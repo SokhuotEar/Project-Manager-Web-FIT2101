@@ -1,2 +1,1 @@
-
-console.log("goodbye laetitia");
+console.log("goodbye world");
