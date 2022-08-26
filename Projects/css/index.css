@@ -1,0 +1,61 @@
+#menu-text {
+    font-family: Roboto, sans-serif;
+    padding-left: 5px;
+}
+
+#drawer-logo {
+    width: 150px;
+    padding-top: 2.5vh
+}
+
+#top-grid {
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+#bottom-grid {
+    height: calc(100vh - 29vh)
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    padding-left: 20px;
+}
+
+.mdl-navigation__link .material-icons {
+    vertical-align: bottom;
+}
+
+.demo-card-wide.mdl-card {
+    width: 100%;
+}
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+.demo-card-wide.mdl-card.mdl-shadow--2dp {
+    height: 100%;
+}
+
+#product-backlog {
+    color: #fff;
+    height: 100%;
+    background: url('../img/catalina_rock.jpg') center / cover;
+}
+
+#sprint-backlog {
+    color: #fff;
+    height: 100%;
+    background: url('../img/big_sur.jpg') center / cover;
+}
+
+#team-members {
+    color: #fff;
+    height: 100%;
+    background: url('../img/catalina_sunset.jpg') center / cover;
+}
+
+#card-text {
+    font-family: Roboto, sans-serif
+}
+
