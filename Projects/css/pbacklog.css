@@ -28,3 +28,18 @@
 .mdl-textfield {
     width:90%;
 }
+
+.mdl-textfield__input {
+    font-family: Roboto,sans-serif;
+}
+
+#team-list {
+    border: 2px solid;
+    height: 71%;
+    overflow-y: scroll;
+    font-family:'Roboto',sans-serif
+}
+
+.mdl-list__item {
+    letter-spacing: 0;
+}

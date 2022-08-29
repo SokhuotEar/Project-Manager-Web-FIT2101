@@ -96,7 +96,7 @@
                                     </button>
                                 </div>
                                 <div class="mdl-card__menu">
-                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="close">
+                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="close-button">
                                         <i class="material-icons">close</i>
                                     </button>
                                     <div class="mdl-tooltip" data-mdl-for="close">
@@ -134,19 +134,19 @@
                                     <li class="mdl-list__item">
                                         <span class="mdl-list__item-primary-content">
                                             <i class="material-icons mdl-list__item-icon">person</i>
-                                                John Smith
+                                            John Smith
                                         </span>
                                     </li>
                                     <li class="mdl-list__item">
                                         <span class="mdl-list__item-primary-content">
                                             <i class="material-icons mdl-list__item-icon">person</i>
-                                                Brooke Perry
+                                            Brooke Perry
                                         </span>
                                     </li>
                                     <li class="mdl-list__item">
                                         <span class="mdl-list__item-primary-content">
                                             <i class="material-icons mdl-list__item-icon">person</i>
-                                                Mr Sandman
+                                            Mr Sandman
                                         </span>
                                     </li>
                                 </ul>
@@ -196,13 +196,16 @@
                                     <span class="mdl-chip" style="background-color:orange;margin-left:40px">
                                         <span class="mdl-chip__text">UI</span>
                                     </span>
-                                    <span class="mdl-chip" style="background-color:orange;">
-                                        <span class="mdl-chip__text">happy</span>
+                                    <span class="mdl-chip" style="background-color:lightgreen;margin-left:5px">
+                                        <span class="mdl-chip__text">Testing</span>
+                                    </span>
+                                    <span class="mdl-chip" style="background-color:hotpink;margin-left:5px">
+                                        <span class="mdl-chip__text">Core</span>
                                     </span>
                                 </div>
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Priority:   </b>
-                                    <select name="cars" id="cars" style="font-family:Roboto, sans-serif;padding-right:10px">
+                                    <select name="priority" id="priority" style="font-family:Roboto, sans-serif;padding-right:10px">
                                         <option value="low">Low</option>
                                         <option value="med">Medium</option>
                                         <option value="high">High</option>
@@ -210,13 +213,18 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="mdl-cell mdl-cell--6-col">
+                            <div style="height:48vh" class="mdl-cell mdl-cell--6-col">
                                 <p><b>Team Members:</b></p>
-                                <ul class="demo-list-icon mdl-list" style="border-style: solid;">
+                                <ul class="demo-list-icon mdl-list" id="team-list">
                                     <li class="mdl-list__item">
                                         <span class="mdl-list__item-primary-content">
                                             <i class="material-icons mdl-list__item-icon">person</i>
                                                 John Smith
+                                        </span>
+                                        <span class="mdl-list__item-secondary-action">
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">
+                                                <input type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input"/>
+                                            </label>
                                         </span>
                                     </li>
                                     <li class="mdl-list__item">
@@ -224,11 +232,43 @@
                                             <i class="material-icons mdl-list__item-icon">person</i>
                                                 Brooke Perry
                                         </span>
+                                        <span class="mdl-list__item-secondary-action">
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-2">
+                                                <input type="checkbox" id="list-checkbox-2" class="mdl-checkbox__input"/>
+                                            </label>
+                                        </span>
                                     </li>
                                     <li class="mdl-list__item">
                                         <span class="mdl-list__item-primary-content">
                                             <i class="material-icons mdl-list__item-icon">person</i>
                                                 Mr Sandman
+                                        </span>
+                                        <span class="mdl-list__item-secondary-action">
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-3">
+                                                <input type="checkbox" id="list-checkbox-3" class="mdl-checkbox__input"/>
+                                            </label>
+                                        </span>
+                                    </li>
+                                    <li class="mdl-list__item">
+                                        <span class="mdl-list__item-primary-content">
+                                            <i class="material-icons mdl-list__item-icon">person</i>
+                                                Cameron Perry
+                                        </span>
+                                        <span class="mdl-list__item-secondary-action">
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-3">
+                                                <input type="checkbox" id="list-checkbox-3" class="mdl-checkbox__input"/>
+                                            </label>
+                                        </span>
+                                    </li>
+                                    <li class="mdl-list__item">
+                                        <span class="mdl-list__item-primary-content">
+                                            <i class="material-icons mdl-list__item-icon">person</i>
+                                                Obi-Wan Kenobi
+                                        </span>
+                                        <span class="mdl-list__item-secondary-action">
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-3">
+                                                <input type="checkbox" id="list-checkbox-3" class="mdl-checkbox__input"/>
+                                            </label>
                                         </span>
                                     </li>
                                 </ul>
@@ -250,6 +290,18 @@
                     <div class="mdl-dialog__actions">
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">ADD</button>
                         <button type="button" class="mdl-button close">CLOSE</button>
+                    </div>
+                </dialog>
+
+                <dialog style="width:35vw" class="mdl-dialog" id="close-dialog">
+                    <h4 class="mdl-dialog__title" style="padding-left:30px">Delete Task</h4>
+                    <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif">
+                        <div class="mdl-grid">
+                            <p>Are you sure you want to delete task <b>'Change Page Colours'</b>?</p>
+                        </div>
+                    <div class="mdl-dialog__actions">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">DELETE</button>
+                        <button type="button" class="mdl-button close">CANCEL</button>
                     </div>
                 </dialog>
             </section>
