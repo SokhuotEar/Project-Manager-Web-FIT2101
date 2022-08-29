@@ -10,7 +10,7 @@
 }
 .demo-card-wide > .mdl-card__title {
     color: #fff;
-    background: lightcoral center / cover;
+    /* background: lightcoral */
 }
 .demo-card-wide > .mdl-card__menu {
     color: #fff;
@@ -42,4 +42,38 @@
 
 .mdl-list__item {
     letter-spacing: 0;
+}
+
+/* priority */
+
+.low-p {
+    background-color: lightskyblue;
+}
+
+.med-p {
+    background-color: limegreen;
+}
+
+.high-p {
+    background-color: mediumpurple;
+    color: white
+}
+
+.crit-p {
+    background-color: orangered;
+    color: white;
+}
+
+/* tags */
+
+.ui-tag {
+    background-color:orange
+}
+
+.core-tag {
+    background-color:hotpink
+}
+
+.testing-tag {
+    background-color:lightgreen
 }
