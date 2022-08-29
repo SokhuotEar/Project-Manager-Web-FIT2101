@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{material, material-components-web, material.blue-light_blue, material.indigo-pink}" />
+    <file url="PROJECT" libraries="{getmdl-select, material, material-components-web, material.blue-light_blue, material.indigo-pink}" />
   </component>
 </project>
