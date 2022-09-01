@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <meta charset="UTF-8">
+        <title>ToDo - Home Page</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-light_blue.min.css" />
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/pbacklog.js"></script>
+        <link rel="stylesheet" href="css/shared.css">
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+    <body>
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">
+                        <img src="img/logo_white.png" alt="company logo" style="width:100px">
+                    </span>
+                    <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+                <span class="mdl-layout-title">
+                    <img src="img/logo_black.png" alt="company logo" id="drawer-logo">
+                </span>
+                <nav class="mdl-navigation" id="menu-text">
+                    <a class="mdl-navigation__link" href=""><span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">home</i>
+                              <span style="padding-left: 5px">Home</span>
+                    </span></a>
+                    <a class="mdl-navigation__link" href=""><span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">list</i>
+                              <span style="padding-left: 5px">Product Backlog</span>
+                    </span></a>
+                    <a class="mdl-navigation__link" href=""><span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">directions_run</i>
+                              <span style="padding-left: 5px">Sprint Backlog</span>
+                    </span></a>
+                    <a class="mdl-navigation__link" href=""><span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">person</i>
+                              <span style="padding-left: 5px">Team Members</span>
+                    </span></a>
+                </nav>
+            </div>
+            <main class="mdl-layout__content">
+                <div class="page-content">
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col" id="top-grid">
+                            <img src="img/logo_black.png" alt="company logo" style="width:200px;padding-top:10px">
+                        </div>
+                    </div>
+                    <div class="mdl-grid" id="bottom-grid">
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title" id="product-backlog">
+                                    <h2 class="mdl-card__title-text">Product Backlog</h2>
+                                </div>
+                                <div class="mdl-card__supporting-text" id="card-text">
+                                    View, edit and remove tasks related to the current project
+                                    in the product backlog.
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <button class="mdl-button mdl-js-button mdl-button--primary">
+                                        Open
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title" id="sprint-backlog">
+                                    <h2 class="mdl-card__title-text">Sprint Backlog</h2>
+                                </div>
+                                <div class="mdl-card__supporting-text" id="text">
+                                    View, edit and analyse current tasks in the active sprint as
+                                    well as see previous sprints.
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <button class="mdl-button mdl-js-button mdl-button--primary">
+                                        Open
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title" id="team-members">
+                                    <h2 class="mdl-card__title-text">Team Members</h2>
+                                </div>
+                                <div class="mdl-card__supporting-text" id="card-text">
+                                    View all team members in the project, add new members and
+                                    see their current productivity.
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <button class="mdl-button mdl-js-button mdl-button--primary">
+                                        Open
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

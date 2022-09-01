@@ -1,0 +1,79 @@
+#header-text {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+    font-size: 20pt;
+    font-weight: 350;
+}
+
+.demo-card-wide.mdl-card {
+    width: 100%;
+}
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    /* background: lightcoral */
+}
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+.mdl-card {
+    min-height: 100%;
+}
+
+.mdl-dialog {
+    width: 60vw;
+    box-shadow: 0 0 15px 5px rgba(79,79,79,0.55);
+}
+
+.mdl-textfield {
+    width:90%;
+}
+
+.mdl-textfield__input {
+    font-family: Roboto,sans-serif;
+}
+
+#team-list {
+    border: 2px solid;
+    height: 71%;
+    overflow-y: scroll;
+    font-family:'Roboto',sans-serif
+}
+
+.mdl-list__item {
+    letter-spacing: 0;
+}
+
+/* priority */
+
+.low-p {
+    background-color: lightskyblue;
+}
+
+.med-p {
+    background-color: limegreen;
+}
+
+.high-p {
+    background-color: mediumpurple;
+    color: white
+}
+
+.crit-p {
+    background-color: orangered;
+    color: white;
+}
+
+/* tags */
+
+.ui-tag {
+    background-color:orange
+}
+
+.core-tag {
+    background-color:hotpink
+}
+
+.testing-tag {
+    background-color:lightgreen
+}
