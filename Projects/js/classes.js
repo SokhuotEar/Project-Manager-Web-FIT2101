@@ -275,3 +275,5 @@ class TeamMembers {
 class Developer {
 
 }
+
+let sys = new System();

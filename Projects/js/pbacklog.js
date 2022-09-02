@@ -31,7 +31,7 @@ close_dialog.querySelector('.close').addEventListener('click', function() {
     close_dialog.close();
 });
 
-let productBacklog = new ProductBacklog();
+let productBacklog = sys.productBacklog;
 
 function showCards(){
     let words=''
@@ -40,7 +40,7 @@ function showCards(){
         console.log(task)
         words+=
         `<div class="mdl-cell mdl-cell--4-col">
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card1">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card${i}">
                 <div class="mdl-card__title" style="background: lightcoral">
                     <h2 class="mdl-card__title-text">${task.name}</h2>
                 </div>
@@ -78,9 +78,9 @@ function showCards(){
 
 
 function addTask(){
-    let name=document.getElementById("sample3").value;
-    let description=document.getElementById("sample5").value;
-    let storyPoints=document.getElementById("sample4").value;
+    let name=document.getElementById("task-name").value;
+    let description=document.getElementById("task-desc").value;
+    let storyPoints=document.getElementById("storyp").value;
     let priority=document.getElementById("priority").value;
     let status=document.getElementById("cars").value;
     
@@ -88,4 +88,6 @@ function addTask(){
     productBacklog.addTask(task);
     console.log(task);
     showCards();
+    add_dialog.close();
+    localStorage.setItem('ProductBacklog',JSON.stringify(sys))
 }
