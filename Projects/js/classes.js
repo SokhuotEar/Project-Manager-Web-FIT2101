@@ -116,13 +116,12 @@ class ProductBacklog {
 
 
 class Task {
-    constructor(name, description, type, storyPoints, tags, priority){
+    constructor(name, description, type, storyPoints, tags, priority,status){
         //this if statement can be broken and make more specific but
-
         if(typeof(name)=="string" && typeof(description)=="string" && typeof(type)=="string" 
-        && typeof(tags)=="string" && typeof(priority)=="string"
-        (typeof(storyPoints)=="number" || typeof(storyPoints)=="number")
-        && name.length>0 && description.length>0 && type.length>0 && tags.length>0 && priority.lenght>0){
+        && typeof(tags)=="string" && typeof(priority)=="string" &&
+        (typeof(storyPoints)=="string" || typeof(storyPoints)=="number")
+        && name.length>0 && description.length>0 && type.length>0 && tags.length>0 && priority.length>0){
 
             this._name=name;
             this._description=description;
@@ -130,12 +129,24 @@ class Task {
             this._storyPoints=parseFloat(storyPoints)
             this._tags=tags;
             this._priority=priority;
-            this._status=notStarted;  // this is not defined yet
+            this._status=status;
             this._timeSpent=[];
             this._developer;//##################
 
         }
         else{
+            console.log(typeof(name)=="string");
+            console.log(typeof(description)=="string");
+            console.log(typeof(type)=="string");
+            console.log(typeof(tags)=="string");
+            console.log(typeof(priority)=="string");
+            console.log(typeof(storyPoints)=="number");
+            console.log(typeof(storyPoints)=="number");
+            console.log(name.length>0);
+            console.log(description.length>0);
+            console.log(type.length>0);
+            console.log(tags.length>0);
+            console.log(priority.length>0);
             throw "Incorrect task specifications"
         }
     }
