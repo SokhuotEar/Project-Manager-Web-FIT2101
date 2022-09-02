@@ -105,7 +105,7 @@ class ProductBacklog {
         result=[]
         //fix
         for(let i=0;i>array.length-1;i++){
-            if(array[i] meets condition){
+            if(array[i].tags()==condition){
                 result.push(array[i])
             }
         }
@@ -165,6 +165,35 @@ class Task {
     get status(){
         return this._status;
     }
+    //mutators
+    // not editable part is the responsibility of the function not the class
+    set name(newName){
+        this._name=newName;
+    }
+    set description(newDesc){
+        this._description=newDesc;
+    }
+    set type(newType){
+        this._type=newType;
+    }
+    set storyPoints(newSP){
+        this._storyPoints=newSP;
+    }
+    set tags(newTag){
+        this._tags=newTag;
+    }
+    set priority(newPriority){
+        this._priority=newPriority;
+    }
+    set developer(newDeveloper){
+        this._developer=newDeveloper;
+    }
+    set status(newStatus){
+        this._status=newStatus;
+    }
+
+
+
 
     //methods
     summarise(){
