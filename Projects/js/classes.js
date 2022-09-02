@@ -276,3 +276,4 @@ class Developer {
 
 }
 
+let sys = new System();
