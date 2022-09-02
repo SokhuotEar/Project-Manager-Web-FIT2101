@@ -4,7 +4,6 @@ let view_dialog = document.getElementById('view-dialog')
 let view_button = document.getElementById('open-button')
 let add_dialog = document.getElementById('add-dialog')
 let add_button = document.getElementById('add-button')
-let close_dialog = document.getElementById('close-dialog')
 let close_button = document.getElementById('close-button')
 
 view_button.addEventListener('click', function() {
@@ -23,13 +22,27 @@ add_dialog.querySelector('.close').addEventListener('click', function() {
     add_dialog.close();
 });
 
+///delete functionality
 close_button.addEventListener('click', function() {
     close_dialog.showModal();
 });
 
-close_dialog.querySelector('.close').addEventListener('click', function() {
-    close_dialog.close();
-});
+function deletequery(i){
+    let close_dialog = document.getElementById('close-dialog')
+    let delete_button = document.getElementById('delete-confirm')
+    close_dialog.showModal();
+    
+    delete_button.addEventListener('click', function() {
+        deleteTask(i);
+        close_dialog.close();
+    })
+
+    close_dialog.querySelector('.close').addEventListener('click', function() {
+        close_dialog.close();
+    });
+}
+
+
 
 let productBacklog = sys.productBacklog;
 
@@ -64,10 +77,6 @@ function showCards(){
         else if(tag=="Testing"){
             tag_css="testing-tag"
         }
-        console.log(prio)
-        console.log(prio_css)
-        console.log(tag)
-        console.log(tag_css)
         words+=
         `<div class="mdl-cell mdl-cell--4-col">
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card${i}">
@@ -92,7 +101,7 @@ function showCards(){
                     </button>
                 </div>
                 <div class="mdl-card__menu">
-                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="close-button">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="deletequery(${i})">
                         <i class="material-icons">close</i>
                     </button>
                     <div class="mdl-tooltip" data-mdl-for="close">
@@ -102,7 +111,6 @@ function showCards(){
             </div>
         </div>`
     }
-    console.log(words)
     document.getElementById("testing").innerHTML = words;
 }
 
@@ -120,4 +128,10 @@ function addTask(){
     showCards();
     add_dialog.close();
     localStorage.setItem('ProductBacklog',JSON.stringify(sys))
+}
+
+function deleteTask(i){
+    productBacklog.removeTask(productBacklog.tasks[i]);
+    showCards();
+    console.log(productBacklog)
 }
