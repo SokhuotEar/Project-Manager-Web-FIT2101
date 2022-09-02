@@ -42,7 +42,7 @@ function showCards(){
         `<div class="mdl-cell mdl-cell--4-col">
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card1">
                 <div class="mdl-card__title" style="background: lightcoral">
-                    <h2 class="mdl-card__title-text">${task.name}</h2>
+                    <h2 class="mdl-card__title-text">${x``.name}</h2>
                 </div>
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                     <span class="mdl-chip ui-tag">
