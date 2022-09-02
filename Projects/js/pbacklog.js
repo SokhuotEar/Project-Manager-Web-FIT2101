@@ -34,25 +34,7 @@ close_dialog.querySelector('.close').addEventListener('click', function() {
 let productBacklog = new ProductBacklog();
 
 function showCards(){
-    let words=`<div class="mdl-cell mdl-cell--12-col">
-        <button id="demo-menu-lower-left"
-                class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">filter_list</i>
-        </button>
-
-        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-            for="demo-menu-lower-left" style="padding-top:0">
-            <li disabled class="mdl-menu__item mdl-menu__item--full-bleed-divider">Filter by:</li>
-            <li class="mdl-menu__item">UI</li>
-            <li class="mdl-menu__item">Core</li>
-            <li class="mdl-menu__item">Testing</li>
-        </ul>
-        <div style="padding-left:10px;display:inline">
-            <button id='add-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                ADD TASK
-            </button>
-        </div>
-    </div>`
+    let words=''
     for(let i=0; i<productBacklog.showTasks().length;i++){
         let task = productBacklog.showTasks()[i]
         console.log(task)
