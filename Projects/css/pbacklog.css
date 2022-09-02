@@ -47,15 +47,15 @@
 /* priority */
 
 .low-p {
-    background-color: lightskyblue;
+    background-color: rgb(53, 231, 142);
 }
 
 .med-p {
-    background-color: limegreen;
+    background-color: rgb(240, 221, 75);
 }
 
 .high-p {
-    background-color: mediumpurple;
+    background-color: rgb(235, 140, 44);
     color: white
 }
 
