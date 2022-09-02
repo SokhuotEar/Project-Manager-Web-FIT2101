@@ -130,7 +130,7 @@ class Task {
             this._storyPoints=parseFloat(storyPoints)
             this._tags=tags;
             this._priority=priority;
-            this._status=notStarted;
+            this._status=notStarted;  // this is not defined yet
             this._timeSpent=[];
             this._developer;//##################
 
@@ -264,3 +264,4 @@ class TeamMembers {
 class Developer {
 
 }
+
