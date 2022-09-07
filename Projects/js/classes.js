@@ -69,7 +69,7 @@ class ProductBacklog {
     }
 
     updateTask(oldTask,newTask){
-        index = this._tasks.indexOf(oldTask);
+        let index = this._tasks.indexOf(oldTask);
         if(index>-1){
             this._tasks[index]=newTask;
         }
