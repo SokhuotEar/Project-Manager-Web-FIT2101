@@ -33,9 +33,14 @@ class System {
     }
 
     //No methods done yet
-
-
-
+    // fromData(data)
+    // {
+    //     this._completedSprints = [];
+    //     for (let i = 0; i<data._completedSprints.length; i++)
+    //     {
+    //         let 
+    //     }
+    // }
         // saves to LS
     save(){
         saveToLS(SYSTEM_KEY,this);
@@ -56,6 +61,8 @@ class ProductBacklog {
     get tasks(){
         return this._tasks;
     }
+
+    // methods 
 
     addTask(task){
         this._tasks.push(task);
@@ -207,6 +214,7 @@ class Task {
 
 
     //methods
+
     summarise(){
         return [this.name(),this.tags(),this.priority(),this.storyPoints()]
     }
@@ -256,6 +264,18 @@ class Task {
         else{
             this._timeSpent.push([date,timeToAdd])
         }
+    }
+
+    // updating local storage
+    fromData(data)
+    {
+        this._name = data._name;
+        this._description = data._description;
+        this._storyPoints = data._storyPoints;
+        this._tags = data._tags;
+        this._priority = data._priority;
+        this._developer = data._developer;
+        this._status = data._status;
     }
 
 
