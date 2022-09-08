@@ -1,0 +1,45 @@
+Epic: 
+create/delete/edit tasks
+As a user, I would like to create tasks in the product backlog, so that I can keep track of what tasks there are. (8hr)
+As a user, I would like to delete tasks in the product backlog, so that I can prioritise other tasks. (2hr)
+As a user, I would like to edit tasks in the product backlog, so that I can update details or mistakes. (3hr)
+
+
+View
+
+As a user, I would like to see all the tasks in the project backlog so that I don’t forget the requirements (4-6hr) : PASS
+As a user, I don’t want the tasks to be editable after their tag changes to “Completed”, to avoid confusion (1hr)
+
+Tasks
+As a user, I would like a button to enter data for a new task and all fields are mandatory, so that I can update the task(2hr)
+As a user, I want to be able to assign priorities to tasks as low-critical so that I know what tasks are more important(1hr)
+As a user, I want to be able to give a description for each task so that I can check it later by opening up the task in case I forget (1hr)
+As a user, I would like to view the tasks in a card layout so that the tasks can be easily comprehended(4hr)
+
+Card Layout(8hr)
+As a user, in the card layout, I would like to see the task name so that I know what the task is.(1hr)
+As a user, in the card layout, I would like to see the task description so that I know what the task entails. (1hr)
+As a user, in the card layout, I would like to see the task type so that I know what the task is.(1hr)
+As a user, in the card layout, I would like to see the task story points so that I know how long the task will take.(1hr)
+As a user, in the card layout, I would like to see the task tags so that I know what the task is.(1hr)
+As a user, in the card layout, I would like to see the task priority so that I know what the task is.(1hr)
+As a user, in the card layout, I would like to see who the task is assigned to so that I know who to contact regarding the task(1hr)
+As a user, in the card layout, I would like to see the task status so that I know what the status of the task is(1hr)
+
+Add filters
+As a user, I want to be able to filter the tasks in product backlog so my screen is not as cluttered(5-6hr)
+As a user, I would like to hide all the inactive tasks from the view so that I can easily set the priorities(1.5 hr)
+
+Menu top left(0.5hr)
+As a user, I would like a globally accessible menu item, so that I can easily navigate through the program.
+As a user, I would like to see Product backlog, Sprint backlog, Team members options in the menu
+
+
+Summary
+As a user, I would like to see a summary of the task which includes Task Name,Tag, Priority, Story points so that I can quickly get a glimpse of the task(2hr)
+
+Data Storage
+As a user, I would like to save data locally so that I can access it easily(2.5hr)
+As a user, I would like to log my time for the tasks I have been working on, so that we are able to collect and observe data on time efficiency.(2hr)
+As a user, I would like to enter a start and end date for my sprints, so that I am able to plan ahead for other sprints. (2hr)
+
