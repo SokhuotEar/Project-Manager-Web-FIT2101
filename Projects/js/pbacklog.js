@@ -181,16 +181,9 @@ function confirmAddTask()
 
     let task = new Task(userName, userDescription,"user story", userStoryPoints,"UI", userPriority, userStatus);
     productBacklog.addTask(task);
-<<<<<<< HEAD
     showCards();
     add_dialog.close();
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
-=======
-    localStorage.setItem('ProductBacklog', JSON.stringify(sys));
-    showCards();
-    add_dialog.close();
-
->>>>>>> 27974a54af1f24c21b1404165683b72a0d0ddb9f
 }
 
 function deleteTask(i){
@@ -416,9 +409,5 @@ function edit_task_dialog(task_class,i)
 
     return a;
 }
-<<<<<<< HEAD
-
-=======
 // shows cards when page reloads
->>>>>>> 27974a54af1f24c21b1404165683b72a0d0ddb9f
 showCards()
