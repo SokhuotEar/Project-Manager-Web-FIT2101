@@ -13,7 +13,7 @@ As a user, I donâ€™t want the tasks to be editable after their tag changes to â€
 Tasks
 As a user, I would like a button to enter data for a new task and all fields are mandatory, so that I can update the task(2hr)
 As a user, I want to be able to assign priorities to tasks as low-critical so that I know what tasks are more important(1hr) : PASS
-As a user, I want to be able to give a description for each task so that I can check it later by opening up the task in case I forget (1hr)
+As a user, I want to be able to give a description for each task so that I can check it later by opening up the task in case I forget (1hr) : PASS
 As a user, I would like to view the tasks in a card layout so that the tasks can be easily comprehended(4hr)
 
 Card Layout(8hr)
