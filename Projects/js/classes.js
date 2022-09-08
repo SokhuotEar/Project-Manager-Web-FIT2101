@@ -69,7 +69,7 @@ class ProductBacklog {
     }
 
     updateTask(oldTask,newTask){
-        index = this._tasks.indexOf(oldTask);
+        let index = this._tasks.indexOf(oldTask);
         if(index>-1){
             this._tasks[index]=newTask;
         }
@@ -101,18 +101,18 @@ class ProductBacklog {
     }
 
     filterTasks(condition){
-        array=this._tasks
-        result=[]
+        // returns the index instead
+        let array=this._tasks
+        let result=[]
         //fix
-        for(let i=0;i>array.length-1;i++){
-            if(array[i].tags()==condition){
-                result.push(array[i])
+        for(let i=0;i<array.length;i++){
+            if(array[i]._tags == condition){
+                result.push(i)
             }
         }
         return result
     }
 }
-
 
 
 class Task {
