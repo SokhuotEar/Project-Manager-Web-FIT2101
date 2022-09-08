@@ -51,7 +51,6 @@ function showCards(){
     let words='';
     for(let i=0; i<productBacklog.showTasks().length;i++){
         let task = productBacklog.showTasks()[i]
-        console.log(task)
         let prio=task.priority;
         let tag=task.tags;
         let prio_css;
@@ -113,31 +112,94 @@ function showCards(){
         </div>`
     }
     document.getElementById("testing").innerHTML = words;
+
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+    console.log(sys)
+
 }
 
 
-function addTask(){
-    let name=document.getElementById("task-name").value;
-    let description=document.getElementById("task-desc").value;
-    let storyPoints=document.getElementById("storyp").value;
-    let priority=document.getElementById("priority").value;
-    let status=document.getElementById("cars").value;
+
+// function addTask(){
     
-    let task = new Task(name,description,"user story",storyPoints,"UI",priority,status);
+//     let name=document.getElementById("task-name").value;
+//     let description=document.getElementById("task-desc").value;
+//     let storyPoints=document.getElementById("storyp").value;
+//     let priority=document.getElementById("priority").value;
+//     let status=document.getElementById("cars").value;
+
+   
+
+//     let task = new Task(name,description,"user story",storyPoints,"UI",priority,status);
+
+//     productBacklog.addTask(task);
+//     console.log(task);
+//     showCards();
+//     add_dialog.close();
+//     localStorage.setItem('ProductBacklog', JSON.stringify(sys))
+// }
+
+// operates when "add task" button is clicked
+// resets all input fields to empty strings
+function openAddTask()
+{
+    let newName=document.getElementById("task-name");
+    newName.value = "";
+
+    let newDescription=document.getElementById("task-desc");
+    newDescription.value = "";
+
+    let newStoryPoints=document.getElementById("storyp");
+    newStoryPoints.value = "";
+
+    let newPriority=document.getElementById("priority");
+    newPriority.value = "";
+
+    let newStatus=document.getElementById("cars");
+    newStatus.value = "";
+}
+
+// operates when "add" button in add dialog is clicked
+// retrieves user input to create new task 
+// closes gialog box and updates product backlog view
+function confirmAddTask()
+{
+    let newName=document.getElementById("task-name");
+    let userName = newName.value;
+
+    let newDescription=document.getElementById("task-desc");
+    let userDescription = newDescription.value;
+
+    let newStoryPoints=document.getElementById("storyp");
+    let userStoryPoints = newStoryPoints.value;
+
+    let newPriority=document.getElementById("priority");
+    let userPriority = newPriority.value;
+
+    let newStatus=document.getElementById("cars");
+    let userStatus = newStatus.value;
+
+    let task = new Task(userName, userDescription,"user story", userStoryPoints,"UI", userPriority, userStatus);
     productBacklog.addTask(task);
-    console.log(task);
     showCards();
     add_dialog.close();
+<<<<<<< HEAD
     localStorage.setItem('ProductBacklog', JSON.stringify(sys))
+=======
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
 }
 
 function deleteTask(i){
     productBacklog.removeTask(productBacklog.tasks[i]);
     showCards();
+<<<<<<< HEAD
     console.log(productBacklog)
 
     // Save it to local storage
     localStorage.setItem("ProductBacklog", JSON.stringify(sys)
+=======
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
 }
 
 
@@ -145,7 +207,11 @@ function deleteTask(i){
 // view functionality
 function retrieve_from_local_storage()
 {
+<<<<<<< HEAD
     return localStorage.getItem("ProductBacklog");
+=======
+    return localStorage.getItem(SYSTEM_KEY);
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
     
 }
 
@@ -155,8 +221,11 @@ function view_task(i)
     // first retrieve information from local storage
     let storage = retrieve_from_local_storage("ProductBacklog");
     let backlog = JSON.parse(storage)._productBacklog;
+<<<<<<< HEAD
     console.log(backlog);
     console.log(i);
+=======
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
     let task = backlog._tasks[i];
     
     
@@ -250,6 +319,10 @@ function edit_task(i)
 
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
 function confirm_edit(i)
 {
     //retrive information from edit task input field
@@ -266,13 +339,25 @@ function confirm_edit(i)
     productBacklog.updateTask(productBacklog.tasks[i], updated_task)
 
     // store to local storage
+<<<<<<< HEAD
     let sys_string = JSON.stringify(sys)
     localStorage.setItem("ProductBacklog", sys_string);
+=======
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));;
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
     
     // show cards and close dialogs
     showCards();
     edit_dialog.close()
     view_dialog.close()
+<<<<<<< HEAD
+=======
+}
+
+function close_edit()
+{
+    edit_dialog.close()
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
 
 }
 
@@ -287,14 +372,22 @@ function edit_task_dialog(task_class,i)
                                 <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="edit-task-name" value = "${task_class._name}">
+<<<<<<< HEAD
                                         <label class="mdl-textfield__label" for="task-name">Enter task name...</label>
+=======
+                                        <label class="mdl-textfield__label" for="task-name"></label>
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
                                     </div>
                                 </form>
 
                                 <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <textarea class="mdl-textfield__input" type="text" rows= "5" id="edit-task-desc"> ${task_class._description} </textarea>
+<<<<<<< HEAD
                                         <label class="mdl-textfield__label" for="task-desc">Enter task description...</label>
+=======
+                                        <label class="mdl-textfield__label" for="task-desc"></label>
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
                                     </div>
                                 </form>
 
@@ -302,7 +395,11 @@ function edit_task_dialog(task_class,i)
                                 <form action="#">
                                     <div style="width:50%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="edit-storyp" value = "${task_class._storyPoints}">
+<<<<<<< HEAD
                                         <label class="mdl-textfield__label" for="storyp">Enter story points (0-100)...</label>
+=======
+                                        <label class="mdl-textfield__label" for="storyp"></label>
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
                                         <span class="mdl-textfield__error">Input is not a number!</span>
                                     </div>
                                 </form>
@@ -349,12 +446,17 @@ function edit_task_dialog(task_class,i)
                     </div>
                     <div class="mdl-dialog__actions">
                         <button onclick="confirm_edit(${i})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">CONFIRM</button>
+<<<<<<< HEAD
                         <button type="button" class="mdl-button close">CLOSE</button>
+=======
+                        <button type="button" class="mdl-button close" onclick = close_edit() >CLOSE</button>
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
                     </div>
                 </dialog>`
 
     return a;
 }
+<<<<<<< HEAD
 
 //---------------------------------------------------------------------------------------------
 // filter task functionality
@@ -420,3 +522,7 @@ function filter_task(condition)
 }
 
 
+=======
+// shows cards when page reloads
+showCards()
+>>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
