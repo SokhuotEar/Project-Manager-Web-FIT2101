@@ -408,5 +408,68 @@ function edit_task_dialog(task_class,i)
 
     return a;
 }
+
+//----------------------------------------------------------------------------
+// filter task implementation
+//add event listener for all buttons regarding filter
+document.getElementById("UI-filter").addEventListener('click', function(){filter_task("UI")})
+document.getElementById("core-filter").addEventListener('click', function(){filter_task("core")})
+document.getElementById("test-filter").addEventListener('click', function(){filter_task("test")})
+document.getElementById("clear-filter").addEventListener('click', function(){showCards()})
+
+function filter_task(condition)
+{
+
+    // apply filter; index_array returned will be the index of the task in productBacklog that the filter applies to
+    let index_array = productBacklog.filterTasks(condition)
+
+    // view the tasks on display screen
+    let display = '';
+    for ( let i =0; i < index_array.length; i++)
+    {
+        // retrieve the task
+        let task = productBacklog._tasks[index_array[i]]
+
+        // display the task
+        display += 
+        `<div class="mdl-cell mdl-cell--4-col">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card${i}">
+                <div class="mdl-card__title" style="background: lightcoral">
+                    <h2 class="mdl-card__title-text">${task._name}</h2>
+                </div>
+                <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
+                    <span class="mdl-chip">
+                        <span class="mdl-chip__text">${task._tag}</span>
+                    </span>
+                    <span class="mdl-chip">
+                        <span class="mdl-chip__text">${task._priority}</span>
+                    </span>
+                    <span class="mdl-chip">
+                        <span class="mdl-chip__text">${task._storyPoints} story points</span>
+                    </span>
+                </div>
+                <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
+                    <!-- Accent-colored raised button with ripple -->
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "view_task(${index_array[i]})">
+                        VIEW
+                    </button>
+                </div>
+                <div class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="deletequery(${index_array[i]})">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <div class="mdl-tooltip" data-mdl-for="close">
+                        <strong>Delete Task</strong>
+                    </div>
+                </div>
+            </div>
+        </div>`
+
+    }
+
+    // display the html
+    document.getElementById("testing").innerHTML = display;
+}
+
 // shows cards when page reloads
 showCards()
