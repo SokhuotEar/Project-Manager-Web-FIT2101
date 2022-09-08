@@ -189,6 +189,9 @@ function confirmAddTask()
 function deleteTask(i){
     productBacklog.removeTask(productBacklog.tasks[i]);
     showCards();
+
+    // store to local storage
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
