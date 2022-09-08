@@ -28,11 +28,11 @@ As a user, in the card layout, I would like to see the task status so that I kno
 
 Add filters
 As a user, I want to be able to filter the tasks in product backlog so my screen is not as cluttered(5-6hr)
-As a user, I would like to hide all the inactive tasks from the view so that I can easily set the priorities(1.5 hr)
+As a user, I would like to hide all the tasks not in the active filter from the view so that I can easily set the priorities(1.5 hr)
 
 Menu top left(0.5hr)
-As a user, I would like a globally accessible menu item, so that I can easily navigate through the program.
-As a user, I would like to see Product backlog, Sprint backlog, Team members options in the menu
+As a user, I would like a globally accessible menu item, so that I can easily navigate through the program. : PASS
+As a user, I would like to see Product backlog, Sprint backlog, Team members options in the menu : PASS
 
 
 Summary
