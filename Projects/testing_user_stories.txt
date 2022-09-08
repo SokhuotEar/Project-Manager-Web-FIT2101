@@ -1,8 +1,8 @@
 Epic: 
 create/delete/edit tasks
-As a user, I would like to create tasks in the product backlog, so that I can keep track of what tasks there are. (8hr)
-As a user, I would like to delete tasks in the product backlog, so that I can prioritise other tasks. (2hr)
-As a user, I would like to edit tasks in the product backlog, so that I can update details or mistakes. (3hr)
+As a user, I would like to create tasks in the product backlog, so that I can keep track of what tasks there are. (8hr) : PASS
+As a user, I would like to delete tasks in the product backlog, so that I can prioritise other tasks. (2hr) : PASS
+As a user, I would like to edit tasks in the product backlog, so that I can update details or mistakes. (3hr) : PASS
 
 
 View
