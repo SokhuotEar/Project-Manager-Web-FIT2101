@@ -119,18 +119,78 @@ function showCards(){
 }
 
 
-function addTask(){
-    let name=document.getElementById("task-name").value;
-    let description=document.getElementById("task-desc").value;
-    let storyPoints=document.getElementById("storyp").value;
-    let priority=document.getElementById("priority").value;
-    let status=document.getElementById("cars").value;
+
+// function addTask(){
     
-    let task = new Task(name,description,"user story",storyPoints,"UI",priority,status);
+//     let name=document.getElementById("task-name").value;
+//     let description=document.getElementById("task-desc").value;
+//     let storyPoints=document.getElementById("storyp").value;
+//     let priority=document.getElementById("priority").value;
+//     let status=document.getElementById("cars").value;
+
+   
+
+//     let task = new Task(name,description,"user story",storyPoints,"UI",priority,status);
+
+//     productBacklog.addTask(task);
+//     console.log(task);
+//     showCards();
+//     add_dialog.close();
+//     localStorage.setItem('ProductBacklog', JSON.stringify(sys))
+// }
+
+// operates when "add task" button is clicked
+// resets all input fields to empty strings
+function openAddTask()
+{
+    let newName=document.getElementById("task-name");
+    newName.value = "";
+
+    let newDescription=document.getElementById("task-desc");
+    newDescription.value = "";
+
+    let newStoryPoints=document.getElementById("storyp");
+    newStoryPoints.value = "";
+
+    let newPriority=document.getElementById("priority");
+    newPriority.value = "";
+
+    let newStatus=document.getElementById("cars");
+    newStatus.value = "";
+}
+
+// operates when "add" button in add dialog is clicked
+// retrieves user input to create new task 
+// closes gialog box and updates product backlog view
+function confirmAddTask()
+{
+    let newName=document.getElementById("task-name");
+    let userName = newName.value;
+
+    let newDescription=document.getElementById("task-desc");
+    let userDescription = newDescription.value;
+
+    let newStoryPoints=document.getElementById("storyp");
+    let userStoryPoints = newStoryPoints.value;
+
+    let newPriority=document.getElementById("priority");
+    let userPriority = newPriority.value;
+
+    let newStatus=document.getElementById("cars");
+    let userStatus = newStatus.value;
+
+    let task = new Task(userName, userDescription,"user story", userStoryPoints,"UI", userPriority, userStatus);
     productBacklog.addTask(task);
+<<<<<<< HEAD
     showCards();
     add_dialog.close();
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+=======
+    localStorage.setItem('ProductBacklog', JSON.stringify(sys));
+    showCards();
+    add_dialog.close();
+
+>>>>>>> 27974a54af1f24c21b1404165683b72a0d0ddb9f
 }
 
 function deleteTask(i){
@@ -246,6 +306,7 @@ function edit_task(i)
 
 }
 
+
 function confirm_edit(i)
 {
     //retrive information from edit task input field
@@ -270,6 +331,12 @@ function confirm_edit(i)
     view_dialog.close()
 }
 
+function close_edit()
+{
+    edit_dialog.close()
+
+}
+
 // edit tasks functionality
 function edit_task_dialog(task_class,i)
 {
@@ -281,14 +348,14 @@ function edit_task_dialog(task_class,i)
                                 <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="edit-task-name" value = "${task_class._name}">
-                                        <label class="mdl-textfield__label" for="task-name">Enter task name...</label>
+                                        <label class="mdl-textfield__label" for="task-name"></label>
                                     </div>
                                 </form>
 
                                 <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <textarea class="mdl-textfield__input" type="text" rows= "5" id="edit-task-desc"> ${task_class._description} </textarea>
-                                        <label class="mdl-textfield__label" for="task-desc">Enter task description...</label>
+                                        <label class="mdl-textfield__label" for="task-desc"></label>
                                     </div>
                                 </form>
 
@@ -296,7 +363,7 @@ function edit_task_dialog(task_class,i)
                                 <form action="#">
                                     <div style="width:50%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="edit-storyp" value = "${task_class._storyPoints}">
-                                        <label class="mdl-textfield__label" for="storyp">Enter story points (0-100)...</label>
+                                        <label class="mdl-textfield__label" for="storyp"></label>
                                         <span class="mdl-textfield__error">Input is not a number!</span>
                                     </div>
                                 </form>
@@ -343,11 +410,15 @@ function edit_task_dialog(task_class,i)
                     </div>
                     <div class="mdl-dialog__actions">
                         <button onclick="confirm_edit(${i})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">CONFIRM</button>
-                        <button type="button" class="mdl-button close">CLOSE</button>
+                        <button type="button" class="mdl-button close" onclick = close_edit() >CLOSE</button>
                     </div>
                 </dialog>`
 
     return a;
 }
+<<<<<<< HEAD
 
+=======
+// shows cards when page reloads
+>>>>>>> 27974a54af1f24c21b1404165683b72a0d0ddb9f
 showCards()
