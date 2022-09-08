@@ -314,6 +314,10 @@ function edit_task(i)
     // show edit task dialog (this is similar to add task dialog)
     document.getElementById("edit-dialog").innerHTML = edit_task_dialog(task,i)
 
+    // initialise status and priority
+    document.getElementById("edit-priority").value = task._priority
+    document.getElementById("edit-cars").value = task._status
+
     // show modal
     edit_dialog.showModal();
 
@@ -407,7 +411,7 @@ function edit_task_dialog(task_class,i)
                                 </ul>
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Status:   </b>
-                                    <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px" value = "${task_class._status}">
+                                    <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px">
                                         <option value="N/S">Not Started</option>
                                         <option value="prog">In Progress</option>
                                         <option value="dev">Developing</option>
@@ -425,6 +429,7 @@ function edit_task_dialog(task_class,i)
                         <button type="button" class="mdl-button close" onclick = close_edit() >CLOSE</button>
                     </div>
                 </dialog>`
+
 
     return a;
 }
