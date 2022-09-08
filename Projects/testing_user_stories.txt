@@ -17,12 +17,12 @@ As a user, I want to be able to give a description for each task so that I can c
 As a user, I would like to view the tasks in a card layout so that the tasks can be easily comprehended(4hr) : PASS
 
 Card Layout(8hr)
-As a user, in the card layout, I would like to see the task name so that I know what the task is.(1hr)
-As a user, in the card layout, I would like to see the task description so that I know what the task entails. (1hr)
+As a user, in the card layout, I would like to see the task name so that I know what the task is.(1hr) : PASS
+As a user, in the card layout, I would like to see the task description so that I know what the task entails. (1hr) : PASS
 As a user, in the card layout, I would like to see the task type so that I know what the task is.(1hr)
-As a user, in the card layout, I would like to see the task story points so that I know how long the task will take.(1hr)
+As a user, in the card layout, I would like to see the task story points so that I know how long the task will take.(1hr) : PASS
 As a user, in the card layout, I would like to see the task tags so that I know what the task is.(1hr)
-As a user, in the card layout, I would like to see the task priority so that I know what the task is.(1hr)
+As a user, in the card layout, I would like to see the task priority so that I know what the task is.(1hr) : PASS
 As a user, in the card layout, I would like to see who the task is assigned to so that I know who to contact regarding the task(1hr)
 As a user, in the card layout, I would like to see the task status so that I know what the status of the task is(1hr)
 
