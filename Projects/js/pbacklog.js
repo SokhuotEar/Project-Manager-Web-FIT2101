@@ -183,23 +183,12 @@ function confirmAddTask()
     productBacklog.addTask(task);
     showCards();
     add_dialog.close();
-<<<<<<< HEAD
-    localStorage.setItem('ProductBacklog', JSON.stringify(sys))
-=======
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
 }
 
 function deleteTask(i){
     productBacklog.removeTask(productBacklog.tasks[i]);
     showCards();
-<<<<<<< HEAD
-    console.log(productBacklog)
-
-    // Save it to local storage
-    localStorage.setItem("ProductBacklog", JSON.stringify(sys)
-=======
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
 }
 
 
@@ -207,11 +196,7 @@ function deleteTask(i){
 // view functionality
 function retrieve_from_local_storage()
 {
-<<<<<<< HEAD
-    return localStorage.getItem("ProductBacklog");
-=======
     return localStorage.getItem(SYSTEM_KEY);
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
     
 }
 
@@ -221,11 +206,6 @@ function view_task(i)
     // first retrieve information from local storage
     let storage = retrieve_from_local_storage("ProductBacklog");
     let backlog = JSON.parse(storage)._productBacklog;
-<<<<<<< HEAD
-    console.log(backlog);
-    console.log(i);
-=======
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
     let task = backlog._tasks[i];
     
     
@@ -319,10 +299,6 @@ function edit_task(i)
 
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
 function confirm_edit(i)
 {
     //retrive information from edit task input field
@@ -339,25 +315,17 @@ function confirm_edit(i)
     productBacklog.updateTask(productBacklog.tasks[i], updated_task)
 
     // store to local storage
-<<<<<<< HEAD
-    let sys_string = JSON.stringify(sys)
-    localStorage.setItem("ProductBacklog", sys_string);
-=======
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));;
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
     
     // show cards and close dialogs
     showCards();
     edit_dialog.close()
     view_dialog.close()
-<<<<<<< HEAD
-=======
 }
 
 function close_edit()
 {
     edit_dialog.close()
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
 
 }
 
@@ -372,22 +340,14 @@ function edit_task_dialog(task_class,i)
                                 <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="edit-task-name" value = "${task_class._name}">
-<<<<<<< HEAD
-                                        <label class="mdl-textfield__label" for="task-name">Enter task name...</label>
-=======
                                         <label class="mdl-textfield__label" for="task-name"></label>
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
                                     </div>
                                 </form>
 
                                 <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <textarea class="mdl-textfield__input" type="text" rows= "5" id="edit-task-desc"> ${task_class._description} </textarea>
-<<<<<<< HEAD
-                                        <label class="mdl-textfield__label" for="task-desc">Enter task description...</label>
-=======
                                         <label class="mdl-textfield__label" for="task-desc"></label>
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
                                     </div>
                                 </form>
 
@@ -395,11 +355,7 @@ function edit_task_dialog(task_class,i)
                                 <form action="#">
                                     <div style="width:50%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="edit-storyp" value = "${task_class._storyPoints}">
-<<<<<<< HEAD
-                                        <label class="mdl-textfield__label" for="storyp">Enter story points (0-100)...</label>
-=======
                                         <label class="mdl-textfield__label" for="storyp"></label>
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
                                         <span class="mdl-textfield__error">Input is not a number!</span>
                                     </div>
                                 </form>
@@ -446,83 +402,11 @@ function edit_task_dialog(task_class,i)
                     </div>
                     <div class="mdl-dialog__actions">
                         <button onclick="confirm_edit(${i})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">CONFIRM</button>
-<<<<<<< HEAD
-                        <button type="button" class="mdl-button close">CLOSE</button>
-=======
                         <button type="button" class="mdl-button close" onclick = close_edit() >CLOSE</button>
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
                     </div>
                 </dialog>`
 
     return a;
 }
-<<<<<<< HEAD
-
-//---------------------------------------------------------------------------------------------
-// filter task functionality
-
-//add event listener for all buttons regarding filter
-document.getElementById("UI-filter").addEventListener('click', function(){filter_task("UI")})
-document.getElementById("core-filter").addEventListener('click', function(){filter_task("core")})
-document.getElementById("test-filter").addEventListener('click', function(){filter_task("test")})
-document.getElementById("clear-filter").addEventListener('click', function(){showCards()})
-
-function filter_task(condition)
-{
-
-    // apply filter; index_array returned will be the index of the task in productBacklog that the filter applies to
-    let index_array = productBacklog.filterTasks(condition)
-
-    // view the tasks on display screen
-    let display = '';
-    for ( let i =0; i < index_array.length; i++)
-    {
-        // retrieve the task
-        let task = productBacklog._tasks[index_array[i]]
-
-        // display the task
-        display += 
-        `<div class="mdl-cell mdl-cell--4-col">
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card${i}">
-                <div class="mdl-card__title" style="background: lightcoral">
-                    <h2 class="mdl-card__title-text">${task._name}</h2>
-                </div>
-                <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
-                    <span class="mdl-chip">
-                        <span class="mdl-chip__text">${task._tag}</span>
-                    </span>
-                    <span class="mdl-chip">
-                        <span class="mdl-chip__text">${task._priority}</span>
-                    </span>
-                    <span class="mdl-chip">
-                        <span class="mdl-chip__text">${task._storyPoints} story points</span>
-                    </span>
-                </div>
-                <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
-                    <!-- Accent-colored raised button with ripple -->
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "view_task(${index_array[i]})">
-                        VIEW
-                    </button>
-                </div>
-                <div class="mdl-card__menu">
-                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="deletequery(${index_array[i]})">
-                        <i class="material-icons">close</i>
-                    </button>
-                    <div class="mdl-tooltip" data-mdl-for="close">
-                        <strong>Delete Task</strong>
-                    </div>
-                </div>
-            </div>
-        </div>`
-
-    }
-
-    // display the html
-    document.getElementById("testing").innerHTML = display;
-}
-
-
-=======
 // shows cards when page reloads
 showCards()
->>>>>>> 0ea0ae6e033cc0043af92c3b5e8d92ecc9b6c4ef
