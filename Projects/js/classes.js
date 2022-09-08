@@ -33,23 +33,19 @@ class System {
     }
 
     //No methods done yet
-    // fromData(data)
-    // {
-    //     this._completedSprints = [];
-    //     for (let i = 0; i<data._completedSprints.length; i++)
-    //     {
-    //         let 
-    //     }
-    // }
-        // saves to LS
-    save(){
-        saveToLS(SYSTEM_KEY,this);
+    fromData(data){
+        console.log(2)
+        this._productBacklog.fromData(data._productBacklog)
+        //this._teamMembers.fromData(data._teamMembers)
+        //this._activeSprint.fromData(data._activeSprint)
+        //this._completedSprints.fromData(data._completedSprints)
+        //this._notStartedSprints.fromData(data._notStartedSprints)
+        this._teamMembers=data._teamMembers;
+        this._activeSprint=data._activeSprint;
+        this._completedSprints=data._completedSprints;
+        this._notStartedSprints=data._notStartedSprints;
     }
-        //pretty sure it needs to recursively do it for every object
-        // loads LS
-    load(){
-        //loadLS(SYSTEM_KEY)
-    }
+
 }
 
 class ProductBacklog {
@@ -118,6 +114,16 @@ class ProductBacklog {
         }
         return result
     }
+
+    fromData(data){
+        this._tasks=[]
+        for(let i=0;i<data._tasks.length;i++){
+            let next_task= Task.fromData(data._tasks[i]);
+            this.addTask(next_task);
+        }
+
+        this._sortType=data._sortType
+    }
 }
 
 
@@ -127,13 +133,13 @@ class Task {
         //this if statement can be broken and make more specific but
         if(typeof(name)=="string" && typeof(description)=="string" && typeof(type)=="string" 
         && typeof(tags)=="string" && typeof(priority)=="string" &&
-        (typeof(storyPoints)=="string" || typeof(storyPoints)=="number")
+        (!isNaN(Number(storyPoints)) || typeof(storyPoints)=="number")
         && name.length>0 && description.length>0 && type.length>0 && tags.length>0 && priority.length>0){
 
             this._name=name;
             this._description=description;
             this._type=type;
-            this._storyPoints=parseFloat(storyPoints)
+            this._storyPoints=Number(storyPoints)
             this._tags=tags;
             this._priority=priority;
             this._status=status;
@@ -142,18 +148,6 @@ class Task {
 
         }
         else{
-            console.log(typeof(name)=="string");
-            console.log(typeof(description)=="string");
-            console.log(typeof(type)=="string");
-            console.log(typeof(tags)=="string");
-            console.log(typeof(priority)=="string");
-            console.log(typeof(storyPoints)=="number");
-            console.log(typeof(storyPoints)=="number");
-            console.log(name.length>0);
-            console.log(description.length>0);
-            console.log(type.length>0);
-            console.log(tags.length>0);
-            console.log(priority.length>0);
             throw "Incorrect task specifications"
         }
     }
@@ -267,15 +261,11 @@ class Task {
     }
 
     // updating local storage
-    fromData(data)
+    static fromData(data)
     {
-        this._name = data._name;
-        this._description = data._description;
-        this._storyPoints = data._storyPoints;
-        this._tags = data._tags;
-        this._priority = data._priority;
-        this._developer = data._developer;
-        this._status = data._status;
+        let task = new Task(data._name,data._description,data._type,data._storyPoints,data._tags,data._priority,data._status)
+        task._developer=data._developer
+        return task
     }
 
 
@@ -296,4 +286,3 @@ class Developer {
 
 }
 
-let sys = new System();

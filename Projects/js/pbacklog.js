@@ -51,7 +51,6 @@ function showCards(){
     let words='';
     for(let i=0; i<productBacklog.showTasks().length;i++){
         let task = productBacklog.showTasks()[i]
-        console.log(task)
         let prio=task.priority;
         let tag=task.tags;
         let prio_css;
@@ -113,6 +112,10 @@ function showCards(){
         </div>`
     }
     document.getElementById("testing").innerHTML = words;
+
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+    console.log(sys)
+
 }
 
 
@@ -125,16 +128,14 @@ function addTask(){
     
     let task = new Task(name,description,"user story",storyPoints,"UI",priority,status);
     productBacklog.addTask(task);
-    console.log(task);
     showCards();
     add_dialog.close();
-    localStorage.setItem('ProductBacklog', JSON.stringify(sys))
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 function deleteTask(i){
     productBacklog.removeTask(productBacklog.tasks[i]);
     showCards();
-    console.log(productBacklog)
 }
 
 
@@ -142,7 +143,7 @@ function deleteTask(i){
 // view functionality
 function retrieve_from_local_storage()
 {
-    return localStorage.getItem("ProductBacklog");
+    return localStorage.getItem(SYSTEM_KEY);
     
 }
 
@@ -152,8 +153,6 @@ function view_task(i)
     // first retrieve information from local storage
     let storage = retrieve_from_local_storage("ProductBacklog");
     let backlog = JSON.parse(storage)._productBacklog;
-    console.log(backlog);
-    console.log(i);
     let task = backlog._tasks[i];
     
     
@@ -263,8 +262,7 @@ function confirm_edit(i)
     productBacklog.updateTask(productBacklog.tasks[i], updated_task)
 
     // store to local storage
-    let sys_string = JSON.stringify(sys)
-    localStorage.setItem("ProductBacklog", sys_string);
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));;
     
     // show cards and close dialogs
     showCards();
@@ -352,3 +350,4 @@ function edit_task_dialog(task_class,i)
     return a;
 }
 
+showCards()
