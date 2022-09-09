@@ -36,6 +36,16 @@ closeButtonRef.addEventListener('click', function() {
     closeDialogRef.showModal();
 });
 
+let teamMembers=sys.teamMembers
+teamMembers.removeAll()
+teamMembers.addMember(new Developer("a"))
+teamMembers.addMember(new Developer("b"))
+teamMembers.addMember(new Developer("c"))
+teamMembers.addMember(new Developer("d"))
+teamMembers.addMember(new Developer("e"))
+
+
+
 function deleteQuery(i){
     //
     let confirmText =
@@ -197,6 +207,7 @@ function openAddTask()
     let teamList =""
     for(let i=0; i<teamMembers.teamMembers.length; i++){
         let developer=teamMembers.teamMembers[i];
+        console.log(developer)
 
         teamList+=
         `<li class="mdl-list__item">
