@@ -248,6 +248,11 @@ function view_task(i)
                         <span class="mdl-chip__text">${task._tag}</span>
                     </span>
                 </div>
+                <div><b style="position:absolute;margin-top:8px">Type:</b>
+                    <span class="mdl-chip" style="margin-left:58px">
+                        <span class="mdl-chip__text">${task._type}</span>
+                    </span>
+                </div>
                 <div><b style="position:absolute;margin-top:8px">Priority:</b>
                     <span class="mdl-chip" style="background-color:lightskyblue;margin-left:58px">
                         <span class="mdl-chip__text">${task._priority}</span>
@@ -467,6 +472,9 @@ function filter_task(condition)
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">${task._tag}</span>
+                    </span>
+                    <span class="mdl-chip">
+                        <span class="mdl-chip__text">${task._type}</span>
                     </span>
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">${task._priority}</span>
