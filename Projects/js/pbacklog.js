@@ -119,26 +119,6 @@ function showCards(){
 }
 
 
-
-// function addTask(){
-    
-//     let name=document.getElementById("task-name").value;
-//     let description=document.getElementById("task-desc").value;
-//     let storyPoints=document.getElementById("storyp").value;
-//     let priority=document.getElementById("priority").value;
-//     let status=document.getElementById("cars").value;
-
-   
-
-//     let task = new Task(name,description,"user story",storyPoints,"UI",priority,status);
-
-//     productBacklog.addTask(task);
-//     console.log(task);
-//     showCards();
-//     add_dialog.close();
-//     localStorage.setItem('ProductBacklog', JSON.stringify(sys))
-// }
-
 // operates when "add task" button is clicked
 // resets all input fields to empty strings
 function openAddTask()
