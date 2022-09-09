@@ -60,23 +60,23 @@ function showCards(){
         let tag=task.tags;
         let prioCSS;
         let tagCSS;
-        if(prio=="low"){
+        if(prio=="Low"){
             prioCSS="low-p"
         }
-        else if(prio=="med"){
+        else if(prio=="Medium"){
             prioCSS="med-p"
         }
-        else if(prio=="high"){
+        else if(prio=="High"){
             prioCSS="high-p"
         }
-        else if(prio=="crit"){
+        else if(prio=="Critical"){
             prioCSS="crit-p"
         }
 
         if(tag=="UI"){
             tagCSS= "ui-tag"
         }
-        else if(tag=="CORE"){
+        else if(tag=="Core"){
             tagCSS="core-tag"
         }
         else if(tag=="Testing"){
@@ -90,7 +90,7 @@ function showCards(){
                 </div>
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                     <span class="mdl-chip ${tagCSS}">
-                        <span class="mdl-chip__text">${task._tag}</span>
+                        <span class="mdl-chip__text">${tag}</span>
                     </span>
                     <span class="mdl-chip ${prioCSS}">
                         <span class="mdl-chip__text">${task._priority}</span>
