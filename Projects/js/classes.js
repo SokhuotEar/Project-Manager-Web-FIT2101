@@ -33,18 +33,19 @@ class System {
     }
 
     //No methods done yet
-
-
-
-        // saves to LS
-    save(){
-        saveToLS(SYSTEM_KEY,this);
+    fromData(data){
+        console.log(2)
+        this._productBacklog.fromData(data._productBacklog)
+        //this._teamMembers.fromData(data._teamMembers)
+        //this._activeSprint.fromData(data._activeSprint)
+        //this._completedSprints.fromData(data._completedSprints)
+        //this._notStartedSprints.fromData(data._notStartedSprints)
+        this._teamMembers=data._teamMembers;
+        this._activeSprint=data._activeSprint;
+        this._completedSprints=data._completedSprints;
+        this._notStartedSprints=data._notStartedSprints;
     }
-        //pretty sure it needs to recursively do it for every object
-        // loads LS
-    load(){
-        //loadLS(SYSTEM_KEY)
-    }
+
 }
 
 class ProductBacklog {
@@ -56,6 +57,8 @@ class ProductBacklog {
     get tasks(){
         return this._tasks;
     }
+
+    // methods 
 
     addTask(task){
         this._tasks.push(task);
@@ -101,36 +104,45 @@ class ProductBacklog {
     }
 
     filterTasks(condition){
-        array=this._tasks
-        result=[]
+        // returns the index instead
+        let array=this._tasks
+        let result=[]
         //fix
-        for(let i=0;i>array.length-1;i++){
-            if(array[i].tags()==condition){
-                result.push(array[i])
+        for(let i=0;i<array.length;i++){
+            if(array[i]._tags == condition){
+                result.push(i)
             }
         }
         return result
     }
+
+    fromData(data){
+        this._tasks=[]
+        for(let i=0;i<data._tasks.length;i++){
+            let next_task= Task.fromData(data._tasks[i]);
+            this.addTask(next_task);
+        }
+
+        this._sortType=data._sortType
+    }
 }
 
 
-
 class Task {
-    constructor(name, description, type, storyPoints, tags, priority){
+    constructor(name, description, type, storyPoints, tags, priority,status){
         //this if statement can be broken and make more specific but
-
         if(typeof(name)=="string" && typeof(description)=="string" && typeof(type)=="string" 
-        && typeof(tags)=="string" && typeof(priority)=="string"
-        (typeof(storyPoints)=="number" || typeof(storyPoints)=="number")
-        && name.length>0 && description.length>0 && type.length>0 && tags.length>0 && priority.lenght>0){
+        && typeof(tags)=="string" && typeof(priority)=="string" &&
+        (!isNaN(Number(storyPoints)) || typeof(storyPoints)=="number")
+        && name.length>0 && description.length>0 && type.length>0 && tags.length>0 && priority.length>0){
 
             this._name=name;
             this._description=description;
             this._type=type;
-            this._storyPoints=parseFloat(storyPoints)
+            this._storyPoints=Number(storyPoints)
             this._tags=tags;
             this._priority=priority;
-            this._status=notStarted;  // this is not defined yet
+            this._status=status;
             this._timeSpent=[];
             this._developer;//##################
 
@@ -196,6 +208,7 @@ class Task {
 
 
     //methods
+
     summarise(){
         return [this.name(),this.tags(),this.priority(),this.storyPoints()]
     }
@@ -245,6 +258,14 @@ class Task {
         else{
             this._timeSpent.push([date,timeToAdd])
         }
+    }
+
+    // updating local storage
+    static fromData(data)
+    {
+        let task = new Task(data._name,data._description,data._type,data._storyPoints,data._tags,data._priority,data._status)
+        task._developer=data._developer
+        return task
     }
 
 
