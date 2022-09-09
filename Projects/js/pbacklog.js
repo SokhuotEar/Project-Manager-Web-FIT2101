@@ -51,10 +51,20 @@ function showCards(){
     let words='';
     for(let i=0; i<productBacklog.showTasks().length;i++){
         let task = productBacklog.showTasks()[i]
+        let tasktype = task.type;
         let prio=task.priority;
         let tag=task.tags;
+        let type_css;
         let prio_css;
         let tag_css;
+
+        if(tasktype=="user story"){
+            type_css="userstory"
+        }
+        else if(tasktype=="bug"){
+            type_css="bug"
+        }
+
         if(prio=="low"){
             prio_css="low-p"
         }
@@ -86,6 +96,9 @@ function showCards(){
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                     <span class="mdl-chip ${tag_css}">
                         <span class="mdl-chip__text">${task._tag}</span>
+                    </span>
+                    <span class="mdl-chip ${type_css}">
+                        <span class="mdl-chip__text">${task._type}</span>
                     </span>
                     <span class="mdl-chip ${prio_css}">
                         <span class="mdl-chip__text">${task._priority}</span>
@@ -152,6 +165,9 @@ function openAddTask()
     let newStoryPoints=document.getElementById("storyp");
     newStoryPoints.value = "";
 
+    let newStoryType=document.getElementById("task_type");
+    newStoryType.value = "";
+
     let newPriority=document.getElementById("priority");
     newPriority.value = "";
 
@@ -173,13 +189,16 @@ function confirmAddTask()
     let newStoryPoints=document.getElementById("storyp");
     let userStoryPoints = newStoryPoints.value;
 
+    let newStoryType=document.getElementById("task_type");
+    let userStoryType = newStoryType.value;
+
     let newPriority=document.getElementById("priority");
     let userPriority = newPriority.value;
 
     let newStatus=document.getElementById("cars");
     let userStatus = newStatus.value;
 
-    let task = new Task(userName, userDescription,"user story", userStoryPoints,"UI", userPriority, userStatus);
+    let task = new Task(userName, userDescription,userStoryType, userStoryPoints,"UI", userPriority, userStatus);
     productBacklog.addTask(task);
     showCards();
     add_dialog.close();
@@ -308,11 +327,12 @@ function confirm_edit(i)
     let name=document.getElementById("edit-task-name").value;
     let description=document.getElementById("edit-task-desc").value;
     let storyPoints=document.getElementById("edit-storyp").value;
+    let userStoryType=document.getElementById("edit-story-type").value;
     let priority=document.getElementById("edit-priority").value;
     let status=document.getElementById("edit-cars").value;
 
     //create a new task
-    let updated_task = new Task(name,description,"user story",storyPoints,"UI",priority,status);
+    let updated_task = new Task(name,description,userStoryType,storyPoints,"UI",priority,status);
 
     //update task
     productBacklog.updateTask(productBacklog.tasks[i], updated_task)
@@ -374,13 +394,19 @@ function edit_task_dialog(task_class,i)
                                         <span class="mdl-chip__text">Core</span>
                                     </span>
                                 </div>
+                                <div style="padding-top:5px"><b style="padding-right:5px">Type:   </b>
+                                    <select name="type_task" id="type_task" style="font-family:Roboto, sans-serif;padding-right:10px">
+                                        <option value="userStory">User Story</option>
+                                        <option value="bug">Bug</option>
+                                    </select>
+                                </div>
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Priority:   </b>
                                     <select name="priority" id="edit-priority" style="font-family:Roboto, sans-serif;padding-right:10px">
                                         <option value="low">Low</option>
-                                        <option value="med">Medium</option>
+                                        <option value="medium">Medium</option>
                                         <option value="high">High</option>
-                                        <option value="crit">Critical</option>
+                                        <option value="critical">Critical</option>
                                     </select>
                                 </div>
                             </div>
@@ -393,8 +419,6 @@ function edit_task_dialog(task_class,i)
                                     <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px" value = "${task_class.status}">
                                         <option value="N/S">Not Started</option>
                                         <option value="prog">In Progress</option>
-                                        <option value="dev">Developing</option>
-                                        <option value="test">Testing</option>
                                         <option value="comp">Completed</option>
                                     </select>
                                 </div>
