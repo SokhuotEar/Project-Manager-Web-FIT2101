@@ -366,7 +366,7 @@ function view_task(i) {
                     </span>
                 </div>
                 <div><b style="position:absolute;margin-top:8px">Type:</b>
-                    <span class="mdl-chip" style="margin-left:58px">
+                    <span class="mdl-chip" style="background-color:chartreuse;margin-left:58px">
                         <span class="mdl-chip__text">${task._type}</span>
                     </span>
                 </div>
@@ -553,9 +553,9 @@ function editTaskDialog(taskClass,i)
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Status:   </b>
                                     <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px" value = "${taskClass.status}">
-                                        <option value="N/S">Not Started</option>
-                                        <option value="prog">In Progress</option>
-                                        <option value="comp">Completed</option>
+                                        <option value="Not Started">Not Started</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Completed">Completed</option>
                                     </select>
                                 </div>
 
