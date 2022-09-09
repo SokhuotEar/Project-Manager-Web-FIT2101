@@ -564,8 +564,8 @@ function editTaskDialog(taskClass,i)
 // filter task implementation
 //add event listener for all buttons regarding filter
 document.getElementById("UI-filter").addEventListener('click', function(){filterTask("UI")})
-document.getElementById("core-filter").addEventListener('click', function(){filterTask("core")})
-document.getElementById("test-filter").addEventListener('click', function(){filterTask("test")})
+document.getElementById("core-filter").addEventListener('click', function(){filterTask("Core")})
+document.getElementById("test-filter").addEventListener('click', function(){filterTask("Testing")})
 document.getElementById("clear-filter").addEventListener('click', function(){showCards()})
 
 function filterTask(condition)

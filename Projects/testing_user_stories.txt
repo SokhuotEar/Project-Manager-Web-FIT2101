@@ -8,7 +8,7 @@ As a user, I would like to edit tasks in the product backlog, so that I can upda
 View
 
 As a user, I would like to see all the tasks in the project backlog so that I don’t forget the requirements (4-6hr) : PASS
-As a user, I don’t want the tasks to be editable after their tag changes to “Completed”, to avoid confusion (1hr)
+As a user, I don’t want the tasks to be editable after their tag changes to “Completed”, to avoid confusion (1hr) : PASS
 
 Tasks
 As a user, I would like a button to enter data for a new task and all fields are mandatory, so that I can update the task(2hr) : PASS
@@ -23,7 +23,7 @@ As a user, in the card layout, I would like to see the task type so that I know 
 As a user, in the card layout, I would like to see the task story points so that I know how long the task will take.(1hr) : PASS
 As a user, in the card layout, I would like to see the task tags so that I know what the task is.(1hr)
 As a user, in the card layout, I would like to see the task priority so that I know what the task is.(1hr) : PASS
-As a user, in the card layout, I would like to see who the task is assigned to so that I know who to contact regarding the task(1hr)
+As a user, in the card layout, I would like to see who the task is assigned to so that I know who to contact regarding the task(1hr) : PASS
 As a user, in the card layout, I would like to see the task status so that I know what the status of the task is(1hr) : PASS
 
 Add filters
