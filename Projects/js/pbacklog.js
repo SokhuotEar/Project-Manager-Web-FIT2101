@@ -469,9 +469,10 @@ function confirmEdit(i)
     let priority=document.getElementById("edit-priority").value;
     let status=document.getElementById("edit-cars").value;
     let userStoryType = document.getElementById("edit-story-type").value;
+    let userStoryTag = document.getElementById("edit-story-tag").value;
 
     //create a new task
-    let updatedTask = new Task(name,description,userStoryType,storyPoints,"UI",priority,status);
+    let updatedTask = new Task(name,description,userStoryType,storyPoints,userStoryTag,priority,status);
 
     //update task
     productBacklog.updateTask(productBacklog.tasks[i], updatedTask)
@@ -522,16 +523,12 @@ function editTaskDialog(taskClass,i)
                                     </div>
                                 </form>
 
-                                <div style="padding-top:5px"><b style="position:absolute;margin-top:8px">Tags:</b>
-                                    <span class="mdl-chip" style="background-color:orange;margin-left:40px">
-                                        <span class="mdl-chip__text">UI</span>
-                                    </span>
-                                    <span class="mdl-chip" style="background-color:lightgreen;margin-left:5px">
-                                        <span class="mdl-chip__text">Testing</span>
-                                    </span>
-                                    <span class="mdl-chip" style="background-color:hotpink;margin-left:5px">
-                                        <span class="mdl-chip__text">Core</span>
-                                    </span>
+                                <div style="padding-top:5px"><b style="padding-right:5px">Priority:   </b>
+                                    <select name="tags" id="edit-story-tag" style="font-family:Roboto, sans-serif;padding-right:10px">
+                                        <option value="UI">UI</option>
+                                        <option value="Testing">Testing</option>
+                                        <option value="Core">Core</option>
+                                    </select>
                                 </div>
                                 <div style="padding-top:5px"><b style="padding-right:5px">Type:   </b>
                                     <select name="type_task" id="edit-story-type" style="font-family:Roboto, sans-serif;padding-right:10px">
@@ -542,10 +539,10 @@ function editTaskDialog(taskClass,i)
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Priority:   </b>
                                     <select name="priority" id="edit-priority" style="font-family:Roboto, sans-serif;padding-right:10px">
-                                        <option value="low">Low</option>
-                                        <option value="med">Medium</option>
-                                        <option value="high">High</option>
-                                        <option value="crit">Critical</option>
+                                        <option value="Low">Low</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="High">High</option>
+                                        <option value="Critical">Critical</option>
                                     </select>
                                 </div>
                             </div>
