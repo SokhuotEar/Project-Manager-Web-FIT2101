@@ -249,7 +249,7 @@ function view_task(i)
         </div>
     </div>
     <div class="mdl-dialog__actions">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = edit_task(${i}) >EDIT</button>
+        <button id = "edit-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = edit_task(${i}) >EDIT</button>
         <button type="button" class="mdl-button close" onclick = close_viewtask() >CLOSE</button>
     </div> `;
 
@@ -294,11 +294,22 @@ function edit_task(i)
     let backlog = JSON.parse(storage)._productBacklog;
     let task = backlog._tasks[i];
 
-    // show edit task dialog (this is similar to add task dialog
-    document.getElementById("edit-dialog").innerHTML = edit_task_dialog(task,i)
+    if (task._status == "comp")
+    {
+        document.getElementById("edit-button").disabled = true;
 
-    // show modal
-    edit_dialog.showModal();
+        // TODO: error message
+    }
+    else
+    {
+         // show edit task dialog (this is similar to add task dialog
+        document.getElementById("edit-dialog").innerHTML = edit_task_dialog(task,i)
+        // show modal
+        edit_dialog.showModal();
+    }
+   
+
+   
 
 }
 
