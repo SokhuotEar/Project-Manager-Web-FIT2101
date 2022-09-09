@@ -13,6 +13,10 @@ let closeDialogRef = document.getElementById('close-dialog')
 let nameErrorRef = document.getElementById('name_err');
 let descErrorRef = document.getElementById('desc_err');
 let storypointErrorRef = document.getElementById('storypoints_err');
+let tagErrorRef = document.getElementById('tag_err');
+let typeErrorRef = document.getElementById('type_err');
+let prioErrorRef = document.getElementById('prio_err');
+let statusErrorRef = document.getElementById('status_err');
 
 
 viewButtonRef.addEventListener('click', function() {
@@ -162,20 +166,26 @@ function showCards(){
 // resets all input fields to empty strings
 function openAddTask()
 {
-    let newName=document.getElementById("task-name");
-    newName.value = "";
+    let nameRef=document.getElementById("task-name");
+    nameRef.value = "";
 
-    let newDescription=document.getElementById("task-desc");
-    newDescription.value = "";
+    let descRef=document.getElementById("task-desc");
+    descRef.value = "";
 
-    let newStoryPoints=document.getElementById("storyp");
-    newStoryPoints.value = "";
+    let tagsRef=document.getElementById("tag");
+    tagsRef.value = "";
 
-    let newPriority=document.getElementById("priority");
-    newPriority.value = "";
+    let typeRef=document.getElementById("task_type");
+    typeRef.value = "";
 
-    let newStatus=document.getElementById("cars");
-    newStatus.value = "";
+    let storyPointsRef=document.getElementById("storyp");
+    storyPointsRef.value = "";
+
+    let priorityRef=document.getElementById("priority");
+    priorityRef.value = "";
+
+    let statusRef=document.getElementById("cars");
+    statusRef.value = "";
 }
 
 // operates when "add" button in add dialog is clicked
@@ -193,7 +203,10 @@ function confirmAddTask()
     let userStoryPoints = storyPointsRef.value;
 
     let tagRef = document.getElementById('tag');
-    let tag = tagRef.value;
+    let userTag = tagRef.value;
+
+    let typeRef = document.getElementById('task_type');
+    let userType = typeRef.value;
 
     let priorityRef=document.getElementById("priority");
     let userPriority = priorityRef.value;
@@ -203,11 +216,11 @@ function confirmAddTask()
 
     // verify inputs
     // break if invalid, clear error messages if valid
-    if (verifyInputs(userName,userDescription,userStoryPoints,tag,'prio','team','status') === 0) {
+    if (verifyInputs(userName,userDescription,userStoryPoints,userTag,userType,userPriority,'team',userStatus) === 0) {
         return
     }
 
-    let task = new Task(userName, userDescription,"user story", userStoryPoints, tag, userPriority, userStatus);
+    let task = new Task(userName, userDescription,"user story", userStoryPoints, userTag, userPriority, userStatus);
     productBacklog.addTask(task);
     showCards();
     addDialogRef.close();
@@ -221,19 +234,22 @@ function confirmAddTask()
 //
 // Inputs: all user inputs for the task
 // Returns: 0 if invalid, 1 if valid
-function verifyInputs(name, desc, storyp, tags, priority, team, status) {
+function verifyInputs(name, desc, storyp, tags, taskType, priority, team, status) {
+    // task name
     if (name === "") {
         nameErrorRef.innerText = 'Please enter a task name.';
         return 0;
     }
     nameErrorRef.innerText = '';
 
+    // task description
     if (desc === ""){
         descErrorRef.innerText = 'Please enter a task description.';
         return 0;
     }
     descErrorRef.innerText = '';
 
+    // story points
     if (storyp === ""){
         storypointErrorRef.innerText = 'Please enter a story points value.';
         return 0;
@@ -242,6 +258,34 @@ function verifyInputs(name, desc, storyp, tags, priority, team, status) {
         return 0;
     }
     storypointErrorRef.innerText = '';
+
+    // tag
+    if (tags === ""){
+        tagErrorRef.innerText = 'Please select a tag.';
+        return 0;
+    }
+    tagErrorRef.innerText = '';
+
+    // task type
+    if (taskType === ""){
+        typeErrorRef.innerText = 'Please select a task type.';
+        return 0;
+    }
+    typeErrorRef.innerText = '';
+
+    // priority
+    if (priority === "") {
+        prioErrorRef.innerText = "Please select a priority.";
+        return 0;
+    }
+    prioErrorRef.innerText = "";
+
+    // status
+    if (status === "") {
+        statusErrorRef.innerText = "Please select a status.";
+        return 0;
+    }
+    statusErrorRef.innerText = "";
     return 1;
 }
 
@@ -256,15 +300,13 @@ function deleteTask(i){
 
 //-----------------------------------------------------------------------------------
 // view functionality
-function retrieve_from_local_storage()
-{
+function retrieve_from_local_storage() {
     return localStorage.getItem(SYSTEM_KEY);
     
 }
 
 
-function view_task(i)
-{
+function view_task(i) {
     // first retrieve information from local storage
     let storage = retrieve_from_local_storage("ProductBacklog");
     let backlog = JSON.parse(storage)._productBacklog;

@@ -281,36 +281,37 @@
                                     </div>
                                 </form>
 
-                                <!-- Numeric Textfield with Floating Label -->
                                 <form action="#">
-                                    <div style="width:50%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="storyp">
-                                        <label class="mdl-textfield__label" for="storyp">Enter story points (0-100)...</label>
-                                        <span id="storypoints_err" class="mdl-textfield__error">Input is not a number!</span>
+                                    <div style="width:70%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="text" id="storyp">
+                                        <label class="mdl-textfield__label" for="task-name">Enter story points (0-100)...</label>
+                                        <span id="storypoints_err" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible;'></span>
                                     </div>
                                 </form>
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Tags:</b>
                                     <select name="tag" id="tag" style="font-family:Roboto, sans-serif;padding-right:10px">
-                                        <option value="low">UI</option>
-                                        <option value="med">Testing</option>
-                                        <option value="high">Core</option>
+                                        <option value="UI">UI</option>
+                                        <option value="Testing">Testing</option>
+                                        <option value="Core">Core</option>
                                     </select>
+                                    <span id="tag_err" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;'></span>
                                 </div>
                                 <div style="padding-top:5px"><b style="padding-right:5px">Type:   </b>
                                     <select name="type_task" id="task_type" style="font-family:Roboto, sans-serif;padding-right:10px">
                                         <option value="userStory">User Story</option>
                                         <option value="bug">Bug</option>
                                     </select>
-                                </div>
+                                    <span id="type_err" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;'></span>                                </div>
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Priority:   </b>
                                     <select name="priority" id="priority" style="font-family:Roboto, sans-serif;padding-right:10px">
-                                        <option value="low">Low</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="high">High</option>
-                                        <option value="critical">Critical</option>
+                                        <option value="Low">Low</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="High">High</option>
+                                        <option value="Critical">Critical</option>
                                     </select>
+                                    <span id="prio_err" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;'></span>
                                 </div>
                             </div>
                             <div style="height:48vh" class="mdl-cell mdl-cell--6-col">
@@ -375,10 +376,11 @@
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Status:   </b>
                                     <select name="cars" id="cars" style="font-family:Roboto, sans-serif;padding-right:10px">
-                                        <option value="N/S">Not Started</option>
-                                        <option value="prog">In Progress</option>
-                                        <option value="comp">Completed</option>
+                                        <option value="Not Started">Not Started</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Completed">Completed</option>
                                     </select>
+                                    <span id="status_err" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;'></span>
                                 </div>
 
 
