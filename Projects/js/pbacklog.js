@@ -247,7 +247,7 @@ function confirmAddTask()
         return
     }
 
-    let task = new Task(userName, userDescription,"user story", userStoryPoints, userTag, userPriority, userStatus);
+    let task = new Task(userName, userDescription,userType, userStoryPoints, userTag, userPriority, userStatus);
     for(let i=0; i<teamMembers.teamMembers.length; i++){
         if (document.getElementById(`list-checkbox-${i}`).checked){
             task.addMember(teamMembers.teamMembers[i])
@@ -364,6 +364,12 @@ function view_task(i) {
                         <span class="mdl-chip__text">${task._tags}</span>
                     </span>
                 </div>
+                <div><b style="position:absolute;margin-top:8px">Type:</b>
+                    <span class="mdl-chip" style="margin-left:58px">
+                        <span class="mdl-chip__text">${task._type}</span>
+                    </span>
+                </div>
+
                 <div><b style="position:absolute;margin-top:8px">Priority:</b>
                     <span class="mdl-chip" style="background-color:lightskyblue;margin-left:58px">
                         <span class="mdl-chip__text">${task._priority}</span>
@@ -551,8 +557,6 @@ function editTaskDialog(taskClass,i)
                                     <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px" value = "${taskClass.status}">
                                         <option value="N/S">Not Started</option>
                                         <option value="prog">In Progress</option>
-                                        <option value="dev">Developing</option>
-                                        <option value="test">Testing</option>
                                         <option value="comp">Completed</option>
                                     </select>
                                 </div>
@@ -603,6 +607,10 @@ function filterTask(condition)
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">${task._tags}</span>
                     </span>
+                    <span class="mdl-chip">
+                        <span class="mdl-chip__text">${task._type}</span>
+                    </span>
+
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">${task._priority}</span>
                     </span>
