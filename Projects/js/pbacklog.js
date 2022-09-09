@@ -16,7 +16,11 @@ let storypointErrorRef = document.getElementById('storypoints_err');
 let tagErrorRef = document.getElementById('tag_err');
 let typeErrorRef = document.getElementById('type_err');
 let prioErrorRef = document.getElementById('prio_err');
+let teamErrorRef = document.getElementById('team_err');
 let statusErrorRef = document.getElementById('status_err');
+
+
+
 
 
 viewButtonRef.addEventListener('click', function() {
@@ -253,7 +257,14 @@ function confirmAddTask()
 
     // verify inputs
     // break if invalid, clear error messages if valid
-    if (verifyInputs(userName,userDescription,userStoryPoints,userTag,userType,userPriority,'team',userStatus) === 0) {
+    let team = 0;
+    for(let i=0; i<teamMembers.teamMembers.length; i++){
+        if (document.getElementById(`list-radio-${i}`).checked){
+            team+=1
+        }
+    }
+
+    if (verifyInputs(userName,userDescription,userStoryPoints,userTag,userType,userPriority,team,userStatus,"add") === 0) {
         return
     }
 
@@ -263,6 +274,8 @@ function confirmAddTask()
             task.addMember(teamMembers.teamMembers[i])
         }
     }
+
+
     productBacklog.addTask(task);
     showCards();
     addDialogRef.close();
@@ -276,59 +289,139 @@ function confirmAddTask()
 //
 // Inputs: all user inputs for the task
 // Returns: 0 if invalid, 1 if valid
-function verifyInputs(name, desc, storyp, tags, taskType, priority, team, status) {
-    // task name
-    if (name === "") {
-        nameErrorRef.innerText = 'Please enter a task name.';
-        return 0;
-    }
-    nameErrorRef.innerText = '';
+function verifyInputs(name, desc, storyp, tags, taskType, priority, team, status,verification) {
+    if(verification=="edit"){
+        let nameErrorRefEdit = document.getElementById('name_err_edit');
+        let descErrorRefEdit = document.getElementById('desc_err_edit');
+        let storypointErrorRefEdit = document.getElementById('storypoints_err_edit');
+        let tagErrorRefEdit = document.getElementById('tag_err_edit');
+        let typeErrorRefEdit = document.getElementById('type_err_edit');
+        let prioErrorRefEdit = document.getElementById('prio_err_edit');
+        let teamErrorRefEdit = document.getElementById('team_err_edit');
+        let statusErrorRefEdit = document.getElementById('status_err_edit');
 
-    // task description
-    if (desc === ""){
-        descErrorRef.innerText = 'Please enter a task description.';
-        return 0;
-    }
-    descErrorRef.innerText = '';
 
-    // story points
-    if (storyp === ""){
-        storypointErrorRef.innerText = 'Please enter a story points value.';
-        return 0;
-    } else if (storyp > 100){
-        storypointErrorRef.innerText = 'Please enter a value between 0 and 100.';
-        return 0;
-    }
-    storypointErrorRef.innerText = '';
+        if (name === "") {
+            nameErrorRefEdit.innerText = 'Please enter a task name.';
+            return 0;
+        }
+        nameErrorRefEdit.innerText = '';
 
-    // tag
-    if (tags === ""){
-        tagErrorRef.innerText = 'Please select a tag.';
-        return 0;
-    }
-    tagErrorRef.innerText = '';
+        // task description
+        if (desc === ""){
+            descErrorRefEdit.innerText = 'Please enter a task description.';
+            return 0;
+        }
+        descErrorRefEdit.innerText = '';
 
-    // task type
-    if (taskType === ""){
-        typeErrorRef.innerText = 'Please select a task type.';
-        return 0;
-    }
-    typeErrorRef.innerText = '';
+        // story points
+        if (storyp === ""){
+            storypointErrorRefEdit.innerText = 'Please enter a story points value.';
+            return 0;
+        } else if (storyp > 100){
+            storypointErrorRefEdit.innerText = 'Please enter a value between 0 and 100.';
+            return 0;
+        }
+        storypointErrorRefEdit.innerText = '';
 
-    // priority
-    if (priority === "") {
-        prioErrorRef.innerText = "Please select a priority.";
-        return 0;
-    }
-    prioErrorRef.innerText = "";
+        // tag
+        if (tags === ""){
+            tagErrorRefEdit.innerText = 'Please select a tag.';
+            return 0;
+        }
+        tagErrorRefEdit.innerText = '';
 
-    // status
-    if (status === "") {
-        statusErrorRef.innerText = "Please select a status.";
-        return 0;
+        // task type
+        if (taskType === ""){
+            typeErrorRefEdit.innerText = 'Please select a task type.';
+            return 0;
+        }
+        typeErrorRefEdit.innerText = '';
+
+        // priority
+        if (priority === "") {
+            prioErrorRefEdit.innerText = "Please select a priority.";
+            return 0;
+        }
+        prioErrorRefEdit.innerText = "";
+
+        // priority
+        if (team === 0) {
+            teamErrorRefEdit.innerText = "Please select a team member.";
+            return 0;
+        }
+        prioErrorRefEdit.innerText = "";
+
+        // status
+        if (status === "") {
+            statusErrorRefEdit.innerText = "Please select a status.";
+            return 0;
+        }
+        statusErrorRefEdit.innerText = "";
+        return 1;
     }
-    statusErrorRef.innerText = "";
-    return 1;
+    else{
+        
+        // task name
+        if (name === "") {
+            nameErrorRef.innerText = 'Please enter a task name.';
+            return 0;
+        }
+        nameErrorRef.innerText = '';
+
+        // task description
+        if (desc === ""){
+            descErrorRef.innerText = 'Please enter a task description.';
+            return 0;
+        }
+        descErrorRef.innerText = '';
+
+        // story points
+        if (storyp === ""){
+            storypointErrorRef.innerText = 'Please enter a story points value.';
+            return 0;
+        } else if (storyp > 100){
+            storypointErrorRef.innerText = 'Please enter a value between 0 and 100.';
+            return 0;
+        }
+        storypointErrorRef.innerText = '';
+
+        // tag
+        if (tags === ""){
+            tagErrorRef.innerText = 'Please select a tag.';
+            return 0;
+        }
+        tagErrorRef.innerText = '';
+
+        // task type
+        if (taskType === ""){
+            typeErrorRef.innerText = 'Please select a task type.';
+            return 0;
+        }
+        typeErrorRef.innerText = '';
+
+        // priority
+        if (priority === "") {
+            prioErrorRef.innerText = "Please select a priority.";
+            return 0;
+        }
+        prioErrorRef.innerText = "";
+
+        // priority
+        if (team === 0) {
+            teamErrorRef.innerText = "Please select a team member.";
+            return 0;
+        }
+        prioErrorRef.innerText = "";
+
+        // status
+        if (status === "") {
+            statusErrorRef.innerText = "Please select a status.";
+            return 0;
+        }
+        statusErrorRef.innerText = "";
+        return 1;
+    }
 }
 
 function deleteTask(i){
@@ -525,6 +618,16 @@ function confirmEdit(i)
     let userStoryType = document.getElementById("edit-story-type").value;
     let userStoryTag = document.getElementById("edit-story-tag").value;
 
+    let team = 0;
+    for(let i=0; i<teamMembers.teamMembers.length; i++){
+        if (document.getElementById(`edit-list-radio-${i}`).checked){
+            team+=1
+        }
+    }
+
+    if (verifyInputs(name,description,storyPoints,userStoryTag,userStoryType,priority,team,status,"edit") === 0) {
+        return
+    }
 
 
     //create a new task
@@ -570,6 +673,7 @@ function editTaskDialog(taskClass,i)
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="edit-task-name" value = "${taskClass._name}">
                                         <label class="mdl-textfield__label" for="task-name"></label>
+                                        <span id="name_err_edit" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible;'></span>
                                     </div>
                                 </form>
 
@@ -577,6 +681,7 @@ function editTaskDialog(taskClass,i)
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <textarea class="mdl-textfield__input" type="text" rows= "5" id="edit-task-desc"> ${taskClass._description} </textarea>
                                         <label class="mdl-textfield__label" for="task-desc"></label>
+                                        <span id="desc_err_edit" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible;'></span>
                                     </div>
                                 </form>
 
@@ -586,6 +691,7 @@ function editTaskDialog(taskClass,i)
                                         <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="edit-storyp" value = "${taskClass._storyPoints}">
                                         <label class="mdl-textfield__label" for="storyp"></label>
                                         <span class="mdl-textfield__error">Input is not a number!</span>
+                                        <span id="storypoints_err_edit" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible;'></span>
                                     </div>
                                 </form>
 
@@ -595,12 +701,14 @@ function editTaskDialog(taskClass,i)
                                         <option value="Testing">Testing</option>
                                         <option value="Core">Core</option>
                                     </select>
+                                    <span id="tag_err_edit" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;'></span>
                                 </div>
                                 <div style="padding-top:5px"><b style="padding-right:5px">Type:   </b>
                                     <select name="type_task" id="edit-story-type" style="font-family:Roboto, sans-serif;padding-right:10px">
                                         <option value="userStory">User Story</option>
                                         <option value="bug">Bug</option>
                                     </select>
+                                    <span id="type_err_edit" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;'></span>  
                                 </div>
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Priority:   </b>
@@ -610,6 +718,7 @@ function editTaskDialog(taskClass,i)
                                         <option value="High">High</option>
                                         <option value="Critical">Critical</option>
                                     </select>
+                                    <span id="prio_err_edit" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;'></span>
                                 </div>
                             </div>
                             <div style="height:48vh" class="mdl-cell mdl-cell--6-col">
@@ -617,13 +726,14 @@ function editTaskDialog(taskClass,i)
                                 <p><b>Team Members:</b></p>
                                 <ul id="edit-teammembers" class="demo-list-icon mdl-list" style="border-style: solid;">
                                 </ul>
-
-                                <div style="padding-top:5px"><b style="padding-right:5px">Status:   </b>
+                                <span id="team_err_edit" class="mdl-textfield__error" style="font-family: &quot;Roboto&quot;,sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;"></span>
+                                <div style="padding-top:20px"><b style="padding-right:5px">Status:   </b>
                                     <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px" value = "${taskClass.status}">
                                         <option value="Not Started">Not Started</option>
                                         <option value="In Progress">In Progress</option>
                                         <option value="Completed">Completed</option>
                                     </select>
+                                    <span id="status_err_edit" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;'></span>
                                 </div>
 
 
