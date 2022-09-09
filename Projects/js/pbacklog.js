@@ -1,5 +1,6 @@
 "use strict"
 
+
 // dialog and button ids
 let viewDialogRef = document.getElementById('view-dialog')
 let viewButtonRef = document.getElementById('open-button')
@@ -20,6 +21,7 @@ let teamErrorRef = document.getElementById('team_err');
 let statusErrorRef = document.getElementById('status_err');
 
 
+let colours=["darkgray","greenyellow","green","darkolivegreen","lightskyblue","lightseagreen","dodgerblue","tomato","indianred","red","maroon"]
 
 
 
@@ -45,7 +47,7 @@ closeButtonRef.addEventListener('click', function() {
 });
 
 let teamMembers=sys.teamMembers
-/*
+
 if(teamMembers.teamMembers.length!=5){
     teamMembers.removeAll()
     teamMembers.addMember(new Developer("a"))
@@ -53,7 +55,7 @@ if(teamMembers.teamMembers.length!=5){
     teamMembers.addMember(new Developer("c"))
     teamMembers.addMember(new Developer("d"))
     teamMembers.addMember(new Developer("e"))
-}*/
+}
 
 
 
@@ -128,10 +130,13 @@ function showCards(){
             typeCSS = 'bug';
         }
 
+        let intensity=(task.storyPoints-(task.storyPoints%10))/10;
+    
+
         words+=
         `<div class="mdl-cell mdl-cell--4-col">
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card${i}">
-                <div class="mdl-card__title" style="background: lightcoral">
+                <div class="mdl-card__title" style="background: ${colours[intensity]}">
                     <h2 class="mdl-card__title-text">${task._name}</h2>
                 </div>
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
