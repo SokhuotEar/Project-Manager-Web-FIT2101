@@ -161,26 +161,6 @@ function showCards(){
 }
 
 
-
-// function addTask(){
-    
-//     let name=document.getElementById("task-name").value;
-//     let description=document.getElementById("task-desc").value;
-//     let storyPoints=document.getElementById("storyp").value;
-//     let priority=document.getElementById("priority").value;
-//     let status=document.getElementById("cars").value;
-
-   
-
-//     let task = new Task(name,description,"user story",storyPoints,"UI",priority,status);
-
-//     productBacklog.addTask(task);
-//     console.log(task);
-//     showCards();
-//     add_dialog.close();
-//     localStorage.setItem('ProductBacklog', JSON.stringify(sys))
-// }
-
 // operates when "add task" button is clicked
 // resets all input fields to empty strings
 function openAddTask()
@@ -371,8 +351,8 @@ function view_task(i)
         </div>
     </div>
     <div class="mdl-dialog__actions">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = editTask(${i}) >EDIT</button>
-        <button type="button" class="mdl-button close" onclick = closeViewTask() >CLOSE</button>
+        <button id = "edit-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = edit_task(${i}) >EDIT</button>
+        <button type="button" class="mdl-button close" onclick = close_viewtask() >CLOSE</button>
     </div> `;
 
     //TO DO: implement team member feild
