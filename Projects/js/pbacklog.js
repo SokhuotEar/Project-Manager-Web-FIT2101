@@ -692,27 +692,33 @@ function filterTask(condition)
                     <h2 class="mdl-card__title-text">${task._name}</h2>
                 </div>
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
-                    <span class="mdl-chip ${tagCSS}">
-                        <span class="mdl-chip__text">${task._tags}</span>
+                    <span class="mdl-chip" style = "position: relative; right: 5px;">
+                    <span class="mdl-chip__text">${task._storyPoints} story points</span>
                     </span>
-                    <span class="mdl-chip ${prioCSS}">
+                    <br><br>
+                    <b style = "position: relative; top: 4px;">Tags:</b>
+                    <span class="mdl-chip ${tagCSS}" style = "position: relative; left: 20px;">
+                        <span class="mdl-chip__text">${tag}</span>
+                    </span>
+                    <br>
+                    <b style = "position: relative; top: 4px;">Type:</b>
+                    <span class="mdl-chip ${typeCSS}" style = "position: relative; left: 20px;">
+                        <span class="mdl-chip__text">${type}</span>
+                    </span>
+                    <br>
+                    <b style = "position: relative; top: 4px;">Priority:</b>
+                    <span class="mdl-chip ${prioCSS}" style = "position: relative; left: 5px;">
                         <span class="mdl-chip__text">${task._priority}</span>
                     </span>
-                    <span class="mdl-chip ${typeCSS}">
-                        <span class="mdl-chip__text">${task._type}</span>
-                    </span>
-                    <span class="mdl-chip">
-                        <span class="mdl-chip__text">${task._storyPoints} story points</span>
-                    </span>
                 </div>
-                <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
+                <div class="mdl-card__actions mdl-card--border" style="padding-right:15px;">
                     <!-- Accent-colored raised button with ripple -->
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "view_task(${indexArray[i]})">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "view_task(${i})">
                         VIEW
                     </button>
                 </div>
                 <div class="mdl-card__menu">
-                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="deleteQuery(${indexArray[i]})">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="deleteQuery(${i})">
                         <i class="material-icons">close</i>
                     </button>
                     <div class="mdl-tooltip" data-mdl-for="close">
