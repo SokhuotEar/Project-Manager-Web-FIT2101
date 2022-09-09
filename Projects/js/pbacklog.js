@@ -233,7 +233,7 @@ function confirmAddTask()
         return
     }
 
-    let task = new Task(userName, userDescription,"user story", userStoryPoints, tag, userPriority, userStatus);
+    let task = new Task(userName, userDescription,"user story", userStoryPoints, userTag, userPriority, userStatus);
     for(let i=0; i<teamMembers.teamMembers.length; i++){
         if (document.getElementById(`list-checkbox-${i}`).checked){
             task.addMember(teamMembers.teamMembers[i])
@@ -347,7 +347,7 @@ function view_task(i) {
                 <b>Story points:</b> ${task._storyPoints}
                 <div style="padding-top:5px"><b style="position:absolute;margin-top:8px">Tags:</b>
                     <span class="mdl-chip" style="background-color:orange;margin-left:40px">
-                        <span class="mdl-chip__text">${task._tag}</span>
+                        <span class="mdl-chip__text">${task._tags}</span>
                     </span>
                 </div>
                 <div><b style="position:absolute;margin-top:8px">Priority:</b>
@@ -369,8 +369,8 @@ function view_task(i) {
         </div>
     </div>
     <div class="mdl-dialog__actions">
-        <button id = "edit-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = edit_task(${i}) >EDIT</button>
-        <button type="button" class="mdl-button close" onclick = close_viewtask() >CLOSE</button>
+        <button id = "edit-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = editTask(${i}) >EDIT</button>
+        <button type="button" class="mdl-button close" onclick = closeViewTask() >CLOSE</button>
     </div> `;
 
     //TO DO: implement team member feild
@@ -447,6 +447,7 @@ function confirmEdit(i)
     let storyPoints=document.getElementById("edit-storyp").value;
     let priority=document.getElementById("edit-priority").value;
     let status=document.getElementById("edit-cars").value;
+    let userStoryType = document.getElementById('task_type').value;
 
     //create a new task
     let updatedTask = new Task(name,description,userStoryType,storyPoints,"UI",priority,status);
@@ -586,7 +587,7 @@ function filterTask(condition)
                 </div>
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                     <span class="mdl-chip">
-                        <span class="mdl-chip__text">${task._tag}</span>
+                        <span class="mdl-chip__text">${task._tags}</span>
                     </span>
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">${task._priority}</span>
