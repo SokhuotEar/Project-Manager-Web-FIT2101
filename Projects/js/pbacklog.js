@@ -440,7 +440,7 @@ function editTask(i)
     let backlog = JSON.parse(storage)._productBacklog;
     let task = backlog._tasks[i];
 
-    if (task._status == "comp")
+    if (task._status == "Completed")
     {
         document.getElementById("edit-button").disabled = true;
 
