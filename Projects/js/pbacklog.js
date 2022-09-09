@@ -87,6 +87,8 @@ function showCards(){
         let task = productBacklog.showTasks()[i]
         let prio=task.priority;
         let tag=task.tags;
+        let type = task._type;
+        let typeCSS;
         let prioCSS;
         let tagCSS;
         if(prio=="Low"){
@@ -111,6 +113,13 @@ function showCards(){
         else if(tag=="Testing"){
             tagCSS="testing-tag"
         }
+
+        if (type === "user story"){
+            typeCSS = 'userstory';
+        } else {
+            typeCSS = 'bug';
+        }
+
         words+=
         `<div class="mdl-cell mdl-cell--4-col">
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card${i}">
@@ -123,6 +132,9 @@ function showCards(){
                     </span>
                     <span class="mdl-chip ${prioCSS}">
                         <span class="mdl-chip__text">${task._priority}</span>
+                    </span>
+                    <span class="mdl-chip ${typeCSS}">
+                        <span class="mdl-chip__text">${type}</span>
                     </span>
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">${task._storyPoints} story points</span>
@@ -148,7 +160,6 @@ function showCards(){
     document.getElementById("testing").innerHTML = words;
 
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
-
 }
 
 

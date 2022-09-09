@@ -1,4 +1,5 @@
 "use strict"
+
 let sys = new System();
 console.log(sys)
 let data = localStorage.getItem(SYSTEM_KEY);
