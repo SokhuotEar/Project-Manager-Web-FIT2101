@@ -814,11 +814,11 @@ function filterTask(condition)
             typeCSS = 'bug';
         }
 
-
+        let intensity=(task.storyPoints-(task.storyPoints%10))/10;
         display += 
         `<div class="mdl-cell mdl-cell--4-col">
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card${i}">
-                <div class="mdl-card__title" style="background: lightcoral">
+                <div class="mdl-card__title" style="background: ${colours[intensity]}">
                     <h2 class="mdl-card__title-text">${task._name}</h2>
                 </div>
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
