@@ -168,6 +168,9 @@ function openAddTask()
     let typeRef=document.getElementById("task_type");
     typeRef.value = "";
 
+    let prioRef = document.getElementById('priority');
+    prioRef.value = "";
+
     let storyPointsRef=document.getElementById("storyp");
     storyPointsRef.value = "";
 

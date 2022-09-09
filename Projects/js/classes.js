@@ -131,26 +131,15 @@ class ProductBacklog {
 
 class Task {
     constructor(name, description, type, storyPoints, tags, priority,status){
-        //this if statement can be broken and make more specific but
-        if(typeof(name)=="string" && typeof(description)=="string" && typeof(type)=="string" 
-        && typeof(priority)=="string" &&
-        (!isNaN(Number(storyPoints)) || typeof(storyPoints)=="number")
-        && name.length>0 && description.length>0 && type.length>0 && tags.length>0 && priority.length>0){
-
-            this._name=name;
-            this._description=description;
-            this._type=type;
-            this._storyPoints=Number(storyPoints)
-            this._tags=tags;
-            this._priority=priority;
-            this._status=status;
-            this._timeSpent=[];
-            this._developers=[];
-
-        }
-        else{
-            throw "Incorrect task specifications"
-        }
+        this._name=name;
+        this._description=description;
+        this._type=type;
+        this._storyPoints=Number(storyPoints)
+        this._tags=tags;
+        this._priority=priority;
+        this._status=status;
+        this._timeSpent=[];
+        this._developers=[];
     }
 
     //accessors
