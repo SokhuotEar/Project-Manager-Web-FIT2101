@@ -74,28 +74,28 @@ function showCards(){
         let tasktype = task.type;
         let prio=task.priority;
         let tag=task.tags;
-        let type_css;
-        let prio_css;
-        let tag_css;
+        let typeCSS;
+        let prioCSS;
+        let tagCSS;
 
         if(tasktype=="user story"){
-            type_css="userstory"
+            typeCSS="userstory"
         }
         else if(tasktype=="bug"){
-            type_css="bug"
+            typeCSS="bug"
         }
 
         if(prio=="low"){
             prioCSS="low-p"
         }
         else if(prio=="medium"){
-            prio_css="med-p"
+            prioCSS="med-p"
         }
         else if(prio=="high"){
             prioCSS="high-p"
         }
         else if(prio=="critical"){
-            prio_css="crit-p"
+            prioCSS="crit-p"
         }
 
         if(tag=="UI"){
@@ -117,10 +117,10 @@ function showCards(){
                     <span class="mdl-chip ${tagCSS}">
                         <span class="mdl-chip__text">${task._tag}</span>
                     </span>
-                    <span class="mdl-chip ${type_css}">
+                    <span class="mdl-chip ${typeCSS}">
                         <span class="mdl-chip__text">${task._type}</span>
                     </span>
-                    <span class="mdl-chip ${prio_css}">
+                    <span class="mdl-chip ${prioCSS}">
                         <span class="mdl-chip__text">${task._priority}</span>
                     </span>
                     <span class="mdl-chip">
