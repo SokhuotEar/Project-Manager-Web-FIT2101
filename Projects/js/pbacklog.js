@@ -7,6 +7,7 @@ let addDialogRef = document.getElementById('add-dialog')
 let addButtonRef = document.getElementById('add-button')
 let closeButtonRef = document.getElementById('close-button')
 let editDialogRef = document.getElementById("edit-dialog");
+let closeDialogRef = document.getElementById('close-dialog')
 
 // error message ids
 let nameErrorRef = document.getElementById('name_err');
@@ -32,12 +33,12 @@ addDialogRef.querySelector('.close').addEventListener('click', function() {
 
 ///delete functionality
 closeButtonRef.addEventListener('click', function() {
-    close_dialog.showModal();
+    closeDialogRef.showModal();
 });
 
-function deletequery(i){
+function deleteQuery(i){
     //
-    let confirm_text = 
+    let confirmText =
     `<h4 class="mdl-dialog__title" style="padding-left:30px">Delete Task</h4>
     <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif">
         <div class="mdl-grid">
@@ -49,19 +50,18 @@ function deletequery(i){
     </div>
     `
 
-    document.getElementById("close-dialog").innerHTML = confirm_text;
+    document.getElementById("close-dialog").innerHTML = confirmText;
 
-    let close_dialog = document.getElementById('close-dialog')
-    let delete_button = document.getElementById('delete-confirm')
-    close_dialog.showModal();
+    let deleteButton = document.getElementById('delete-confirm')
+    closeDialogRef.showModal();
     
     deleteButton.addEventListener('click', function() {
         deleteTask(i);
-        closeDialog.close();
+        closeDialogRef.close();
     })
 
-    closeDialog.querySelector('.close').addEventListener('click', function() {
-        closeDialog.close();
+    closeDialogRef.querySelector('.close').addEventListener('click', function() {
+        closeDialogRef.close();
     });
 }
 
