@@ -276,7 +276,7 @@
                                 </form>
 
                                 <form action="#">
-                                    <div class="mdl-textfield mdl-js-textfield">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <textarea class="mdl-textfield__input" type="text" rows= "5" id="task-desc" ></textarea>
                                         <label class="mdl-textfield__label" for="task-desc">Enter task description...</label>
                                         <span id="desc_err" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible;'></span>
@@ -375,8 +375,8 @@
                                         </span>
                                     </li>
                                 </ul>
-
-                                <div style="padding-top:5px"><b style="padding-right:5px">Status:   </b>
+                                <span id="team_err" class="mdl-textfield__error" style="font-family: &quot;Roboto&quot;,sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;"></span>
+                                <div style="padding-top:20px"><b style="padding-right:5px">Status:   </b>
                                     <select name="cars" id="cars" style="font-family:Roboto, sans-serif;padding-right:10px">
                                         <option value="Not Started">Not Started</option>
                                         <option value="In Progress">In Progress</option>

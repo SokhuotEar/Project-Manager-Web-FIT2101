@@ -32,16 +32,15 @@ class System {
         return this._notStartedSprints;
     }
 
+
     //No methods done yet
     fromData(data){
         this._productBacklog.fromData(data._productBacklog)
-        //this._teamMembers.fromData(data._teamMembers)
-        //this._activeSprint.fromData(data._activeSprint)
-        //this._completedSprints.fromData(data._completedSprints)
-        //this._notStartedSprints.fromData(data._notStartedSprints)
-
         this._teamMembers.fromData(data._teamMembers);
 
+        for(let i=0; i<this._productBacklog.tasks.length; i++){
+            this._productBacklog.tasks[i].replaceMember(this._teamMembers.equivalentMember(this._productBacklog.tasks[i].developers[0]))
+        }
 
         this._activeSprint=data._activeSprint;
         this._completedSprints=data._completedSprints;
@@ -191,15 +190,30 @@ class Task {
         this._status=newStatus;
     }
 
+    replaceMember(newDeveloper){
+        this._developers=[newDeveloper];
+    }
+
     addMember(developer){
         this._developers.push(developer)
     }
 
     removeMember(developer){
-        let index = this._tasks.indexOf(developer);
+        let index = this._developers.indexOf(developer);
 
         if(index>-1){
             this._developers.splice(index,1)
+        }
+    }
+    
+    checkMember(developer){
+        let index = this._developers.indexOf(developer);
+
+        if(index>-1){
+            return true
+        }
+        else{
+            return false
         }
     }
 
@@ -267,6 +281,7 @@ class Task {
         for(let i=0;i<data._developers.length;i++){
             let next_developer= Developer.fromData(data._developers[i]);
             task.addMember(next_developer);
+            console.log(task)
         }
 
         return task
@@ -308,6 +323,18 @@ class TeamMembers {
         this._teamMembers=[];
     }
 
+    equivalentMember(developer){
+        console.log(developer)
+        for(let i=0; i<this._teamMembers.length; i++){
+            let checkDev=this._teamMembers[i]
+            console.log(checkDev)
+            if(checkDev.name==developer.name && JSON.stringify(checkDev.tasks)==JSON.stringify(developer.tasks) && JSON.stringify(checkDev.hoursWorked)==JSON.stringify(developer.hoursWorked)){
+                return checkDev
+            }
+        }
+        return false
+    }
+
     fromData(data){
         this._teamMembers=[]
 
@@ -320,6 +347,7 @@ class TeamMembers {
 
 }
 
+
 class Developer {
     constructor(name){
         this._name=name;
@@ -330,6 +358,13 @@ class Developer {
     }
     get name(){
         return this._name
+    }
+    get tasks(){
+        return this._tasks
+    }
+
+    get hoursWorked(){
+        return this._hoursWorked
     }
 
     static fromData(data){
