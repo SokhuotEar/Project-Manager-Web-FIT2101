@@ -29,6 +29,21 @@ close_button.addEventListener('click', function() {
 });
 
 function deletequery(i){
+    //
+    let confirm_text = 
+    `<h4 class="mdl-dialog__title" style="padding-left:30px">Delete Task</h4>
+    <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif">
+        <div class="mdl-grid">
+            <p>Are you sure you want to delete task <b> ${productBacklog._tasks[i]._name} </b>?</p>
+        </div>
+    <div class="mdl-dialog__actions">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="delete-confirm">DELETE</button>
+        <button type="button" class="mdl-button close">CANCEL</button>
+    </div>
+    `
+
+    document.getElementById("close-dialog").innerHTML = confirm_text;
+
     let close_dialog = document.getElementById('close-dialog')
     let delete_button = document.getElementById('delete-confirm')
     close_dialog.showModal();
@@ -187,7 +202,7 @@ function confirmAddTask()
 }
 
 function deleteTask(i){
-    productBacklog.removeTask(productBacklog.tasks[i]);
+    productBacklog.removeTask(i);
     showCards();
 
     // store to local storage
@@ -214,6 +229,7 @@ function view_task(i)
     
     //show modal()
     // edit the html content in the modal first
+    console.log(task._status)
     let view_html_content = `
     <h4 class="mdl-dialog__title" style="padding-left:30px">${task._name}</h4>
     <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif">
@@ -242,7 +258,7 @@ function view_task(i)
                 </ul>
                 <div><b style="position:absolute;margin-top:8px">Status:</b>
                     <span class="mdl-chip" style="margin-left:58px">
-                        <span class="mdl-chip__text">Not Started</span>
+                        <span class="mdl-chip__text">${task._status}</span>
                     </span>
                 </div>
             </div>
@@ -290,12 +306,17 @@ function close_viewtask()
 
 function edit_task(i)
 {
+    // retrieve from local storage
     let storage = retrieve_from_local_storage("ProductBacklog");
     let backlog = JSON.parse(storage)._productBacklog;
     let task = backlog._tasks[i];
 
-    // show edit task dialog (this is similar to add task dialog
+    // show edit task dialog (this is similar to add task dialog)
     document.getElementById("edit-dialog").innerHTML = edit_task_dialog(task,i)
+
+    // initialise status and priority
+    document.getElementById("edit-priority").value = task._priority
+    document.getElementById("edit-cars").value = task._status
 
     // show modal
     edit_dialog.showModal();
@@ -390,7 +411,7 @@ function edit_task_dialog(task_class,i)
                                 </ul>
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Status:   </b>
-                                    <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px" value = "${task_class.status}">
+                                    <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px">
                                         <option value="N/S">Not Started</option>
                                         <option value="prog">In Progress</option>
                                         <option value="dev">Developing</option>
@@ -408,6 +429,7 @@ function edit_task_dialog(task_class,i)
                         <button type="button" class="mdl-button close" onclick = close_edit() >CLOSE</button>
                     </div>
                 </dialog>`
+
 
     return a;
 }
