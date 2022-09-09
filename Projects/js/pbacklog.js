@@ -129,7 +129,6 @@ function showCards(){
     document.getElementById("testing").innerHTML = words;
 
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
-    console.log(sys)
 
 }
 
@@ -229,7 +228,6 @@ function view_task(i)
     
     //show modal()
     // edit the html content in the modal first
-    console.log(task._status)
     let view_html_content = `
     <h4 class="mdl-dialog__title" style="padding-left:30px">${task._name}</h4>
     <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif">
