@@ -374,16 +374,27 @@ function editTask(i)
     let backlog = JSON.parse(storage)._productBacklog;
     let task = backlog._tasks[i];
 
-    // show edit task dialog (this is similar to add task dialog
-    document.getElementById("edit-dialog").innerHTML = editTaskDialog(task,i)
+    if (task._status == "comp")
+    {
+        document.getElementById("edit-button").disabled = true;
 
-    // initialise status and priority
-    document.getElementById("edit-priority").value = task._priority
-    document.getElementById("edit-cars").value = task._status
+        // TODO: error message
+    }
+    else
+    {
+        // show edit task dialog (this is similar to add task dialog
+        document.getElementById("edit-dialog").innerHTML = editTaskDialog(task,i)
 
-    // show modal
-    editDialogRef.showModal();
+        // initialise status and priority
+        document.getElementById("edit-priority").value = task._priority
+        document.getElementById("edit-cars").value = task._status
 
+        // show modal
+        editDialogRef.showModal();
+
+    }
+
+    
 }
 
 function confirmEdit(i)
