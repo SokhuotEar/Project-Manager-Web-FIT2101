@@ -77,3 +77,12 @@
 .testing-tag {
     background-color:lightgreen
 }
+
+
+/* type */
+.userstory{
+    background-color: rgb(25, 238, 213);
+}
+.bug{
+    background-color: chartreuse;
+}
