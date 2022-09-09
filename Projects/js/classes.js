@@ -146,7 +146,7 @@ class Task {
             this._priority=priority;
             this._status=status;
             this._timeSpent=[];
-            this._developer=[];
+            this._developers=[];
 
         }
         else{
@@ -173,8 +173,8 @@ class Task {
     get priority(){
         return this._priority;
     }
-    get developer(){
-        return this._developer;
+    get developers(){
+        return this._developers;
     }
     get status(){
         return this._status;
@@ -204,14 +204,14 @@ class Task {
     }
 
     addMember(developer){
-        this._developer.push(developer)
+        this._developers.push(developer)
     }
 
     removeMember(developer){
         let index = this._tasks.indexOf(developer);
 
         if(index>-1){
-            this._developer.splice(index,1)
+            this._developers.splice(index,1)
         }
     }
 
@@ -275,8 +275,8 @@ class Task {
     static fromData(data)
     {
         let task = new Task(data._name,data._description,data._type,data._storyPoints,data._tags,data._priority,data._status)
-        task._developer=[]
-        for(let i=0;i<data._developer.length;i++){
+        task._developers=[]
+        for(let i=0;i<data._developers.length;i++){
             let next_developer= Developer.fromData(data._developer[i]);
             task.addMember(next_developer);
         }
