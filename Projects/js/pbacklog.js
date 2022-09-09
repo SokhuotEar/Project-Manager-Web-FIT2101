@@ -211,9 +211,6 @@ function confirmAddTask()
     let newStoryType=document.getElementById("task_type");
     let userStoryType = newStoryType.value;
 
-    let newPriority=document.getElementById("priority");
-    let userPriority = newPriority.value;
-
     let priorityRef=document.getElementById("priority");
     let userPriority = priorityRef.value;
 
