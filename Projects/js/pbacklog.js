@@ -128,20 +128,26 @@ function showCards(){
                     <h2 class="mdl-card__title-text">${task._name}</h2>
                 </div>
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
-                    <span class="mdl-chip ${tagCSS}">
+                    <span class="mdl-chip" style = "position: relative; right: 5px;">
+                    <span class="mdl-chip__text">${task._storyPoints} story points</span>
+                    </span>
+                    <br><br>
+                    <b style = "position: relative; top: 4px;">Tags:</b>
+                    <span class="mdl-chip ${tagCSS}" style = "position: relative; left: 20px;">
                         <span class="mdl-chip__text">${tag}</span>
                     </span>
-                    <span class="mdl-chip ${prioCSS}">
-                        <span class="mdl-chip__text">${task._priority}</span>
-                    </span>
-                    <span class="mdl-chip ${typeCSS}">
+                    <br>
+                    <b style = "position: relative; top: 4px;">Type:</b>
+                    <span class="mdl-chip ${typeCSS}" style = "position: relative; left: 20px;">
                         <span class="mdl-chip__text">${type}</span>
                     </span>
-                    <span class="mdl-chip">
-                        <span class="mdl-chip__text">${task._storyPoints} story points</span>
+                    <br>
+                    <b style = "position: relative; top: 4px;">Priority:</b>
+                    <span class="mdl-chip ${prioCSS}" style = "position: relative; left: 5px;">
+                        <span class="mdl-chip__text">${task._priority}</span>
                     </span>
                 </div>
-                <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
+                <div class="mdl-card__actions mdl-card--border" style="padding-right:15px;">
                     <!-- Accent-colored raised button with ripple -->
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "view_task(${i})">
                         VIEW
@@ -361,7 +367,7 @@ function view_task(i) {
                 <br>
                 <b>Story points:</b> ${task._storyPoints}
                 <div style="padding-top:5px"><b style="position:absolute;margin-top:8px">Tags:</b>
-                    <span class="mdl-chip" style="background-color:orange;margin-left:40px">
+                    <span class="mdl-chip" style="background-color:orange;margin-left:58px">
                         <span class="mdl-chip__text">${task._tags}</span>
                     </span>
                 </div>
