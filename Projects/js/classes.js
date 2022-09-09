@@ -8,6 +8,7 @@ class System {
         this._activeSprint;
         this._completedSprints = [];
         this._notStartedSprints = [];
+        this._sprintNumber = 0;
     }
 
 
@@ -44,6 +45,16 @@ class System {
         this._activeSprint=data._activeSprint;
         this._completedSprints=data._completedSprints;
         this._notStartedSprints=data._notStartedSprints;
+    }
+
+    createSprint(start_date, end_date)
+    {
+        // sprint number initialise the id for sprint
+        sprint_number += 1
+
+        // create sprint and push to not started sprint
+        newSprint = new Sprint(sprint_number, start_date, end_date)
+        this._notStartedSprints.push(newSprint)
     }
 
 }
@@ -273,9 +284,118 @@ class Task {
 
 
 class Sprint {
+    // please don't call this directly; call sys.createSprint() instead
+    constructor(sprint_id, start_date, end_date)
+    {
+        this._sprintId = sprint_id;
+        this._startDate = start_date;
+        this._endDate = end_date;
+        this._sprintBacklog = new SprintBacklog();
+    }
+
+    // getters
+    get sprint_id()
+    {
+        return this._sprint_id
+    }
+    get startDate()
+    {
+        return this._startDate
+    }
+    get endDate()
+    {
+        return this._endDate
+    }
+    get sprintBacklog()
+    {
+        return this._sprintBacklog
+    }
+
+    //setters
+    set sprint_id(newId)
+    {
+        this._sprintId = newId
+    }
+    set startDate(newDate)
+    {
+        this._sprintId = newDate
+    }
+    set endDate(newDate)
+    {
+        this._sprintId = newDate
+    }
+    set sprintBacklog(backlog)
+    {
+        this._sprintId = backlog
+    }
+
+
 }
 
 class SprintBacklog {
+    constructor()
+    {
+        this._allTasks = []
+        this._notStarted_task = []
+        this._started_task = []
+        this._completedTask = []
+    }
+
+    // get task
+    get notStarted_task()
+    {
+        return this._notStarted_task
+    }
+    get started_task()
+    {
+        return this._started_task
+    }
+    get completedTask()
+    {
+        return this._completedTask
+    }
+
+    // add a task
+    add_task(taskClass){
+        
+        // whenever a task is added, add it to all tasks first
+        this._allTask.push(taskClass)
+
+        // assign it to a relevant array: notStarted, started or completed
+        this.assign_task(taskClass)
+    }
+
+    // assign task to relevant array
+    assign_task(taskClass)
+    {
+        if (taskClass._status == "prog" || taskClass._status == "dev" || taskClass._status == "test")
+        {
+            // push it to in started task array
+            this._started_task.push(taskClass)
+        }
+        else if (taskClass._status == "N/S")
+        {
+            // assign it to not started array
+            this._started_task.push(taskClass)
+        }
+        else if (taskClass._status == "comp")
+        {
+            // assign it to completed array
+            this._completedTask.push(taskClass)
+        }
+    }
+
+
+    // move task
+    move_task(indexToMove, destination)
+    /* indexToMove: is the index of the task to move, relative to this._allTask
+        dest
+    */
+    {
+        // find the task and 
+        
+    }
+
 }
 
 class TeamMembers {
