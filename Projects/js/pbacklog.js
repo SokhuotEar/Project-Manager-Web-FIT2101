@@ -595,8 +595,12 @@ function filterTask(condition)
         let task = productBacklog._tasks[indexArray[i]]
 
         // display the task
-        let prio = task[i]._priority
-        let tag = task[i]._tag
+        let prio = task._priority
+        let tag = task._tags
+        let type = task._type
+        let prioCSS = "";
+        let tagCSS = "";
+        let typeCSS = "";
 
         if(prio=="Low"){
             prioCSS="low-p"
@@ -639,12 +643,11 @@ function filterTask(condition)
                     <span class="mdl-chip ${tagCSS}">
                         <span class="mdl-chip__text">${task._tags}</span>
                     </span>
-                    <span class="mdl-chip">
-                        <span class="mdl-chip__text">${task._type}</span>
-                    </span>
-
                     <span class="mdl-chip ${prioCSS}">
                         <span class="mdl-chip__text">${task._priority}</span>
+                    </span>
+                    <span class="mdl-chip ${typeCSS}">
+                        <span class="mdl-chip__text">${task._type}</span>
                     </span>
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">${task._storyPoints} story points</span>
