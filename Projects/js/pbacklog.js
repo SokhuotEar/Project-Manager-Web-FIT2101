@@ -197,7 +197,7 @@ function openAddTask()
     let newStoryPoints=document.getElementById("storyp");
     newStoryPoints.value = "";
 
-    let newStoryType=document.getElementById("task_type");
+    let newStoryType=document.getElementById("type_task");
     newStoryType.value = "";
 
     let newPriority=document.getElementById("priority");
@@ -246,7 +246,7 @@ function confirmAddTask()
     let storyPointsRef=document.getElementById("storyp");
     let userStoryPoints = storyPointsRef.value;
 
-    let newStoryType=document.getElementById("task_type");
+    let newStoryType=document.getElementById("type_task");
     let userStoryType = newStoryType.value;
 
     let priorityRef=document.getElementById("priority");
@@ -262,6 +262,11 @@ function confirmAddTask()
     }
 
     let task = new Task(userName, userDescription,"user story", userStoryPoints, tag, userPriority, userStatus);
+    for(let i=0; i<teamMembers.teamMembers.length; i++){
+        if (document.getElementById(`list-checkbox-${i}`).checked){
+            task.addMember(teamMembers.teamMembers[i])
+        }
+    }
     productBacklog.addTask(task);
     showCards();
     addDialogRef.close();
@@ -393,6 +398,7 @@ function view_task(i)
 
     //add content to the model
     document.getElementById("view-dialog").innerHTML = viewHTMLContent;
+    document.getElementById("display-names").innerHTML = displayNames;
 
     // show view dialog modal
     viewDialogRef.showModal();
