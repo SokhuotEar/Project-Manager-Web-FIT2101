@@ -41,12 +41,15 @@ closeButtonRef.addEventListener('click', function() {
 });
 
 let teamMembers=sys.teamMembers
-teamMembers.removeAll()
-teamMembers.addMember(new Developer("a"))
-teamMembers.addMember(new Developer("b"))
-teamMembers.addMember(new Developer("c"))
-teamMembers.addMember(new Developer("d"))
-teamMembers.addMember(new Developer("e"))
+/*
+if(teamMembers.teamMembers.length!=5){
+    teamMembers.removeAll()
+    teamMembers.addMember(new Developer("a"))
+    teamMembers.addMember(new Developer("b"))
+    teamMembers.addMember(new Developer("c"))
+    teamMembers.addMember(new Developer("d"))
+    teamMembers.addMember(new Developer("e"))
+}*/
 
 
 
@@ -208,8 +211,8 @@ function openAddTask()
             ${developer.name}
     </span>
     <span class="mdl-list__item-secondary-action">
-        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-${i}">
-            <input type="checkbox" id="list-checkbox-${i}" class="mdl-checkbox__input"/>
+        <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-radio-${i}">
+            <input type="radio" id="list-radio-${i}" class="mdl-radio__button" name="add_button"/>
         </label>
     </span>
     </li>`;
@@ -256,7 +259,7 @@ function confirmAddTask()
 
     let task = new Task(userName, userDescription,userType, userStoryPoints, userTag, userPriority, userStatus);
     for(let i=0; i<teamMembers.teamMembers.length; i++){
-        if (document.getElementById(`list-checkbox-${i}`).checked){
+        if (document.getElementById(`list-radio-${i}`).checked){
             task.addMember(teamMembers.teamMembers[i])
         }
     }
@@ -425,7 +428,6 @@ function view_task(i) {
         ;
     }
     document.getElementById("display-names").innerHTML = displayNames;
-    console.log(displayNames)
 
     // show view dialog modal
     viewDialogRef.showModal();
@@ -443,9 +445,7 @@ function closeViewTask()
 function editTask(i)
 {
     // retrieve from local storage
-    let storage = retrieve_from_local_storage("ProductBacklog");
-    let backlog = JSON.parse(storage)._productBacklog;
-    let task = backlog._tasks[i];
+    let task = productBacklog.tasks[i];
 
     if (task._status == "Completed")
     {
@@ -471,25 +471,40 @@ function editTask(i)
         // show team members
         // get team member's information
         let displayMember= ''
-
-        for (i = 0; i< sys._teamMembers._teamMembers.length; i++)
+        for (i = 0; i< teamMembers.teamMembers.length; i++)
         {
             //create a team member html content
-            displayMember+= 
-            `
-            <li class="mdl-list__item">
-            <span class="mdl-list__item-primary-content">
-            <i class="material-icons mdl-list__item-icon">person</i>
-                ${sys._teamMembers._teamMembers[i]._name}
-            </span>
-            <span class="mdl-list__item-secondary-action">
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-${i}">
-                    <input type="checkbox" id="edit-list-checkbox-${i}" class="mdl-checkbox__input"/>
-                </label>
-            </span>
-            </li>
-            `
-            ;
+
+            if(task.checkMember(teamMembers.teamMembers[i])){
+                displayMember+= 
+                `<li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-icon">person</i>
+                    ${teamMembers.teamMembers[i].name}
+                </span>
+                <span class="mdl-list__item-secondary-action">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-radio-${i}">
+                        <input type="radio" id="edit-list-radio-${i}" class="mdl-radio__input" name="edit_button" checked/>
+                    </label>
+                </span>
+                </li>
+                `;
+            }
+            else{
+                displayMember+= 
+                `<li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-icon">person</i>
+                    ${teamMembers.teamMembers[i].name}
+                </span>
+                <span class="mdl-list__item-secondary-action">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-radio-${i}">
+                        <input type="radio" id="edit-list-radio-${i}" class="mdl-radio__input" name="edit_button"/>
+                    </label>
+                </span>
+                </li>
+                `;
+            }
         }
         
         document.getElementById("edit-teammembers").innerHTML = displayMember;
@@ -517,7 +532,7 @@ function confirmEdit(i)
     updatedTask._developers = []
     // check team members
     for(let i=0; i<teamMembers.teamMembers.length; i++){
-        if (document.getElementById(`edit-list-checkbox-${i}`).checked){
+        if (document.getElementById(`edit-list-radio-${i}`).checked){
             updatedTask.addMember(teamMembers.teamMembers[i])
         }
     }
