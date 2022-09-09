@@ -1,49 +1,69 @@
 "use strict"
 
-let view_dialog = document.getElementById('view-dialog')
-let view_button = document.getElementById('open-button')
-let add_dialog = document.getElementById('add-dialog')
-let add_button = document.getElementById('add-button')
-let close_button = document.getElementById('close-button')
-let edit_dialog = document.getElementById("edit-dialog");
+// dialog and button ids
+let viewDialogRef = document.getElementById('view-dialog')
+let viewButtonRef = document.getElementById('open-button')
+let addDialogRef = document.getElementById('add-dialog')
+let addButtonRef = document.getElementById('add-button')
+let closeButtonRef = document.getElementById('close-button')
+let editDialogRef = document.getElementById("edit-dialog");
 
-view_button.addEventListener('click', function() {
-    view_dialog.showModal();
+// error message ids
+let nameErrorRef = document.getElementById('name_err');
+let descErrorRef = document.getElementById('desc_err');
+let storypointErrorRef = document.getElementById('storypoints_err');
+
+
+viewButtonRef.addEventListener('click', function() {
+    viewDialogRef.showModal();
 });
 
-view_dialog.querySelector('.close').addEventListener('click', function() {
-    view_dialog.close();
+viewDialogRef.querySelector('.close').addEventListener('click', function() {
+    viewDialogRef.close();
 });
 
-add_button.addEventListener('click', function() {
-    add_dialog.showModal();
+addButtonRef.addEventListener('click', function() {
+    addDialogRef.showModal();
 });
 
-add_dialog.querySelector('.close').addEventListener('click', function() {
-    add_dialog.close();
+addDialogRef.querySelector('.close').addEventListener('click', function() {
+    addDialogRef.close();
 });
 
 ///delete functionality
-close_button.addEventListener('click', function() {
+closeButtonRef.addEventListener('click', function() {
     close_dialog.showModal();
 });
 
 function deletequery(i){
+    //
+    let confirm_text = 
+    `<h4 class="mdl-dialog__title" style="padding-left:30px">Delete Task</h4>
+    <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif">
+        <div class="mdl-grid">
+            <p>Are you sure you want to delete task <b> ${productBacklog._tasks[i]._name} </b>?</p>
+        </div>
+    <div class="mdl-dialog__actions">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="delete-confirm">DELETE</button>
+        <button type="button" class="mdl-button close">CANCEL</button>
+    </div>
+    `
+
+    document.getElementById("close-dialog").innerHTML = confirm_text;
+
     let close_dialog = document.getElementById('close-dialog')
     let delete_button = document.getElementById('delete-confirm')
     close_dialog.showModal();
     
-    delete_button.addEventListener('click', function() {
+    deleteButton.addEventListener('click', function() {
         deleteTask(i);
-        close_dialog.close();
+        closeDialog.close();
     })
 
-    close_dialog.querySelector('.close').addEventListener('click', function() {
-        close_dialog.close();
+    closeDialog.querySelector('.close').addEventListener('click', function() {
+        closeDialog.close();
     });
 }
-
-
 
 let productBacklog = sys.productBacklog;
 
@@ -66,26 +86,26 @@ function showCards(){
         }
 
         if(prio=="low"){
-            prio_css="low-p"
+            prioCSS="low-p"
         }
         else if(prio=="medium"){
             prio_css="med-p"
         }
         else if(prio=="high"){
-            prio_css="high-p"
+            prioCSS="high-p"
         }
         else if(prio=="critical"){
             prio_css="crit-p"
         }
 
         if(tag=="UI"){
-            tag_css= "ui-tag"
+            tagCSS= "ui-tag"
         }
         else if(tag=="CORE"){
-            tag_css="core-tag"
+            tagCSS="core-tag"
         }
         else if(tag=="Testing"){
-            tag_css="testing-tag"
+            tagCSS="testing-tag"
         }
         words+=
         `<div class="mdl-cell mdl-cell--4-col">
@@ -94,7 +114,7 @@ function showCards(){
                     <h2 class="mdl-card__title-text">${task._name}</h2>
                 </div>
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
-                    <span class="mdl-chip ${tag_css}">
+                    <span class="mdl-chip ${tagCSS}">
                         <span class="mdl-chip__text">${task._tag}</span>
                     </span>
                     <span class="mdl-chip ${type_css}">
@@ -114,7 +134,7 @@ function showCards(){
                     </button>
                 </div>
                 <div class="mdl-card__menu">
-                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="deletequery(${i})">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="deleteQuery(${i})">
                         <i class="material-icons">close</i>
                     </button>
                     <div class="mdl-tooltip" data-mdl-for="close">
@@ -127,7 +147,6 @@ function showCards(){
     document.getElementById("testing").innerHTML = words;
 
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
-    console.log(sys)
 
 }
 
@@ -180,14 +199,14 @@ function openAddTask()
 // closes gialog box and updates product backlog view
 function confirmAddTask()
 {
-    let newName=document.getElementById("task-name");
-    let userName = newName.value;
+    let nameRef=document.getElementById("task-name");
+    let userName = nameRef.value;
 
-    let newDescription=document.getElementById("task-desc");
-    let userDescription = newDescription.value;
+    let descRef=document.getElementById("task-desc");
+    let userDescription = descRef.value;
 
-    let newStoryPoints=document.getElementById("storyp");
-    let userStoryPoints = newStoryPoints.value;
+    let storyPointsRef=document.getElementById("storyp");
+    let userStoryPoints = storyPointsRef.value;
 
     let newStoryType=document.getElementById("task_type");
     let userStoryType = newStoryType.value;
@@ -195,18 +214,58 @@ function confirmAddTask()
     let newPriority=document.getElementById("priority");
     let userPriority = newPriority.value;
 
-    let newStatus=document.getElementById("cars");
-    let userStatus = newStatus.value;
+    let priorityRef=document.getElementById("priority");
+    let userPriority = priorityRef.value;
 
-    let task = new Task(userName, userDescription,userStoryType, userStoryPoints,"UI", userPriority, userStatus);
+    let statusRef=document.getElementById("cars");
+    let userStatus = statusRef.value;
+
+    // verify inputs
+    // break if invalid, clear error messages if valid
+    if (verifyInputs(userName,userDescription,userStoryPoints,tag,'prio','team','status') === 0) {
+        return
+    }
+
+    let task = new Task(userName, userDescription,"user story", userStoryPoints, tag, userPriority, userStatus);
     productBacklog.addTask(task);
     showCards();
-    add_dialog.close();
+    addDialogRef.close();
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
+// verifyInputs()
+//
+// This function verifies the inputs entered by the user, it breaks if an issue is detected but
+// if it passes all tests, returns 1.
+//
+// Inputs: all user inputs for the task
+// Returns: 0 if invalid, 1 if valid
+function verifyInputs(name, desc, storyp, tags, priority, team, status) {
+    if (name === "") {
+        nameErrorRef.innerText = 'Please enter a task name.';
+        return 0;
+    }
+    nameErrorRef.innerText = '';
+
+    if (desc === ""){
+        descErrorRef.innerText = 'Please enter a task description.';
+        return 0;
+    }
+    descErrorRef.innerText = '';
+
+    if (storyp === ""){
+        storypointErrorRef.innerText = 'Please enter a story points value.';
+        return 0;
+    } else if (storyp > 100){
+        storypointErrorRef.innerText = 'Please enter a value between 0 and 100.';
+        return 0;
+    }
+    storypointErrorRef.innerText = '';
+    return 1;
+}
+
 function deleteTask(i){
-    productBacklog.removeTask(productBacklog.tasks[i]);
+    productBacklog.removeTask(i);
     showCards();
 
     // store to local storage
@@ -233,7 +292,7 @@ function view_task(i)
     
     //show modal()
     // edit the html content in the modal first
-    let view_html_content = `
+    let viewHTMLContent = `
     <h4 class="mdl-dialog__title" style="padding-left:30px">${task._name}</h4>
     <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif">
         <div class="mdl-grid" style="padding:0;">
@@ -266,15 +325,15 @@ function view_task(i)
                 </ul>
                 <div><b style="position:absolute;margin-top:8px">Status:</b>
                     <span class="mdl-chip" style="margin-left:58px">
-                        <span class="mdl-chip__text">Not Started</span>
+                        <span class="mdl-chip__text">${task._status}</span>
                     </span>
                 </div>
             </div>
         </div>
     </div>
     <div class="mdl-dialog__actions">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = edit_task(${i}) >EDIT</button>
-        <button type="button" class="mdl-button close" onclick = close_viewtask() >CLOSE</button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = editTask(${i}) >EDIT</button>
+        <button type="button" class="mdl-button close" onclick = closeViewTask() >CLOSE</button>
     </div> `;
 
     //TO DO: implement team member feild
@@ -296,37 +355,41 @@ function view_task(i)
     */
 
     //add content to the model
-    document.getElementById("view-dialog").innerHTML = view_html_content;
+    document.getElementById("view-dialog").innerHTML = viewHTMLContent;
 
-    // show modal
-    let view_dialog = document.getElementById("view-dialog");
-    view_dialog.showModal();
+    // show view dialog modal
+    viewDialogRef.showModal();
 
 }
 
-function close_viewtask()
+function closeViewTask()
 {
-    view_dialog.close()
+    viewDialogRef.close()
 }
 
 // ------------------------------------------------------------------------------
 // edit task functionality
 
-function edit_task(i)
+function editTask(i)
 {
+    // retrieve from local storage
     let storage = retrieve_from_local_storage("ProductBacklog");
     let backlog = JSON.parse(storage)._productBacklog;
     let task = backlog._tasks[i];
 
     // show edit task dialog (this is similar to add task dialog
-    document.getElementById("edit-dialog").innerHTML = edit_task_dialog(task,i)
+    document.getElementById("edit-dialog").innerHTML = editTaskDialog(task,i)
+
+    // initialise status and priority
+    document.getElementById("edit-priority").value = task._priority
+    document.getElementById("edit-cars").value = task._status
 
     // show modal
-    edit_dialog.showModal();
+    editDialogRef.showModal();
 
 }
 
-function confirm_edit(i)
+function confirmEdit(i)
 {
     //retrive information from edit task input field
     let name=document.getElementById("edit-task-name").value;
@@ -340,25 +403,25 @@ function confirm_edit(i)
     let updated_task = new Task(name,description,userStoryType,storyPoints,"UI",priority,status);
 
     //update task
-    productBacklog.updateTask(productBacklog.tasks[i], updated_task)
+    productBacklog.updateTask(productBacklog.tasks[i], updatedTask)
 
     // store to local storage
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));;
     
     // show cards and close dialogs
     showCards();
-    edit_dialog.close()
-    view_dialog.close()
+    editDialogRef.close()
+    viewDialogRef.close()
 }
 
-function close_edit()
+function closeEdit()
 {
-    edit_dialog.close()
+    editDialogRef.close()
 
 }
 
 // edit tasks functionality
-function edit_task_dialog(task_class,i)
+function editTaskDialog(taskClass,i)
 {
     let a = `
     <h4 class="mdl-dialog__title" style="padding-left:30px">EDIT TASK</h4>
@@ -367,14 +430,14 @@ function edit_task_dialog(task_class,i)
                             <div class="mdl-cell mdl-cell--6-col">
                                 <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" type="text" id="edit-task-name" value = "${task_class._name}">
+                                        <input class="mdl-textfield__input" type="text" id="edit-task-name" value = "${taskClass._name}">
                                         <label class="mdl-textfield__label" for="task-name"></label>
                                     </div>
                                 </form>
 
                                 <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <textarea class="mdl-textfield__input" type="text" rows= "5" id="edit-task-desc"> ${task_class._description} </textarea>
+                                        <textarea class="mdl-textfield__input" type="text" rows= "5" id="edit-task-desc"> ${taskClass._description} </textarea>
                                         <label class="mdl-textfield__label" for="task-desc"></label>
                                     </div>
                                 </form>
@@ -382,7 +445,7 @@ function edit_task_dialog(task_class,i)
                                 <!-- Numeric Textfield with Floating Label -->
                                 <form action="#">
                                     <div style="width:50%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="edit-storyp" value = "${task_class._storyPoints}">
+                                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="edit-storyp" value = "${taskClass._storyPoints}">
                                         <label class="mdl-textfield__label" for="storyp"></label>
                                         <span class="mdl-textfield__error">Input is not a number!</span>
                                     </div>
@@ -421,7 +484,7 @@ function edit_task_dialog(task_class,i)
                                 </ul>
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Status:   </b>
-                                    <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px" value = "${task_class.status}">
+                                    <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px" value = "${taskClass.status}">
                                         <option value="N/S">Not Started</option>
                                         <option value="prog">In Progress</option>
                                         <option value="comp">Completed</option>
@@ -433,10 +496,11 @@ function edit_task_dialog(task_class,i)
                         </div>
                     </div>
                     <div class="mdl-dialog__actions">
-                        <button onclick="confirm_edit(${i})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">CONFIRM</button>
-                        <button type="button" class="mdl-button close" onclick = close_edit() >CLOSE</button>
+                        <button onclick="confirmEdit(${i})" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">CONFIRM</button>
+                        <button type="button" class="mdl-button close" onclick = closeEdit() >CLOSE</button>
                     </div>
                 </dialog>`
+
 
     return a;
 }
@@ -444,23 +508,23 @@ function edit_task_dialog(task_class,i)
 //----------------------------------------------------------------------------
 // filter task implementation
 //add event listener for all buttons regarding filter
-document.getElementById("UI-filter").addEventListener('click', function(){filter_task("UI")})
-document.getElementById("core-filter").addEventListener('click', function(){filter_task("core")})
-document.getElementById("test-filter").addEventListener('click', function(){filter_task("test")})
+document.getElementById("UI-filter").addEventListener('click', function(){filterTask("UI")})
+document.getElementById("core-filter").addEventListener('click', function(){filterTask("core")})
+document.getElementById("test-filter").addEventListener('click', function(){filterTask("test")})
 document.getElementById("clear-filter").addEventListener('click', function(){showCards()})
 
-function filter_task(condition)
+function filterTask(condition)
 {
 
     // apply filter; index_array returned will be the index of the task in productBacklog that the filter applies to
-    let index_array = productBacklog.filterTasks(condition)
+    let indexArray = productBacklog.filterTasks(condition)
 
     // view the tasks on display screen
     let display = '';
-    for ( let i =0; i < index_array.length; i++)
+    for ( let i =0; i < indexArray.length; i++)
     {
         // retrieve the task
-        let task = productBacklog._tasks[index_array[i]]
+        let task = productBacklog._tasks[indexArray[i]]
 
         // display the task
         display += 
@@ -485,12 +549,12 @@ function filter_task(condition)
                 </div>
                 <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
                     <!-- Accent-colored raised button with ripple -->
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "view_task(${index_array[i]})">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "view_task(${indexArray[i]})">
                         VIEW
                     </button>
                 </div>
                 <div class="mdl-card__menu">
-                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="deletequery(${index_array[i]})">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="deleteQuery(${indexArray[i]})">
                         <i class="material-icons">close</i>
                     </button>
                     <div class="mdl-tooltip" data-mdl-for="close">

@@ -64,10 +64,9 @@ class ProductBacklog {
         this._tasks.push(task);
     }
 
-    removeTask(task){
-        let index = this._tasks.indexOf(task);
-        if(index>-1){
-            this._tasks.splice(index,1)
+    removeTask(i){
+        if(i>-1){
+            this._tasks.splice(i,1)
         }
     }
 
@@ -132,7 +131,7 @@ class Task {
     constructor(name, description, type, storyPoints, tags, priority,status){
         //this if statement can be broken and make more specific but
         if(typeof(name)=="string" && typeof(description)=="string" && typeof(type)=="string" 
-        && typeof(tags)=="string" && typeof(priority)=="string" &&
+        && typeof(priority)=="string" &&
         (!isNaN(Number(storyPoints)) || typeof(storyPoints)=="number")
         && name.length>0 && description.length>0 && type.length>0 && tags.length>0 && priority.length>0){
 
