@@ -58,13 +58,13 @@ function showCards(){
         if(prio=="low"){
             prio_css="low-p"
         }
-        else if(prio=="med"){
+        else if(prio=="medium"){
             prio_css="med-p"
         }
         else if(prio=="high"){
             prio_css="high-p"
         }
-        else if(prio=="crit"){
+        else if(prio=="critical"){
             prio_css="crit-p"
         }
 
