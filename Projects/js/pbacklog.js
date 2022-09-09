@@ -17,6 +17,7 @@ view_dialog.querySelector('.close').addEventListener('click', function() {
 
 add_button.addEventListener('click', function() {
     add_dialog.showModal();
+
 });
 
 add_dialog.querySelector('.close').addEventListener('click', function() {
@@ -27,6 +28,18 @@ add_dialog.querySelector('.close').addEventListener('click', function() {
 close_button.addEventListener('click', function() {
     close_dialog.showModal();
 });
+
+
+/// Making some team members (hard coded)
+let teamMembers=sys.teamMembers;
+teamMembers.addMember(new Developer("a"))
+teamMembers.addMember(new Developer("b"))
+teamMembers.addMember(new Developer("c"))
+teamMembers.addMember(new Developer("d"))
+teamMembers.addMember(new Developer("e"))
+
+
+
 
 function deletequery(i){
     let close_dialog = document.getElementById('close-dialog')
@@ -157,6 +170,31 @@ function openAddTask()
 
     let newStatus=document.getElementById("cars");
     newStatus.value = "";
+
+    //code to show members
+    let teamList =""
+    for(let i=0; i<teamMembers.teamMembers.length; i++){
+        let developer=teamMembers.teamMembers[i];
+
+        teamList+=
+        `<li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+        <i class="material-icons mdl-list__item-icon">person</i>
+            ${developer.name}
+    </span>
+    <span class="mdl-list__item-secondary-action">
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-${i}">
+            <input type="checkbox" id="list-checkbox-${i}" class="mdl-checkbox__input"/>
+        </label>
+    </span>
+    </li>`;
+    }
+
+    
+    
+    document.getElementById("team-list").innerHTML=teamList
+
+    
 }
 
 // operates when "add" button in add dialog is clicked
@@ -180,6 +218,12 @@ function confirmAddTask()
     let userStatus = newStatus.value;
 
     let task = new Task(userName, userDescription,"user story", userStoryPoints,"UI", userPriority, userStatus);
+    for(let i=0; i<teamMembers.teamMembers.length; i++){
+        if (document.getElementById(`list-checkbox-${i}`).checked){
+            task.addMember(teamMembers.teamMembers[i])
+        }
+    }
+
     productBacklog.addTask(task);
     showCards();
     add_dialog.close();
