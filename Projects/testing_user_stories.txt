@@ -19,7 +19,7 @@ As a user, I would like to view the tasks in a card layout so that the tasks can
 Card Layout(8hr)
 As a user, in the card layout, I would like to see the task name so that I know what the task is.(1hr) : PASS
 As a user, in the card layout, I would like to see the task description so that I know what the task entails. (1hr) : PASS
-As a user, in the card layout, I would like to see the task type so that I know what the task is.(1hr)
+As a user, in the card layout, I would like to see the task type so that I know what the task is.(1hr) : PASS
 As a user, in the card layout, I would like to see the task story points so that I know how long the task will take.(1hr) : PASS
 As a user, in the card layout, I would like to see the task tags so that I know what the task is.(1hr)
 As a user, in the card layout, I would like to see the task priority so that I know what the task is.(1hr) : PASS
@@ -39,7 +39,6 @@ Summary
 As a user, I would like to see a summary of the task which includes Task Name,Tag, Priority, Story points so that I can quickly get a glimpse of the task(2hr)
 
 Data Storage
-As a user, I would like to save data locally so that I can access it easily(2.5hr)
-As a user, I would like to log my time for the tasks I have been working on, so that we are able to collect and observe data on time efficiency.(2hr)
-As a user, I would like to enter a start and end date for my sprints, so that I am able to plan ahead for other sprints. (2hr)
+As a user, I would like to save data locally so that I can access it easily(2.5hr) :PASS
+
 
