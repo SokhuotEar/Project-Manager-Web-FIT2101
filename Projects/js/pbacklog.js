@@ -87,7 +87,7 @@ function showCards(){
         let task = productBacklog.showTasks()[i]
         let prio=task.priority;
         let tag=task.tags;
-        let type = task._type;
+        let type = task.type;
         let typeCSS;
         let prioCSS;
         let tagCSS;
@@ -114,9 +114,10 @@ function showCards(){
             tagCSS="testing-tag"
         }
 
-        if (type === "user story"){
+        if (type === "userStory"){
             typeCSS = 'userstory';
-        } else {
+        } 
+        else if (type == "bug"){
             typeCSS = 'bug';
         }
 
@@ -467,7 +468,7 @@ function confirmEdit(i)
     let storyPoints=document.getElementById("edit-storyp").value;
     let priority=document.getElementById("edit-priority").value;
     let status=document.getElementById("edit-cars").value;
-    let userStoryType = document.getElementById('task_type').value;
+    let userStoryType = document.getElementById("edit-story-type").value;
 
     //create a new task
     let updatedTask = new Task(name,description,userStoryType,storyPoints,"UI",priority,status);
