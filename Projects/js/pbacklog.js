@@ -386,6 +386,7 @@ function view_task(i) {
                         <span class="mdl-chip__text">${task._status}</span>
                     </span>
                 </div>
+                <div>  <span id="comp_err" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible;'></span> </div>
             </div>
         </div>
     </div>
@@ -445,6 +446,9 @@ function editTask(i)
         document.getElementById("edit-button").disabled = true;
 
         // TODO: error message
+        let compErrorRef = document.getElementById('comp_err');
+        compErrorRef.innerText = 'Completed tasks are not editable.';
+        return 0
     }
     else
     {
