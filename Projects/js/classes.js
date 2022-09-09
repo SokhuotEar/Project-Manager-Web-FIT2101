@@ -265,7 +265,7 @@ class Task {
         let task = new Task(data._name,data._description,data._type,data._storyPoints,data._tags,data._priority,data._status)
         task._developers=[]
         for(let i=0;i<data._developers.length;i++){
-            let next_developer= Developer.fromData(data._developer[i]);
+            let next_developer= Developer.fromData(data._developers[i]);
             task.addMember(next_developer);
         }
 
