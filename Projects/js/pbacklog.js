@@ -13,6 +13,10 @@ let closeDialogRef = document.getElementById('close-dialog')
 let nameErrorRef = document.getElementById('name_err');
 let descErrorRef = document.getElementById('desc_err');
 let storypointErrorRef = document.getElementById('storypoints_err');
+let tagErrorRef = document.getElementById('tag_err');
+let typeErrorRef = document.getElementById('type_err');
+let prioErrorRef = document.getElementById('prio_err');
+let statusErrorRef = document.getElementById('status_err');
 
 
 viewButtonRef.addEventListener('click', function() {
@@ -81,37 +85,27 @@ function showCards(){
     let words='';
     for(let i=0; i<productBacklog.showTasks().length;i++){
         let task = productBacklog.showTasks()[i]
-        let tasktype = task.type;
         let prio=task.priority;
         let tag=task.tags;
-        let typeCSS;
         let prioCSS;
         let tagCSS;
-
-        if(tasktype=="user story"){
-            typeCSS="userstory"
-        }
-        else if(tasktype=="bug"){
-            typeCSS="bug"
-        }
-
-        if(prio=="low"){
+        if(prio=="Low"){
             prioCSS="low-p"
         }
-        else if(prio=="medium"){
+        else if(prio=="Medium"){
             prioCSS="med-p"
         }
-        else if(prio=="high"){
+        else if(prio=="High"){
             prioCSS="high-p"
         }
-        else if(prio=="critical"){
+        else if(prio=="Critical"){
             prioCSS="crit-p"
         }
 
         if(tag=="UI"){
             tagCSS= "ui-tag"
         }
-        else if(tag=="CORE"){
+        else if(tag=="Core"){
             tagCSS="core-tag"
         }
         else if(tag=="Testing"){
@@ -125,10 +119,7 @@ function showCards(){
                 </div>
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                     <span class="mdl-chip ${tagCSS}">
-                        <span class="mdl-chip__text">${task._tag}</span>
-                    </span>
-                    <span class="mdl-chip ${typeCSS}">
-                        <span class="mdl-chip__text">${task._type}</span>
+                        <span class="mdl-chip__text">${tag}</span>
                     </span>
                     <span class="mdl-chip ${prioCSS}">
                         <span class="mdl-chip__text">${task._priority}</span>
@@ -165,20 +156,20 @@ function showCards(){
 // resets all input fields to empty strings
 function openAddTask()
 {
-    let newName=document.getElementById("task-name");
-    newName.value = "";
+    let nameRef=document.getElementById("task-name");
+    nameRef.value = "";
 
-    let newDescription=document.getElementById("task-desc");
-    newDescription.value = "";
+    let descRef=document.getElementById("task-desc");
+    descRef.value = "";
 
-    let newStoryPoints=document.getElementById("storyp");
-    newStoryPoints.value = "";
+    let tagsRef=document.getElementById("tag");
+    tagsRef.value = "";
 
-    let newStoryType=document.getElementById("type_task");
-    newStoryType.value = "";
+    let typeRef=document.getElementById("task_type");
+    typeRef.value = "";
 
-    let newPriority=document.getElementById("priority");
-    newPriority.value = "";
+    let storyPointsRef=document.getElementById("storyp");
+    storyPointsRef.value = "";
 
     let newStatus=document.getElementById("cars");
     newStatus.value = "";
@@ -224,8 +215,11 @@ function confirmAddTask()
     let storyPointsRef=document.getElementById("storyp");
     let userStoryPoints = storyPointsRef.value;
 
-    let newStoryType=document.getElementById("type_task");
-    let userStoryType = newStoryType.value;
+    let tagRef = document.getElementById('tag');
+    let userTag = tagRef.value;
+
+    let typeRef = document.getElementById('task_type');
+    let userType = typeRef.value;
 
     let priorityRef=document.getElementById("priority");
     let userPriority = priorityRef.value;
@@ -235,7 +229,7 @@ function confirmAddTask()
 
     // verify inputs
     // break if invalid, clear error messages if valid
-    if (verifyInputs(userName,userDescription,userStoryPoints,tag,'prio','team','status') === 0) {
+    if (verifyInputs(userName,userDescription,userStoryPoints,userTag,userType,userPriority,'team',userStatus) === 0) {
         return
     }
 
@@ -258,19 +252,22 @@ function confirmAddTask()
 //
 // Inputs: all user inputs for the task
 // Returns: 0 if invalid, 1 if valid
-function verifyInputs(name, desc, storyp, tags, priority, team, status) {
+function verifyInputs(name, desc, storyp, tags, taskType, priority, team, status) {
+    // task name
     if (name === "") {
         nameErrorRef.innerText = 'Please enter a task name.';
         return 0;
     }
     nameErrorRef.innerText = '';
 
+    // task description
     if (desc === ""){
         descErrorRef.innerText = 'Please enter a task description.';
         return 0;
     }
     descErrorRef.innerText = '';
 
+    // story points
     if (storyp === ""){
         storypointErrorRef.innerText = 'Please enter a story points value.';
         return 0;
@@ -279,6 +276,34 @@ function verifyInputs(name, desc, storyp, tags, priority, team, status) {
         return 0;
     }
     storypointErrorRef.innerText = '';
+
+    // tag
+    if (tags === ""){
+        tagErrorRef.innerText = 'Please select a tag.';
+        return 0;
+    }
+    tagErrorRef.innerText = '';
+
+    // task type
+    if (taskType === ""){
+        typeErrorRef.innerText = 'Please select a task type.';
+        return 0;
+    }
+    typeErrorRef.innerText = '';
+
+    // priority
+    if (priority === "") {
+        prioErrorRef.innerText = "Please select a priority.";
+        return 0;
+    }
+    prioErrorRef.innerText = "";
+
+    // status
+    if (status === "") {
+        statusErrorRef.innerText = "Please select a status.";
+        return 0;
+    }
+    statusErrorRef.innerText = "";
     return 1;
 }
 
@@ -293,15 +318,13 @@ function deleteTask(i){
 
 //-----------------------------------------------------------------------------------
 // view functionality
-function retrieve_from_local_storage()
-{
+function retrieve_from_local_storage() {
     return localStorage.getItem(SYSTEM_KEY);
     
 }
 
 
-function view_task(i)
-{
+function view_task(i) {
     // first retrieve information from local storage
     //let storage = retrieve_from_local_storage("ProductBacklog");
     //let backlog = JSON.parse(storage)._productBacklog;
@@ -325,11 +348,6 @@ function view_task(i)
                 <div style="padding-top:5px"><b style="position:absolute;margin-top:8px">Tags:</b>
                     <span class="mdl-chip" style="background-color:orange;margin-left:40px">
                         <span class="mdl-chip__text">${task._tag}</span>
-                    </span>
-                </div>
-                <div><b style="position:absolute;margin-top:8px">Type:</b>
-                    <span class="mdl-chip" style="margin-left:58px">
-                        <span class="mdl-chip__text">${task._type}</span>
                     </span>
                 </div>
                 <div><b style="position:absolute;margin-top:8px">Priority:</b>
@@ -427,7 +445,6 @@ function confirmEdit(i)
     let name=document.getElementById("edit-task-name").value;
     let description=document.getElementById("edit-task-desc").value;
     let storyPoints=document.getElementById("edit-storyp").value;
-    let userStoryType=document.getElementById("edit-story-type").value;
     let priority=document.getElementById("edit-priority").value;
     let status=document.getElementById("edit-cars").value;
 
@@ -504,9 +521,9 @@ function editTaskDialog(taskClass,i)
                                 <div style="padding-top:5px"><b style="padding-right:5px">Priority:   </b>
                                     <select name="priority" id="edit-priority" style="font-family:Roboto, sans-serif;padding-right:10px">
                                         <option value="low">Low</option>
-                                        <option value="medium">Medium</option>
+                                        <option value="med">Medium</option>
                                         <option value="high">High</option>
-                                        <option value="critical">Critical</option>
+                                        <option value="crit">Critical</option>
                                     </select>
                                 </div>
                             </div>
@@ -519,6 +536,8 @@ function editTaskDialog(taskClass,i)
                                     <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px" value = "${taskClass.status}">
                                         <option value="N/S">Not Started</option>
                                         <option value="prog">In Progress</option>
+                                        <option value="dev">Developing</option>
+                                        <option value="test">Testing</option>
                                         <option value="comp">Completed</option>
                                     </select>
                                 </div>
@@ -568,9 +587,6 @@ function filterTask(condition)
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">${task._tag}</span>
-                    </span>
-                    <span class="mdl-chip">
-                        <span class="mdl-chip__text">${task._type}</span>
                     </span>
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">${task._priority}</span>
