@@ -36,6 +36,16 @@ closeButtonRef.addEventListener('click', function() {
     closeDialogRef.showModal();
 });
 
+let teamMembers=sys.teamMembers
+teamMembers.removeAll()
+teamMembers.addMember(new Developer("a"))
+teamMembers.addMember(new Developer("b"))
+teamMembers.addMember(new Developer("c"))
+teamMembers.addMember(new Developer("d"))
+teamMembers.addMember(new Developer("e"))
+
+
+
 function deleteQuery(i){
     //
     let confirmText =
@@ -184,7 +194,7 @@ function openAddTask()
     let newStoryPoints=document.getElementById("storyp");
     newStoryPoints.value = "";
 
-    let newStoryType=document.getElementById("task_type");
+    let newStoryType=document.getElementById("type_task");
     newStoryType.value = "";
 
     let newPriority=document.getElementById("priority");
@@ -192,6 +202,32 @@ function openAddTask()
 
     let newStatus=document.getElementById("cars");
     newStatus.value = "";
+
+    //code to show members
+    let teamList =""
+    for(let i=0; i<teamMembers.teamMembers.length; i++){
+        let developer=teamMembers.teamMembers[i];
+        console.log(developer)
+
+        teamList+=
+        `<li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+        <i class="material-icons mdl-list__item-icon">person</i>
+            ${developer.name}
+    </span>
+    <span class="mdl-list__item-secondary-action">
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-${i}">
+            <input type="checkbox" id="list-checkbox-${i}" class="mdl-checkbox__input"/>
+        </label>
+    </span>
+    </li>`;
+    }
+
+    
+    
+    document.getElementById("team-list").innerHTML=teamList
+
+    
 }
 
 // operates when "add" button in add dialog is clicked
@@ -208,7 +244,7 @@ function confirmAddTask()
     let storyPointsRef=document.getElementById("storyp");
     let userStoryPoints = storyPointsRef.value;
 
-    let newStoryType=document.getElementById("task_type");
+    let newStoryType=document.getElementById("type_task");
     let userStoryType = newStoryType.value;
 
     let priorityRef=document.getElementById("priority");
@@ -224,6 +260,11 @@ function confirmAddTask()
     }
 
     let task = new Task(userName, userDescription,"user story", userStoryPoints, tag, userPriority, userStatus);
+    for(let i=0; i<teamMembers.teamMembers.length; i++){
+        if (document.getElementById(`list-checkbox-${i}`).checked){
+            task.addMember(teamMembers.teamMembers[i])
+        }
+    }
     productBacklog.addTask(task);
     showCards();
     addDialogRef.close();
@@ -282,9 +323,11 @@ function retrieve_from_local_storage()
 function view_task(i)
 {
     // first retrieve information from local storage
-    let storage = retrieve_from_local_storage("ProductBacklog");
-    let backlog = JSON.parse(storage)._productBacklog;
-    let task = backlog._tasks[i];
+    //let storage = retrieve_from_local_storage("ProductBacklog");
+    //let backlog = JSON.parse(storage)._productBacklog;
+    //let task = backlog._tasks[i];
+    let task = productBacklog.tasks[i]
+
     
     
     //show modal()
@@ -317,8 +360,7 @@ function view_task(i)
             </div>
             <div class="mdl-cell mdl-cell--6-col">
                 <p><b>Team Members:</b></p>
-                <ul class="demo-list-icon mdl-list" style="border-style: solid;">
-                    <! -- for team members !>
+                <ul id="display-names" class="demo-list-icon mdl-list" style="border-style: solid;">
                 </ul>
                 <div><b style="position:absolute;margin-top:8px">Status:</b>
                     <span class="mdl-chip" style="margin-left:58px">
@@ -334,25 +376,27 @@ function view_task(i)
     </div> `;
 
     //TO DO: implement team member feild
-    /*
     // get team member's information
-    for (i = 0; i< task._teammembers.length; i++)
+    let displayNames=''
+    console.log(task)
+    for (i = 0; i< task.developers.length; i++)
     {
         //create a team member html content
-        document.getElementById().innerHTML = 
+        displayNames+= 
         `
         <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
         <i class="material-icons mdl-list__item-icon">person</i>
-        ${task._teammembers.}
+        ${task.developers[i].name}
         </span>
         </li>
-        `
+        `;
     }
-    */
+
 
     //add content to the model
     document.getElementById("view-dialog").innerHTML = viewHTMLContent;
+    document.getElementById("display-names").innerHTML = displayNames;
 
     // show view dialog modal
     viewDialogRef.showModal();
