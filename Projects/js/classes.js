@@ -64,10 +64,9 @@ class ProductBacklog {
         this._tasks.push(task);
     }
 
-    removeTask(task){
-        let index = this._tasks.indexOf(task);
-        if(index>-1){
-            this._tasks.splice(index,1)
+    removeTask(i){
+        if(i>-1){
+            this._tasks.splice(i,1)
         }
     }
 

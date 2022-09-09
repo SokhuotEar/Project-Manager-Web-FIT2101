@@ -35,10 +35,25 @@ closeButtonRef.addEventListener('click', function() {
     close_dialog.showModal();
 });
 
-function deleteQuery(i){
-    let closeDialog = document.getElementById('close-dialog')
-    let deleteButton = document.getElementById('delete-confirm')
-    closeDialog.showModal();
+function deletequery(i){
+    //
+    let confirm_text = 
+    `<h4 class="mdl-dialog__title" style="padding-left:30px">Delete Task</h4>
+    <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif">
+        <div class="mdl-grid">
+            <p>Are you sure you want to delete task <b> ${productBacklog._tasks[i]._name} </b>?</p>
+        </div>
+    <div class="mdl-dialog__actions">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="delete-confirm">DELETE</button>
+        <button type="button" class="mdl-button close">CANCEL</button>
+    </div>
+    `
+
+    document.getElementById("close-dialog").innerHTML = confirm_text;
+
+    let close_dialog = document.getElementById('close-dialog')
+    let delete_button = document.getElementById('delete-confirm')
+    close_dialog.showModal();
     
     deleteButton.addEventListener('click', function() {
         deleteTask(i);
@@ -119,7 +134,6 @@ function showCards(){
     document.getElementById("testing").innerHTML = words;
 
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
-    console.log(sys)
 
 }
 
@@ -232,7 +246,7 @@ function verifyInputs(name, desc, storyp, tags, priority, team, status) {
 }
 
 function deleteTask(i){
-    productBacklog.removeTask(productBacklog.tasks[i]);
+    productBacklog.removeTask(i);
     showCards();
 
     // store to local storage
@@ -287,7 +301,7 @@ function view_task(i)
                 </ul>
                 <div><b style="position:absolute;margin-top:8px">Status:</b>
                     <span class="mdl-chip" style="margin-left:58px">
-                        <span class="mdl-chip__text">Not Started</span>
+                        <span class="mdl-chip__text">${task._status}</span>
                     </span>
                 </div>
             </div>
@@ -334,12 +348,17 @@ function closeViewTask()
 
 function editTask(i)
 {
+    // retrieve from local storage
     let storage = retrieve_from_local_storage("ProductBacklog");
     let backlog = JSON.parse(storage)._productBacklog;
     let task = backlog._tasks[i];
 
     // show edit task dialog (this is similar to add task dialog
     document.getElementById("edit-dialog").innerHTML = editTaskDialog(task,i)
+
+    // initialise status and priority
+    document.getElementById("edit-priority").value = task._priority
+    document.getElementById("edit-cars").value = task._status
 
     // show modal
     editDialogRef.showModal();
@@ -452,6 +471,7 @@ function editTaskDialog(taskClass,i)
                         <button type="button" class="mdl-button close" onclick = closeEdit() >CLOSE</button>
                     </div>
                 </dialog>`
+
 
     return a;
 }
