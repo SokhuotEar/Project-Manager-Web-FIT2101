@@ -397,7 +397,7 @@ function confirmEdit(i)
     let status=document.getElementById("edit-cars").value;
 
     //create a new task
-    let updated_task = new Task(name,description,userStoryType,storyPoints,"UI",priority,status);
+    let updatedTask = new Task(name,description,userStoryType,storyPoints,"UI",priority,status);
 
     //update task
     productBacklog.updateTask(productBacklog.tasks[i], updatedTask)
@@ -460,7 +460,7 @@ function editTaskDialog(taskClass,i)
                                     </span>
                                 </div>
                                 <div style="padding-top:5px"><b style="padding-right:5px">Type:   </b>
-                                    <select name="type_task" id="type_task" style="font-family:Roboto, sans-serif;padding-right:10px">
+                                    <select name="type_task" id="edit-story-type" style="font-family:Roboto, sans-serif;padding-right:10px">
                                         <option value="userStory">User Story</option>
                                         <option value="bug">Bug</option>
                                     </select>
