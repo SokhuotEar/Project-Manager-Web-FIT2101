@@ -394,28 +394,31 @@ function view_task(i) {
         <button type="button" class="mdl-button close" onclick = closeViewTask() >CLOSE</button>
     </div> `;
 
-    //TO DO: implement team member feild
-    // get team member's information
-    let displayNames=''
-    console.log(task)
-    for (i = 0; i< task.developers.length; i++)
-    {
-        //create a team member html content
-        displayNames+= 
-        `
-        <li class="mdl-list__item">
-        <span class="mdl-list__item-primary-content">
-        <i class="material-icons mdl-list__item-icon">person</i>
-        ${task.developers[i].name}
-        </span>
-        </li>
-        `;
-    }
+
 
 
     //add content to the model
     document.getElementById("view-dialog").innerHTML = viewHTMLContent;
+    
+
+    // get team member's information
+    let displayNames=''
+
+    for (i = 0; i< task._developers.length; i++)
+    {
+        //create a team member html content
+        displayNames+= `
+        <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+        <i class="material-icons mdl-list__item-icon">person</i>
+            ${task._developers[i]._name}
+        </span>
+        </li>
+        `
+        ;
+    }
     document.getElementById("display-names").innerHTML = displayNames;
+    console.log(displayNames)
 
     // show view dialog modal
     viewDialogRef.showModal();
@@ -455,6 +458,32 @@ function editTask(i)
         // show modal
         editDialogRef.showModal();
 
+        // show team members
+        // get team member's information
+        let displayMember= ''
+
+        for (i = 0; i< sys._teamMembers._teamMembers.length; i++)
+        {
+            //create a team member html content
+            displayMember+= 
+            `
+            <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-icon">person</i>
+                ${sys._teamMembers._teamMembers[i]._name}
+            </span>
+            <span class="mdl-list__item-secondary-action">
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-${i}">
+                    <input type="checkbox" id="edit-list-checkbox-${i}" class="mdl-checkbox__input"/>
+                </label>
+            </span>
+            </li>
+            `
+            ;
+        }
+        
+        document.getElementById("edit-teammembers").innerHTML = displayMember;
+
     }
 
     
@@ -471,8 +500,18 @@ function confirmEdit(i)
     let userStoryType = document.getElementById("edit-story-type").value;
     let userStoryTag = document.getElementById("edit-story-tag").value;
 
+
+
     //create a new task
     let updatedTask = new Task(name,description,userStoryType,storyPoints,userStoryTag,priority,status);
+    updatedTask._developers = []
+    // check team members
+    for(let i=0; i<teamMembers.teamMembers.length; i++){
+        if (document.getElementById(`edit-list-checkbox-${i}`).checked){
+            updatedTask.addMember(teamMembers.teamMembers[i])
+        }
+    }
+
 
     //update task
     productBacklog.updateTask(productBacklog.tasks[i], updatedTask)
@@ -484,6 +523,8 @@ function confirmEdit(i)
     showCards();
     editDialogRef.close()
     viewDialogRef.close()
+
+ 
 }
 
 function closeEdit()
@@ -547,8 +588,9 @@ function editTaskDialog(taskClass,i)
                                 </div>
                             </div>
                             <div style="height:48vh" class="mdl-cell mdl-cell--6-col">
+
                                 <p><b>Team Members:</b></p>
-                                <ul class="demo-list-icon mdl-list" id="edit-team-list">
+                                <ul id="edit-teammembers" class="demo-list-icon mdl-list" style="border-style: solid;">
                                 </ul>
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Status:   </b>
@@ -674,6 +716,8 @@ function filterTask(condition)
 
     // display the html
     document.getElementById("testing").innerHTML = display;
+
+
 }
 
 // shows cards when page reloads
