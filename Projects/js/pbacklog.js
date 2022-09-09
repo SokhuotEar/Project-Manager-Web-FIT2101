@@ -595,6 +595,40 @@ function filterTask(condition)
         let task = productBacklog._tasks[indexArray[i]]
 
         // display the task
+        let prio = task[i]._priority
+        let tag = task[i]._tag
+
+        if(prio=="Low"){
+            prioCSS="low-p"
+        }
+        else if(prio=="Medium"){
+            prioCSS="med-p"
+        }
+        else if(prio=="High"){
+            prioCSS="high-p"
+        }
+        else if(prio=="Critical"){
+            prioCSS="crit-p"
+        }
+
+        if(tag=="UI"){
+            tagCSS= "ui-tag"
+        }
+        else if(tag=="Core"){
+            tagCSS="core-tag"
+        }
+        else if(tag=="Testing"){
+            tagCSS="testing-tag"
+        }
+
+        if (type === "userStory"){
+            typeCSS = 'userstory';
+        } 
+        else if (type == "bug"){
+            typeCSS = 'bug';
+        }
+
+
         display += 
         `<div class="mdl-cell mdl-cell--4-col">
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card${i}">
@@ -602,14 +636,14 @@ function filterTask(condition)
                     <h2 class="mdl-card__title-text">${task._name}</h2>
                 </div>
                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
-                    <span class="mdl-chip">
+                    <span class="mdl-chip ${tagCSS}">
                         <span class="mdl-chip__text">${task._tags}</span>
                     </span>
                     <span class="mdl-chip">
                         <span class="mdl-chip__text">${task._type}</span>
                     </span>
 
-                    <span class="mdl-chip">
+                    <span class="mdl-chip ${prioCSS}">
                         <span class="mdl-chip__text">${task._priority}</span>
                     </span>
                     <span class="mdl-chip">
