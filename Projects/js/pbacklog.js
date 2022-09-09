@@ -187,7 +187,7 @@ function openAddTask()
     storyPointsRef.value = "";
 
     let newStatus=document.getElementById("cars");
-    newStatus.value = "";
+    newStatus.value = "Not Started";
 
     //code to show members
     let teamList =""
