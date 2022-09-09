@@ -40,6 +40,16 @@ closeButtonRef.addEventListener('click', function() {
     closeDialogRef.showModal();
 });
 
+let teamMembers=sys.teamMembers
+teamMembers.removeAll()
+teamMembers.addMember(new Developer("a"))
+teamMembers.addMember(new Developer("b"))
+teamMembers.addMember(new Developer("c"))
+teamMembers.addMember(new Developer("d"))
+teamMembers.addMember(new Developer("e"))
+
+
+
 function deleteQuery(i){
     //
     let confirmText =
@@ -142,26 +152,6 @@ function showCards(){
 }
 
 
-
-// function addTask(){
-    
-//     let name=document.getElementById("task-name").value;
-//     let description=document.getElementById("task-desc").value;
-//     let storyPoints=document.getElementById("storyp").value;
-//     let priority=document.getElementById("priority").value;
-//     let status=document.getElementById("cars").value;
-
-   
-
-//     let task = new Task(name,description,"user story",storyPoints,"UI",priority,status);
-
-//     productBacklog.addTask(task);
-//     console.log(task);
-//     showCards();
-//     add_dialog.close();
-//     localStorage.setItem('ProductBacklog', JSON.stringify(sys))
-// }
-
 // operates when "add task" button is clicked
 // resets all input fields to empty strings
 function openAddTask()
@@ -181,11 +171,34 @@ function openAddTask()
     let storyPointsRef=document.getElementById("storyp");
     storyPointsRef.value = "";
 
-    let priorityRef=document.getElementById("priority");
-    priorityRef.value = "";
+    let newStatus=document.getElementById("cars");
+    newStatus.value = "";
 
-    let statusRef=document.getElementById("cars");
-    statusRef.value = "";
+    //code to show members
+    let teamList =""
+    for(let i=0; i<teamMembers.teamMembers.length; i++){
+        let developer=teamMembers.teamMembers[i];
+        console.log(developer)
+
+        teamList+=
+        `<li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+        <i class="material-icons mdl-list__item-icon">person</i>
+            ${developer.name}
+    </span>
+    <span class="mdl-list__item-secondary-action">
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-${i}">
+            <input type="checkbox" id="list-checkbox-${i}" class="mdl-checkbox__input"/>
+        </label>
+    </span>
+    </li>`;
+    }
+
+    
+    
+    document.getElementById("team-list").innerHTML=teamList
+
+    
 }
 
 // operates when "add" button in add dialog is clicked
@@ -220,7 +233,12 @@ function confirmAddTask()
         return
     }
 
-    let task = new Task(userName, userDescription,"user story", userStoryPoints, userTag, userPriority, userStatus);
+    let task = new Task(userName, userDescription,"user story", userStoryPoints, tag, userPriority, userStatus);
+    for(let i=0; i<teamMembers.teamMembers.length; i++){
+        if (document.getElementById(`list-checkbox-${i}`).checked){
+            task.addMember(teamMembers.teamMembers[i])
+        }
+    }
     productBacklog.addTask(task);
     showCards();
     addDialogRef.close();
@@ -308,9 +326,11 @@ function retrieve_from_local_storage() {
 
 function view_task(i) {
     // first retrieve information from local storage
-    let storage = retrieve_from_local_storage("ProductBacklog");
-    let backlog = JSON.parse(storage)._productBacklog;
-    let task = backlog._tasks[i];
+    //let storage = retrieve_from_local_storage("ProductBacklog");
+    //let backlog = JSON.parse(storage)._productBacklog;
+    //let task = backlog._tasks[i];
+    let task = productBacklog.tasks[i]
+
     
     
     //show modal()
@@ -338,8 +358,7 @@ function view_task(i) {
             </div>
             <div class="mdl-cell mdl-cell--6-col">
                 <p><b>Team Members:</b></p>
-                <ul class="demo-list-icon mdl-list" style="border-style: solid;">
-                    <! -- for team members !>
+                <ul id="display-names" class="demo-list-icon mdl-list" style="border-style: solid;">
                 </ul>
                 <div><b style="position:absolute;margin-top:8px">Status:</b>
                     <span class="mdl-chip" style="margin-left:58px">
@@ -350,30 +369,32 @@ function view_task(i) {
         </div>
     </div>
     <div class="mdl-dialog__actions">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = editTask(${i}) >EDIT</button>
-        <button type="button" class="mdl-button close" onclick = closeViewTask() >CLOSE</button>
+        <button id = "edit-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = edit_task(${i}) >EDIT</button>
+        <button type="button" class="mdl-button close" onclick = close_viewtask() >CLOSE</button>
     </div> `;
 
     //TO DO: implement team member feild
-    /*
     // get team member's information
-    for (i = 0; i< task._teammembers.length; i++)
+    let displayNames=''
+    console.log(task)
+    for (i = 0; i< task.developers.length; i++)
     {
         //create a team member html content
-        document.getElementById().innerHTML = 
+        displayNames+= 
         `
         <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
         <i class="material-icons mdl-list__item-icon">person</i>
-        ${task._teammembers.}
+        ${task.developers[i].name}
         </span>
         </li>
-        `
+        `;
     }
-    */
+
 
     //add content to the model
     document.getElementById("view-dialog").innerHTML = viewHTMLContent;
+    document.getElementById("display-names").innerHTML = displayNames;
 
     // show view dialog modal
     viewDialogRef.showModal();
@@ -395,16 +416,27 @@ function editTask(i)
     let backlog = JSON.parse(storage)._productBacklog;
     let task = backlog._tasks[i];
 
-    // show edit task dialog (this is similar to add task dialog
-    document.getElementById("edit-dialog").innerHTML = editTaskDialog(task,i)
+    if (task._status == "comp")
+    {
+        document.getElementById("edit-button").disabled = true;
 
-    // initialise status and priority
-    document.getElementById("edit-priority").value = task._priority
-    document.getElementById("edit-cars").value = task._status
+        // TODO: error message
+    }
+    else
+    {
+        // show edit task dialog (this is similar to add task dialog
+        document.getElementById("edit-dialog").innerHTML = editTaskDialog(task,i)
 
-    // show modal
-    editDialogRef.showModal();
+        // initialise status and priority
+        document.getElementById("edit-priority").value = task._priority
+        document.getElementById("edit-cars").value = task._status
 
+        // show modal
+        editDialogRef.showModal();
+
+    }
+
+    
 }
 
 function confirmEdit(i)
@@ -417,7 +449,7 @@ function confirmEdit(i)
     let status=document.getElementById("edit-cars").value;
 
     //create a new task
-    let updatedTask = new Task(name,description,"user story",storyPoints,"UI",priority,status);
+    let updatedTask = new Task(name,description,userStoryType,storyPoints,"UI",priority,status);
 
     //update task
     productBacklog.updateTask(productBacklog.tasks[i], updatedTask)
@@ -478,6 +510,12 @@ function editTaskDialog(taskClass,i)
                                     <span class="mdl-chip" style="background-color:hotpink;margin-left:5px">
                                         <span class="mdl-chip__text">Core</span>
                                     </span>
+                                </div>
+                                <div style="padding-top:5px"><b style="padding-right:5px">Type:   </b>
+                                    <select name="type_task" id="edit-story-type" style="font-family:Roboto, sans-serif;padding-right:10px">
+                                        <option value="userStory">User Story</option>
+                                        <option value="bug">Bug</option>
+                                    </select>
                                 </div>
 
                                 <div style="padding-top:5px"><b style="padding-right:5px">Priority:   </b>

@@ -34,13 +34,15 @@ class System {
 
     //No methods done yet
     fromData(data){
-        console.log(2)
         this._productBacklog.fromData(data._productBacklog)
         //this._teamMembers.fromData(data._teamMembers)
         //this._activeSprint.fromData(data._activeSprint)
         //this._completedSprints.fromData(data._completedSprints)
         //this._notStartedSprints.fromData(data._notStartedSprints)
-        this._teamMembers=data._teamMembers;
+
+        this._teamMembers.fromData(data._teamMembers);
+
+
         this._activeSprint=data._activeSprint;
         this._completedSprints=data._completedSprints;
         this._notStartedSprints=data._notStartedSprints;
@@ -143,7 +145,7 @@ class Task {
             this._priority=priority;
             this._status=status;
             this._timeSpent=[];
-            this._developer;//##################
+            this._developers=[];
 
         }
         else{
@@ -170,8 +172,8 @@ class Task {
     get priority(){
         return this._priority;
     }
-    get developer(){
-        return this._developer;
+    get developers(){
+        return this._developers;
     }
     get status(){
         return this._status;
@@ -196,11 +198,20 @@ class Task {
     set priority(newPriority){
         this._priority=newPriority;
     }
-    set developer(newDeveloper){
-        this._developer=newDeveloper;
-    }
     set status(newStatus){
         this._status=newStatus;
+    }
+
+    addMember(developer){
+        this._developers.push(developer)
+    }
+
+    removeMember(developer){
+        let index = this._tasks.indexOf(developer);
+
+        if(index>-1){
+            this._developers.splice(index,1)
+        }
     }
 
 
@@ -263,7 +274,12 @@ class Task {
     static fromData(data)
     {
         let task = new Task(data._name,data._description,data._type,data._storyPoints,data._tags,data._priority,data._status)
-        task._developer=data._developer
+        task._developers=[]
+        for(let i=0;i<data._developers.length;i++){
+            let next_developer= Developer.fromData(data._developer[i]);
+            task.addMember(next_developer);
+        }
+
         return task
     }
 
@@ -279,9 +295,59 @@ class SprintBacklog {
 }
 
 class TeamMembers {
+    constructor(){
+        this._teamMembers=[];
+    }
+
+    get teamMembers(){
+        return this._teamMembers;
+    }
+
+    addMember(developer){
+        this._teamMembers.push(developer)
+    }
+
+    removeMember(developer){
+        let index = this._tasks.indexOf(developer);
+
+        if(index>-1){
+            this.teamMembers.splice(index,1)
+        }
+    }
+
+    removeAll(){
+        this._teamMembers=[];
+    }
+
+    fromData(data){
+        this._teamMembers=[]
+
+        for(let i=0;i<data._teamMembers.length;i++){
+            let next_developer= Developer.fromData(data._teamMembers[i]);
+            this.addMember(next_developer);
+        }
+
+    }
+
 }
 
 class Developer {
+    constructor(name){
+        this._name=name;
+        this._tasks=[];
+        this._hoursWorked=[];
+        
 
+    }
+    get name(){
+        return this._name
+    }
+
+    static fromData(data){
+        let developer = new Developer(data._name);
+        this._tasks=data._tasks;
+        this._hoursWorked=data._hoursWorked;
+        return developer
+    }
 }
 
