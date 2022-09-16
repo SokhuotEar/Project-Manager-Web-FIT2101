@@ -20,9 +20,15 @@ let prioErrorRef = document.getElementById('prio_err');
 let teamErrorRef = document.getElementById('team_err');
 let statusErrorRef = document.getElementById('status_err');
 
+//ui-tag orange
 
-let colours=["darkgray","greenyellow","green","darkolivegreen","lightskyblue","lightseagreen","dodgerblue","tomato","indianred","red","maroon"]
+//core-tag hotpink
 
+//testing-tag lightgreen
+
+//old colours based on the story points
+//let colours=["darkgray","greenyellow","green","darkolivegreen","lightskyblue","lightseagreen","dodgerblue","tomato","indianred","red","maroon"]
+let colours=["orange","hotpink","lightgreen"]
 
 
 viewButtonRef.addEventListener('click', function() {
@@ -113,14 +119,18 @@ function showCards(){
             prioCSS="crit-p"
         }
 
+        let intensity
         if(tag=="UI"){
             tagCSS= "ui-tag"
+            intensity=0
         }
         else if(tag=="Core"){
             tagCSS="core-tag"
+            intensity=1
         }
         else if(tag=="Testing"){
             tagCSS="testing-tag"
+            intensity=2
         }
 
         if (type === "userStory"){
@@ -130,7 +140,6 @@ function showCards(){
             typeCSS = 'bug';
         }
 
-        let intensity=(task.storyPoints-(task.storyPoints%10))/10;
     
 
         words+=
@@ -796,15 +805,18 @@ function filterTask(condition)
         else if(prio=="Critical"){
             prioCSS="crit-p"
         }
-
+        let intensity
         if(tag=="UI"){
             tagCSS= "ui-tag"
+            intensity=0
         }
         else if(tag=="Core"){
             tagCSS="core-tag"
+            intensity=1
         }
         else if(tag=="Testing"){
             tagCSS="testing-tag"
+            intensity=2
         }
 
         if (type === "userStory"){
@@ -814,7 +826,7 @@ function filterTask(condition)
             typeCSS = 'bug';
         }
 
-        let intensity=(task.storyPoints-(task.storyPoints%10))/10;
+        
         display += 
         `<div class="mdl-cell mdl-cell--4-col">
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card${i}">
