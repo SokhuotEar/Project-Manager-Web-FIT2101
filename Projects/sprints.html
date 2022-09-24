@@ -60,7 +60,7 @@
                 </button>
             </div>
             <div class="mdl-cell mdl-cell--4-col">
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card1">
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="active-sprint">
                     <div class="mdl-card__title" style="background: lightcoral">
                         <h2 class="mdl-card__title-text">Iteration 2</h2>
                     </div>
@@ -78,14 +78,6 @@
                             VIEW
                         </button>
                     </div>
-                    <div class="mdl-card__menu">
-                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="close-button">
-                            <i class="material-icons">close</i>
-                        </button>
-                        <div class="mdl-tooltip" data-mdl-for="close">
-                            <strong>Delete Task</strong>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div style="margin-bottom: 0" class="mdl-cell mdl-cell--12-col">
@@ -96,14 +88,14 @@
             <div style="margin-top:0" class="mdl-cell mdl-cell--12-col">
                 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                     <div class="mdl-tabs__tab-bar tabs">
-                        <a href="#starks-panel" class="mdl-tabs__tab is-active">Not Started</a>
-                        <a href="#lannisters-panel" class="mdl-tabs__tab">Completed</a>
+                        <a href="#notstarted" class="mdl-tabs__tab is-active">Not Started</a>
+                        <a href="#completed" class="mdl-tabs__tab">Completed</a>
                     </div>
 
-                    <div class="mdl-tabs__panel is-active" id="starks-panel">
+                    <div class="mdl-tabs__panel is-active" id="notstarted">
                         <div class="mdl-cell mdl-cell--4-col">
-                            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card1">
-                                <div class="mdl-card__title" style="background: darkblue">
+                            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="notstarted1">
+                                <div class="mdl-card__title" style="background: darkgreen">
                                     <h2 class="mdl-card__title-text">Iteration 3</h2>
                                 </div>
                                 <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
@@ -117,23 +109,15 @@
                                 <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
                                     <!-- Accent-colored raised button with ripple -->
                                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right">
-                                        VIEW
+                                        MANAGE
                                     </button>
-                                </div>
-                                <div class="mdl-card__menu">
-                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="close-button">
-                                        <i class="material-icons">close</i>
-                                    </button>
-                                    <div class="mdl-tooltip" data-mdl-for="close">
-                                        <strong>Delete Task</strong>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="mdl-tabs__panel" id="lannisters-panel">
+                    <div class="mdl-tabs__panel" id="completed">
                         <div class="mdl-cell mdl-cell--4-col">
-                            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card1">
+                            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="completed1">
                                 <div class="mdl-card__title" style="background: darkblue">
                                     <h2 class="mdl-card__title-text">Iteration 1</h2>
                                 </div>
@@ -151,31 +135,198 @@
                                         VIEW
                                     </button>
                                 </div>
-                                <div class="mdl-card__menu">
-                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="close-button">
-                                        <i class="material-icons">close</i>
-                                    </button>
-                                    <div class="mdl-tooltip" data-mdl-for="close">
-                                        <strong>Delete Task</strong>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mdl-tabs__panel" id="targaryens-panel">
-                        <ul>
-                            <li>Viserys</li>
-                            <li>Daenerys</li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Dialog for the add sprint functionality -->
+        <dialog class="mdl-dialog" style="width: 30vw" id="add-sprint">
+            <h4 class="mdl-dialog__title">Add Sprint</h4>
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif; padding-right:0">
+                <form action="#">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="sprint-name">
+                        <label class="mdl-textfield__label" for="sprint-name">Enter sprint name...</label>
+                    </div>
+                </form>
+                <div class="mdl-textfield--floating-label has-placeholder">
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="date" id="start-date">
+                        <label class="mdl-textfield__label" for="start-date">Enter start date:</label>
+                        <span id="start_date_err" class="mdl-textfield__error" style='visibility: visible;'></span>
+                    </div>
+                </div>
+                <div class="mdl-textfield--floating-label has-placeholder">
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="date" id="end-date">
+                        <label class="mdl-textfield__label" for="end-date">Enter end date:</label>
+                        <span id="end_date_err" class="mdl-textfield__error" style='visibility: visible;'></span>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">ADD</button>
+                <button type="button" class="mdl-button close">CLOSE</button>
+            </div>
+        </dialog>
+
+        <!-- Dialog for the view sprint functionality -->
+        <dialog class="mdl-dialog" style="width: 70vw" id="view-sprint">
+            <div class="mdl-dialog__title" style="padding-top:0; padding-right:0">
+                <div class="mdl-grid" style="padding:0">
+                    <div class="mdl-cell mdl-cell--10-col" style="margin:0">
+                        <h4 style="font-size:2.5rem">Iteration 2</h4>
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <div style="float:right; font-size: 12pt">
+                            <span class="mdl-chip start-time" style="width: 130px">
+                                <span class="mdl-chip__text" style="padding-left:5px">Started on: 22/09/22</span>
+                            </span>
+                            <span class="mdl-chip finish-time" style="width: 130px">
+                                <span class="mdl-chip__text" style="text-align: center;">Set to finish: 01/10/22</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif;">
+                <div class="divider">
+                    <h4 style="margin: 0; color:black">Tasks</h4>
+                </div>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--3-col" style="margin-bottom:0">
+                        <h4 style='margin-top:0; text-align: center'>Not Started</h4>
+                        <ul class="demo-list-control mdl-list" style="border: 1px solid #e0e0e0">
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    Add Sprint Functionality
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">
+                                        <input type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    View Sprint Functionality
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-2">
+                                        <input type="checkbox" id="list-checkbox-2" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    Burndown Charts
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-3">
+                                        <input type="checkbox" id="list-checkbox-3" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mdl-cell mdl-cell--1-col" style="margin-bottom:0; text-align: center">
+                        <div style="padding-top: 85px">
+                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect">
+                                <i class="material-icons">arrow_forward_ios</i>
+                            </button>
+                            <button style="margin-top:7px" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
+                                <i class="material-icons" style="color:rgb(66,66,66)">arrow_back_ios_new</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col" style="margin-bottom:0">
+                        <h4 style='margin-top:0; text-align: center'>In Progress</h4>
+                        <ul class="demo-list-control mdl-list" style="border: 1px solid #e0e0e0">
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    Create HTML Mockup
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-4">
+                                        <input type="checkbox" id="list-checkbox-4" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    Design CSS
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-5">
+                                        <input type="checkbox" id="list-checkbox-5" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                            <!-- Create empty list items so that borders align-->
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt"></span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mdl-cell mdl-cell--1-col" style="margin-bottom:0">
+
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col" style="margin-bottom:0">
+                        <h4 style='margin-top:0; text-align: center'>Completed</h4>
+                        <ul class="demo-list-control mdl-list" style="border: 1px solid #e0e0e0">
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    Create Wireframe for Sprint
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-6">
+                                        <input type="checkbox" id="list-checkbox-6" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt"></span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px"></span>
+                            </li>
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt"></span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mdl-cell mdl-cell--12-col" style="margin-top:0">
+                        <b>Double click on a task to view.</b>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions" style="padding-right:24px">
+
+                <button id='mark-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">MARK AS COMPLETE</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">BURNDOWN CHART</button>
+                <button type="button" class="mdl-button close">CLOSE</button>
+            </div>
+        </dialog>
+
+        <!-- Dialog for the complete sprint confirmation -->
+        <dialog class="mdl-dialog" style="width: 30vw" id="confirm-complete-dialog">
+            <h4 class="mdl-dialog__title">Mark As Complete</h4>
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif; padding-right:0">
+                Are you sure you want to mark 'Iteration 2' as complete?
+            </div>
+            <div class="mdl-dialog__actions">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">YES</button>
+                <button type="button" class="mdl-button close">NO</button>
+            </div>
+        </dialog>
     </main>
 </div>
 <script src="js/keys.js" ></script>
 <script src="js/classes.js" ></script>
 <script src="js/main.js" ></script>
-<script src="js/pbacklog.js" ></script>
+<script src="js/sprints.js" ></script>
 </body>
 </html>
