@@ -1,0 +1,39 @@
+"use strict"
+/*
+    FIT2101: Assignment 3
+    Agile Iteration 2
+
+    This file contains the JavaScript code necessary to run the functionality of the Sprints page.
+
+    Written by: Luke Phillips (32511760), [add name and ids here]
+ */
+
+// document ids
+let addButtonRef = document.getElementById('add-button');
+let addDialogRef = document.getElementById('add-sprint');
+let viewDialogRef = document.getElementById('view-sprint');
+let viewButtonRef = document.getElementById('open-button');
+let completeButtonRef = document.getElementById('mark-button');
+let confirmDialogRef = document.getElementById('confirm-complete-dialog');
+
+// button to open dialog event listeners
+addButtonRef.addEventListener('click', function() {
+    addDialogRef.showModal();
+});
+viewButtonRef.addEventListener('click', function() {
+    viewDialogRef.showModal();
+});
+completeButtonRef.addEventListener('click', function() {
+    confirmDialogRef.showModal();
+});
+
+// close dialog event listeners
+addDialogRef.querySelector('.close').addEventListener('click', function() {
+    addDialogRef.close();
+});
+viewDialogRef.querySelector('.close').addEventListener('click', function() {
+    viewDialogRef.close();
+});
+confirmDialogRef.querySelector('.close').addEventListener('click', function() {
+    confirmDialogRef.close();
+});
