@@ -338,7 +338,6 @@ class Sprint {
         this._sprintId = backlog
     }
 
-
 }
 
 class SprintBacklog {
