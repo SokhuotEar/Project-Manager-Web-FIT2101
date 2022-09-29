@@ -200,7 +200,7 @@
                     <div class="mdl-cell mdl-cell--3-col" style="margin-bottom:0">
                         <h4 style='margin-top:0; text-align: center'>Not Started</h4>
                         <ul class="demo-list-control mdl-list" style="border: 1px solid #e0e0e0">
-                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                            <li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
                                 <span class="mdl-list__item-primary-content" style="font-size:10pt">
                                     Add Sprint Functionality
                                 </span>
@@ -210,7 +210,7 @@
                                     </label>
                                 </span>
                             </li>
-                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                            <li class="mdl-list__item list-item" style="padding-top:8px;padding-bottom:8px">
                                 <span class="mdl-list__item-primary-content" style="font-size:10pt">
                                     View Sprint Functionality
                                 </span>
@@ -220,7 +220,7 @@
                                     </label>
                                 </span>
                             </li>
-                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                            <li class="mdl-list__item list-item" style="padding-top:8px;padding-bottom:8px">
                                 <span class="mdl-list__item-primary-content" style="font-size:10pt">
                                     Burndown Charts
                                 </span>
@@ -245,7 +245,7 @@
                     <div class="mdl-cell mdl-cell--4-col" style="margin-bottom:0">
                         <h4 style='margin-top:0; text-align: center'>In Progress</h4>
                         <ul class="demo-list-control mdl-list" style="border: 1px solid #e0e0e0">
-                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                            <li class="mdl-list__item list-item" style="padding-top:8px;padding-bottom:8px">
                                 <span class="mdl-list__item-primary-content" style="font-size:10pt">
                                     Create HTML Mockup
                                 </span>
@@ -255,7 +255,7 @@
                                     </label>
                                 </span>
                             </li>
-                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                            <li class="mdl-list__item list-item" style="padding-top:8px;padding-bottom:8px">
                                 <span class="mdl-list__item-primary-content" style="font-size:10pt">
                                     Design CSS
                                 </span>
@@ -272,13 +272,20 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="mdl-cell mdl-cell--1-col" style="margin-bottom:0">
-
+                    <div class="mdl-cell mdl-cell--1-col" style="margin-bottom:0; text-align: center">
+                        <div style="padding-top: 85px">
+                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect">
+                                <i class="material-icons">arrow_forward_ios</i>
+                            </button>
+                            <button style="margin-top:7px" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
+                                <i class="material-icons" style="color:rgb(66,66,66)">arrow_back_ios_new</i>
+                            </button>
+                        </div>
                     </div>
                     <div class="mdl-cell mdl-cell--3-col" style="margin-bottom:0">
                         <h4 style='margin-top:0; text-align: center'>Completed</h4>
                         <ul class="demo-list-control mdl-list" style="border: 1px solid #e0e0e0">
-                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                            <li class="mdl-list__item list-item" style="padding-top:8px;padding-bottom:8px">
                                 <span class="mdl-list__item-primary-content" style="font-size:10pt">
                                     Create Wireframe for Sprint
                                 </span>
@@ -306,8 +313,134 @@
             <div class="mdl-dialog__actions" style="padding-right:24px">
 
                 <button id='mark-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">MARK AS COMPLETE</button>
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">BURNDOWN CHART</button>
+                <button id='burndown-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">BURNDOWN CHART</button>
                 <button type="button" class="mdl-button close">CLOSE</button>
+            </div>
+        </dialog>
+
+        <!-- Dialog for viewing a task -->
+        <dialog class="mdl-dialog" style="width: 50vw" id="view-task-dialog">
+            <div class="mdl-grid" style="padding-right: 0">
+                <div class="mdl-cell mdl-cell--10-col" style="margin: 0 0 0 10px;">
+                    <h4 style="font-size:2.5rem; margin: 9px 0 0;">Add Sprint Functionality</h4>
+                </div>
+                <div class="mdl-cell mdl-cell--2-col">
+                    <div style="float:right; font-size: 12pt">
+                        <span class="mdl-chip not-started">
+                            <span class="mdl-chip__text">Not Started</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif; padding:0;">
+                <div class="mdl-grid" style="padding-right: 0; padding-top:0; height: 256px">
+                    <div class="mdl-cell mdl-cell--6-col task-info">
+                        <b>Description:</b>
+                        <p>Implement the functionality of the Sprints page.</p>
+                        <b>Story points:</b> 20
+                        <div style="padding-top:5px"><b style="position:absolute;margin-top:8px">Tags:</b>
+                            <span class="mdl-chip" style="background-color:orange;margin-left:40px">
+                                        <span class="mdl-chip__text">UI</span>
+                                    </span>
+                        </div>
+                        <div><b style="position:absolute;margin-top:8px">Priority:</b>
+                            <span class="mdl-chip" style="background-color:lightskyblue;margin-left:58px">
+                                        <span class="mdl-chip__text">Low</span>
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <p><b>Team Members:</b></p>
+                        <ul class="demo-list-icon mdl-list" id="team-list">
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                        John Smith
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                        Brooke Perry
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                        Mr Sandman
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                        Cameron Perry
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                        Obi-Wan Kenobi
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="task-divider">
+                    <h4 style="margin: -4px 0 0;color:black; font-size:1.3rem;">Sprint Information</h4>
+                </div>
+                <div class="mdl-grid" style="padding-right: 0">
+                    <div class="mdl-cell mdl-cell--3-col task-info" style="text-align: center">
+                        <b>Time logged: </b>25 hours
+                    </div>
+                    <div class="mdl-cell mdl-cell--9-col">
+                        <b>Log a time:</b>
+                        <form action="#">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="log-hours">
+                                <label class="mdl-textfield__label" for="log-hours">Enter hours...</label>
+                            </div>
+                        </form>
+                        <div class="mdl-textfield--floating-label has-placeholder">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="date" id="log-date">
+                                <label class="mdl-textfield__label" for="log-date">Enter log date:</label>
+                                <span id="log_date_err" class="mdl-textfield__error" style='visibility: visible;'></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">LOG TIME</button>
+                <button type="button" class="mdl-button close">CLOSE</button>
+            </div>
+        </dialog>
+
+        <!-- Dialog for viewing a tasks burndown chart -->
+        <dialog class="mdl-dialog" style="width: 50vw" id="burndown-task-dialog">
+            <div class="mdl-grid" style="padding-right: 0">
+                <div class="mdl-cell mdl-cell--10-col">
+                    <h4 style="font-size:2.5rem; margin: 23px 0 0 -2px;">Iteration 2</h4>
+                </div>
+                <div class="mdl-cell mdl-cell--2-col">
+                    <div style="float:right; font-size: 12pt">
+                            <span class="mdl-chip start-time" style="width: 130px">
+                                <span class="mdl-chip__text" style="padding-left:5px">Started on: 22/09/22</span>
+                            </span>
+                        <span class="mdl-chip finish-time" style="width: 130px">
+                                <span class="mdl-chip__text" style="text-align: center;">Set to finish: 01/10/22</span>
+                            </span>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif; padding:0;">
+                <div class="burndown-divider">
+                    <h4 style="margin: -4px 0 0;color:black; font-size:1.3rem;">Burndown Chart</h4>
+                </div>
+                <!-- place burndown chart here !!! -->
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button close">BACK TO SPRINT</button>
             </div>
         </dialog>
 
