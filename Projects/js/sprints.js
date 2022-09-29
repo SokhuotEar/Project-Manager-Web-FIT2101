@@ -86,6 +86,40 @@ function showChart(){
     });
 }
 
-function viewTask(index){
+
+///Testing view sprints
+console.log(sys)
+sys.createSprint("ee",new Date("2022-09-20"),new Date("2022-09-28"))
+sys.moveSprint(0,0)
+
+let task=sys.productBacklog._tasks[1]
+task._status="prog"
+let sprint = sys.activeSprint.sprintBacklog.add_task(task)
+
+
+console.log(sys)
+console.log(task)
+//console.log(task.getTotalTime())
+console.log(task.getTotalTime())
+task.logTime(10,new Date("2022-09-25"))
+console.log(task.getTotalTime())
+task.logTime(5,new Date("2022-09-24"))
+console.log(task.getTotalTime())
+console.log(task)
+
+
+viewTask(1,0)
+// list is 0 to 2 -> NS or IP or Comp
+// index is the place of it
+function viewTask(list,index){
+    let sprint = sys.activeSprint.sprintBacklog
+    let task
+    if (list==0){
+        task=sprint.notStarted[index]
+    } else if (list==1){
+        task=sprint.started[index]
+    } else if (list==2){
+        task=sprint.completed[index]
+    }
     
 }
