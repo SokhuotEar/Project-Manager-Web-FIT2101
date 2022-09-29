@@ -15,6 +15,8 @@ let viewDialogRef = document.getElementById('view-sprint');
 let viewButtonRef = document.getElementById('open-button');
 let completeButtonRef = document.getElementById('mark-button');
 let confirmDialogRef = document.getElementById('confirm-complete-dialog');
+let burndownDialogRef = document.getElementById('burndown-task-dialog');
+let burndownButtonRef = document.getElementById('burndown-button')
 
 // document id for test item (view item dialog)
 let testItemRef = document.getElementById('test-item')
@@ -33,6 +35,10 @@ completeButtonRef.addEventListener('click', function() {
 testItemRef.addEventListener('dblclick', function() {
     viewTaskDialogRef.showModal()
 });
+burndownButtonRef.addEventListener('click', function() {
+    burndownDialogRef.showModal();
+});
+
 
 // close dialog event listeners
 addDialogRef.querySelector('.close').addEventListener('click', function() {
@@ -46,4 +52,7 @@ confirmDialogRef.querySelector('.close').addEventListener('click', function() {
 });
 viewTaskDialogRef.querySelector('.close').addEventListener('click', function() {
     viewTaskDialogRef.close();
+});
+burndownDialogRef.querySelector('.close').addEventListener('click', function() {
+    burndownDialogRef.close();
 });

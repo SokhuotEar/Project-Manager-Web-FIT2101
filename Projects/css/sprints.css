@@ -69,3 +69,12 @@
     border-top: 2px solid rgb(33,150,255);
     text-align: center
 }
+.burndown-divider {
+    width: 96%;
+    height: 25px;
+    margin-left: 15px;
+    background-color: #F8CECC;
+    border-bottom: 2px solid #B85450;
+    border-top: 2px solid #B85450;
+    text-align: center
+}

@@ -313,7 +313,7 @@
             <div class="mdl-dialog__actions" style="padding-right:24px">
 
                 <button id='mark-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">MARK AS COMPLETE</button>
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">BURNDOWN CHART</button>
+                <button id='burndown-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">BURNDOWN CHART</button>
                 <button type="button" class="mdl-button close">CLOSE</button>
             </div>
         </dialog>
@@ -332,7 +332,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif; padding-right:0; padding-top:0; padding-left:0">
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif; padding:0;">
                 <div class="mdl-grid" style="padding-right: 0; padding-top:0; height: 256px">
                     <div class="mdl-cell mdl-cell--6-col task-info">
                         <b>Description:</b>
@@ -388,13 +388,59 @@
                 <div class="task-divider">
                     <h4 style="margin: -4px 0 0;color:black; font-size:1.3rem;">Sprint Information</h4>
                 </div>
-                <div style="padding-left:15px">
-                    <p><b>Time logging stuff will be implemented here next sprint.</b></p>
+                <div class="mdl-grid" style="padding-right: 0">
+                    <div class="mdl-cell mdl-cell--3-col task-info" style="text-align: center">
+                        <b>Time logged: </b>25 hours
+                    </div>
+                    <div class="mdl-cell mdl-cell--9-col">
+                        <b>Log a time:</b>
+                        <form action="#">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="log-hours">
+                                <label class="mdl-textfield__label" for="log-hours">Enter hours...</label>
+                            </div>
+                        </form>
+                        <div class="mdl-textfield--floating-label has-placeholder">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="date" id="log-date">
+                                <label class="mdl-textfield__label" for="log-date">Enter log date:</label>
+                                <span id="log_date_err" class="mdl-textfield__error" style='visibility: visible;'></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="mdl-dialog__actions">
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">LOG TIME</button>
                 <button type="button" class="mdl-button close">CLOSE</button>
+            </div>
+        </dialog>
+
+        <!-- Dialog for viewing a tasks burndown chart -->
+        <dialog class="mdl-dialog" style="width: 50vw" id="burndown-task-dialog">
+            <div class="mdl-grid" style="padding-right: 0">
+                <div class="mdl-cell mdl-cell--10-col">
+                    <h4 style="font-size:2.5rem; margin: 23px 0 0 -2px;">Iteration 2</h4>
+                </div>
+                <div class="mdl-cell mdl-cell--2-col">
+                    <div style="float:right; font-size: 12pt">
+                            <span class="mdl-chip start-time" style="width: 130px">
+                                <span class="mdl-chip__text" style="padding-left:5px">Started on: 22/09/22</span>
+                            </span>
+                        <span class="mdl-chip finish-time" style="width: 130px">
+                                <span class="mdl-chip__text" style="text-align: center;">Set to finish: 01/10/22</span>
+                            </span>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif; padding:0;">
+                <div class="burndown-divider">
+                    <h4 style="margin: -4px 0 0;color:black; font-size:1.3rem;">Burndown Chart</h4>
+                </div>
+                <!-- place burndown chart here !!! -->
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button close">BACK TO SPRINT</button>
             </div>
         </dialog>
 
