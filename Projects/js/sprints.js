@@ -85,3 +85,7 @@ function showChart(){
           },
     });
 }
+
+function viewTask(index){
+    
+}
