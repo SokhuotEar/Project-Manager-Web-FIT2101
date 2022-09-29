@@ -1,3 +1,4 @@
+/* start and finish classes */
 .start-time {
     background-color: green;
     color: white;
@@ -8,6 +9,31 @@
     color: white;
 }
 
+/* status colours */
+.not-started {
+    /* for not started use chip default colors */
+}
+.in-progress {
+    background-color: green;
+    color: white;
+}
+.finished {
+    background-color: firebrick;
+    color: white;
+}
+
+.list-item:hover{
+    background-color: lightgray;
+    transition: background-color .1s;
+}
+
+#team-list {
+    border: 2px solid;
+    height: 50%;
+    overflow-y: scroll;
+    font-family:'Roboto',sans-serif
+}
+
 .tabs {
     width: 97vw;
     float: left;
@@ -16,6 +42,16 @@
     border-bottom: 1px solid #e0e0e0
 }
 
+.task-info {
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    /* Column | row */
+}
+
+/* dividers */
 .divider {
     width: 100%;
     height: 34px;
@@ -24,12 +60,21 @@
     border-top: 2px solid rgb(33,150,255);
     text-align: center
 }
-
-.burnDivider {
-    width: 100%;
-    height: 34px;
-    background-color: rgb(248, 206, 204);
-    border-bottom: 2px solid rgb(164, 84, 80);
-    border-top: 2px solid rgb(164, 84, 80);
+.task-divider {
+    width: 96%;
+    height: 25px;
+    margin-left: 15px;
+    background-color: paleturquoise;
+    border-bottom: 2px solid rgb(33,150,255);
+    border-top: 2px solid rgb(33,150,255);
+    text-align: center
+}
+.burndown-divider {
+    width: 96%;
+    height: 25px;
+    margin-left: 15px;
+    background-color: #F8CECC;
+    border-bottom: 2px solid #B85450;
+    border-top: 2px solid #B85450;
     text-align: center
 }

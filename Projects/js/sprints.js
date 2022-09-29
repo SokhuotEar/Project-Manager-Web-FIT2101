@@ -15,6 +15,12 @@ let viewDialogRef = document.getElementById('view-sprint');
 let viewButtonRef = document.getElementById('open-button');
 let completeButtonRef = document.getElementById('mark-button');
 let confirmDialogRef = document.getElementById('confirm-complete-dialog');
+let burndownDialogRef = document.getElementById('burndown-task-dialog');
+let burndownButtonRef = document.getElementById('burndown-button')
+
+// document id for test item (view item dialog)
+let testItemRef = document.getElementById('test-item')
+let viewTaskDialogRef = document.getElementById('view-task-dialog')
 
 let burnDownRef = document.getElementById('burndown-chart');
 let burnDownButtonRef = document.getElementById('show-chart');
@@ -30,6 +36,13 @@ viewButtonRef.addEventListener('click', function() {
 completeButtonRef.addEventListener('click', function() {
     confirmDialogRef.showModal();
 });
+testItemRef.addEventListener('dblclick', function() {
+    viewTaskDialogRef.showModal()
+});
+burndownButtonRef.addEventListener('click', function() {
+    burndownDialogRef.showModal();
+});
+
 
 burnDownButtonRef.addEventListener('click', function() {
     burnDownRef.showModal();
