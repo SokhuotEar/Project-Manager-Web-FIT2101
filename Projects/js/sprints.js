@@ -16,6 +16,10 @@ let viewButtonRef = document.getElementById('open-button');
 let completeButtonRef = document.getElementById('mark-button');
 let confirmDialogRef = document.getElementById('confirm-complete-dialog');
 
+// document id for test item (view item dialog)
+let testItemRef = document.getElementById('test-item')
+let viewTaskDialogRef = document.getElementById('view-task-dialog')
+
 // button to open dialog event listeners
 addButtonRef.addEventListener('click', function() {
     addDialogRef.showModal();
@@ -25,6 +29,9 @@ viewButtonRef.addEventListener('click', function() {
 });
 completeButtonRef.addEventListener('click', function() {
     confirmDialogRef.showModal();
+});
+testItemRef.addEventListener('dblclick', function() {
+    viewTaskDialogRef.showModal()
 });
 
 // close dialog event listeners
@@ -36,4 +43,7 @@ viewDialogRef.querySelector('.close').addEventListener('click', function() {
 });
 confirmDialogRef.querySelector('.close').addEventListener('click', function() {
     confirmDialogRef.close();
+});
+viewTaskDialogRef.querySelector('.close').addEventListener('click', function() {
+    viewTaskDialogRef.close();
 });
