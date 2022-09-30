@@ -406,7 +406,7 @@ class SprintBacklog {
         this._allTask.push(taskClass)
 
         // assign it to not started section
-        this._notStarted_task.push(taskClass)
+        this.assign_task(taskClass)
     }
 
     // assign task to relevant array
@@ -420,7 +420,7 @@ class SprintBacklog {
         else if (taskClass._status == "N/S" || taskClass._status == "Not Started")
         {
             // assign it to not started array
-            this._started_task.push(taskClass)
+            this._notStarted_task.push(taskClass)
         }
         else if (taskClass._status == "comp" || taskClass._status == "Completed")
         {
@@ -432,22 +432,28 @@ class SprintBacklog {
 
     // move task
     move_task(list,index, destination){
+        console.log(list)
+        console.log(this._notStarted_task)
+        let task
         if(list==0){
-            let task = this._notStarted_task[index]
+            task = this._notStarted_task[index]
             this._notStarted_task.splice(index,1)
         } else if (list==1){
-            let task = this._started_task[index]
+            task = this._started_task[index]
             this._started_task.splice(index,1)
         } else if (list==2){
-            let task = this._completedTask[index]
+            task = this._completedTask[index]
             this._completedTask.splice(index,1)
         }
 
         if(destination==0){
+            task.status = "Not Started"
             this._notStarted_task.push(task)
         } else if (destination==1){
+            task.status = "In Progress"
             this._started_task.push(task)
         } else if (destination==2){
+            task.status = "Completed"
             this._completedTask.push(task)
         }
 

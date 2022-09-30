@@ -19,6 +19,8 @@ let burndownDialogRef = document.getElementById('burndown-task-dialog');
 let burndownButtonRef = document.getElementById('burndown-button')
 
 
+
+
 // document id for test item (view item dialog)
 let testItemRef = document.getElementById('test-item')
 let viewTaskDialogRef = document.getElementById('view-task-dialog')
@@ -41,7 +43,6 @@ completeButtonRef.addEventListener('click', function() {
     confirmDialogRef.showModal();
 });
 testItemRef.addEventListener('dblclick', function() {
-    viewTaskDialogRef.showModal()
     viewTask(1,0)
 });
 burndownButtonRef.addEventListener('click', function() {
@@ -65,6 +66,9 @@ confirmDialogRef.querySelector('.close').addEventListener('click', function() {
 showSprint()
 
 function showChart(){
+
+
+
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -142,23 +146,22 @@ function logTimeForTask(list,index){
     }
     task.logTime(hours,date)
     console.log(task)
+    listTasks()
     viewTaskDialogRef.close();
-
+    
 }
 
 
 
 // STUFF BELOW THIS IS TO 
 ///Testing view sprints
-sys.createSprint(new Date("2022-09-20"),new Date("2022-09-28"))
-sys.moveSprint(0,0)
 
-let task=sys.productBacklog._tasks[1]
-task._status="In Progress"
-let sprint = sys.activeSprint.sprintBacklog.add_task(task)
+
 // list is 0 to 2 -> NS or IP or Comp
 // index is the place of it
 function viewTask(list,index){
+    viewTaskDialogRef.showModal()
+    console.log("viewing")
     let sprint = sys.activeSprint.sprintBacklog
     let task
     if (list==0){
@@ -293,6 +296,7 @@ function viewTask(list,index){
     </div>`
 
     document.getElementById('view-task-dialog').innerHTML=viewText
+
     
     
 }
@@ -313,7 +317,7 @@ function listTasks(){
     console.log(completedList)
     for(let i=0; i<notStartedList.length;i++){
         nsHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
-        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt" ondblclick="viewTask(${0},${i})">
             ${notStartedList[i].name}
         </span>
         <span class="mdl-list__item-secondary-action" style="margin-left:5px">
@@ -325,7 +329,7 @@ function listTasks(){
     }
     for(let i=0; i<startedList.length;i++){
         ipHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
-        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt" ondblclick="viewTask(${1},${i})">
             ${startedList[i].name}
         </span>
         <span class="mdl-list__item-secondary-action" style="margin-left:5px">
@@ -338,7 +342,7 @@ function listTasks(){
     }
     for(let i=0; i<completedList.length;i++){
         comHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
-        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt" ondblclick="viewTask(${2},${i})">
             ${completedList[i].name}
         </span>
         <span class="mdl-list__item-secondary-action" style="margin-left:5px">
@@ -353,7 +357,7 @@ function listTasks(){
     document.getElementById("ns-list").innerHTML=nsHTML
     document.getElementById("ip-list").innerHTML=ipHTML
     document.getElementById("com-list").innerHTML=comHTML
-
+    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
@@ -415,6 +419,10 @@ function showSprint()
 
 //add task
 function addTaskWindow(){
+    if(sys.activeSprint.endDate<new Date()){
+        console.log("L")
+        return
+    }
     let taskList=""
 
     for(let i=0; i<sys.productBacklog.tasks.length; i++){
@@ -438,10 +446,12 @@ function addTask(){
         console.log(`add-task-${i}`)
         if(document.getElementById(`add-task-${i}`).checked){
             let task = sys.productBacklog.tasks[i]
-            sys.productBacklog.removeTask(i)
             sys._activeSprint.sprintBacklog.add_task(task)
+            sys.productBacklog.removeTask(i)
+            
         }
     }
+    console.log(sys)
     listTasks()
     addTaskDialogRef.close();
 }
@@ -604,7 +614,6 @@ function viewActiveButton()
 {
     viewDialogRef.show()
     listTasks()
-    console.log(33)
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -636,6 +645,10 @@ function markSprintAsComplete()
 
 //
 function nsToIp(){
+    if(sys.activeSprint.endDate<new Date()){
+        console.log("L")
+        return
+    }
     let sprint=sys.activeSprint;
     let notStartedList=sprint.sprintBacklog.notStarted
     for(let i=notStartedList.length-1; i>=0;i--){
@@ -649,6 +662,10 @@ function nsToIp(){
 }
 
 function ipToNs(){
+    if(sys.activeSprint.endDate<new Date()){
+        console.log("L")
+        return
+    }
     let sprint=sys.activeSprint;
     let startedList=sprint.sprintBacklog.started
     for(let i=startedList.length-1; i>=0;i--){
@@ -659,16 +676,24 @@ function ipToNs(){
     listTasks()
 }
 function ipToCom(){
+    if(sys.activeSprint.endDate<new Date()){
+        console.log("L")
+        return
+    }
     let sprint=sys.activeSprint;
     let startedList=sprint.sprintBacklog.started
     for(let i=startedList.length-1; i>=0;i--){
         if(document.getElementById(`list-checkbox-s-${i}`).checked){
             sprint.sprintBacklog.move_task(1,i,2)
         }
-    }
+    }  
     listTasks()
 }
 function comToIp(){
+    if(sys.activeSprint.endDate<new Date()){
+        console.log("L")
+        return
+    }
     let sprint=sys.activeSprint;
     let completedList=sprint.sprintBacklog.completed
     for(let i=completedList.length-1; i>=0;i--){
