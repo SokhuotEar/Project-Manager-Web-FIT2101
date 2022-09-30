@@ -14,11 +14,11 @@
     /* for not started use chip default colors */
 }
 .in-progress {
-    background-color: green;
+    background-color: rgb(140, 242, 140);
     color: white;
 }
 .finished {
-    background-color: firebrick;
+    background-color: rgb(245, 153, 153);
     color: white;
 }
 
