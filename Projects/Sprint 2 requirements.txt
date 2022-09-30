@@ -56,7 +56,7 @@ Epic 5: Fault Tolerant:
 
 Summary of Total Time spent by each member: 
 Dasun Mahamadachchi: 
-Parul Garg: 
+Parul Garg: 1 hr
 Laetitia Teo: 1.5 hrs
 Luke Phillips: 
 Sok Ear: 4hr35 mins (on requirements above) + 1h25 mins (working data structure) = 5hr 50mins
