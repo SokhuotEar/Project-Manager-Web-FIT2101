@@ -1,3 +1,5 @@
+/* CSS for the home page of the website */
+
 #top-grid {
     text-align: center;
     padding-bottom: 0;
@@ -18,25 +20,25 @@
 .demo-card-wide.mdl-card.mdl-shadow--2dp {
     height: 100%;
 }
-
+/*  product backlog page card*/
 #product-backlog {
     color: #fff;
     height: 100%;
     background: url('../img/catalina_rock.jpg') center / cover;
 }
-
+/*  sprint backlog page card*/
 #sprint-backlog {
     color: #fff;
     height: 100%;
     background: url('../img/big_sur.jpg') center / cover;
 }
-
+/*  team memebers page card*/
 #team-members {
     color: #fff;
     height: 100%;
     background: url('../img/catalina_sunset.jpg') center / cover;
 }
-
+/*  text on each card*/
 #card-text {
     font-family: Roboto, sans-serif
 }

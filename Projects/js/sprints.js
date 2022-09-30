@@ -5,7 +5,7 @@
 
     This file contains the JavaScript code necessary to run the functionality of the Sprints page.
 
-    Written by: Luke Phillips (32511760), [add name and ids here]
+    Written by: Luke Phillips (32511760)
  */
 
 // document ids
@@ -347,7 +347,7 @@ function showSprint()
     showCompletedSprint()
 }
 
-
+// showing the not started sprints
 
 function showNotStartedSprint()
 {
