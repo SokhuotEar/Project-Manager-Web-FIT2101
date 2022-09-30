@@ -55,7 +55,7 @@
                 </h4>
             </div>
             <div class="mdl-cell mdl-cell--2-col">
-                <button style="float: right" id='add-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = "addSprint()">
+                <button style="float: right" id='add-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                     ADD SPRINT
                 </button>
             </div>
@@ -193,7 +193,7 @@
                 </div>
             </div>
             <div class="mdl-dialog__actions">
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id = 'addSprint' onclick = "addSprint()">ADD</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id = 'addSprint' onclick = "addSprintConfirm()">ADDD</button>
                 <button type="button" class="mdl-button close">CLOSE</button>
             </div>
         </dialog>
@@ -476,7 +476,7 @@
                 Are you sure you want to mark 'Iteration 2' as complete?
             </div>
             <div class="mdl-dialog__actions">
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">YES</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = "markSprintAsComplete()">YES</button>
                 <button type="button" class="mdl-button close">NO</button>
             </div>
         </dialog>

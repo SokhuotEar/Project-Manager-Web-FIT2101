@@ -31,9 +31,10 @@ let ctx = document.getElementById('myChart').getContext('2d');
 addButtonRef.addEventListener('click', function() {
     addDialogRef.showModal();
 });
+
 viewButtonRef.addEventListener('click', function() {
-    viewDialogRef.showModal();
-});
+        viewDialogRef.showModal();
+    });
 completeButtonRef.addEventListener('click', function() {
     confirmDialogRef.showModal();
 });
@@ -141,25 +142,25 @@ function viewTask(list,index){
 }
 
 // ----------------------------------------------------------------------------------
-// // Add task to sprint backlog
-// let addTaskToSprintRef = document.getElementById('add-toSprint-button')
-// let addTaskDialogRef = document.getElementById('add-task-dialog')
-// addTaskToSprintRef.addEventListener('click', function() {
-//     addTaskDialogRef.showModal();
-// });
+// Add task to sprint backlog
+let addTaskToSprintRef = document.getElementById('add-toSprint-button')
+let addTaskDialogRef = document.getElementById('add-task-dialog')
+addTaskToSprintRef.addEventListener('click', function() {
+    addTaskDialogRef.showModal();
+});
 
-// function addToSprintBacklog(i)
-// {
-//     let task = productBacklog[i]
+function addToSprintBacklog(i)
+{
+    let task = productBacklog[i]
     
-//     // add task to sprintBacklog
-//     let sprint = sys.activeSprint.sprintBacklog
-//     sprint.add_task(task)
+    // add task to sprintBacklog
+    let sprint = sys.activeSprint.sprintBacklog
+    sprint.add_task(task)
 
-//     // remove the task from product backlog
-//     productBacklog.splice(i,1)
+    // remove the task from product backlog
+    productBacklog.splice(i,1)
 
-// }
+}
 
 
 //-------------------------------------------------------------------------------------------------------
@@ -173,9 +174,13 @@ function addSprint()
 
     let start_date = new Date(start)
     let end_Date = new Date(end)
-    
     sys.createSprint(start_date,end_Date)
 
+}
+
+function addSprintConfirm()
+{
+    addSprint()
     addDialogRef.close()
     showSprint()
 }
@@ -184,8 +189,16 @@ function addSprint()
 // implement showSprint
 function showSprint()
 {
+    showNotStartedSprint()
+    showActiveSprint()
+    showCompletedSprint()
+}
 
-    console.log("run")
+
+
+function showNotStartedSprint()
+{
+
     // get all not started prints
     let notStartedSprints = sys.notStartedSprints
     let value = ""
@@ -214,25 +227,156 @@ function showSprint()
                     </div>
                     <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
                         <!-- Accent-colored raised button with ripple -->
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button${i}' style="float:right">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='manage-button${i}' style="float:right">
                             MANAGE
                         </button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='setActive-button${i}' onclick = "setActive(${i})" style="float:right">
+                        Set Active
+                    </button>
                     </div>
+                    
                 </div> 
             </div>`
     }
 
     sprintViewRef.innerHTML = value
 
-    console.log("finished")
 
+}
+
+function showActiveSprint()
+{
+    // get the active sprint
+    let activeSprint = sys.activeSprint
+    // view it
+    let sprintViewRef = document.getElementById("active-sprint-view")
+    let value = ""
+
+    if (activeSprint == null)
+    {
+    }
+    else
+    {   
+        value += 
+                `<div class="mdl-card__title" style="background: lightcoral">
+                            <h2 class="mdl-card__title-text">${activeSprint.sprint_id}</h2>
+                        </div>
+                        <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
+                                    <span class="mdl-chip start-time">
+                                        <span class="mdl-chip__text">Started on: ${activeSprint._startDate.toDateString()}</span>
+                                    </span>
+                            <span class="mdl-chip finish-time">
+                                        <span class="mdl-chip__text">Set to finish: ${activeSprint._endDate.toDateString()}</span>
+                                    </span>
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
+                            <!-- Accent-colored raised button with ripple -->
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "viewActiveButton()">
+                                VIEW
+                            </button>
+                        </div>`
+    }
+
+    sprintViewRef.innerHTML = value
+
+
+}
+
+
+function showCompletedSprint(){
+    // get all not started prints
+    let completedSprints = sys.completedSprints
+    let value = ""
+
+    // view it
+    let sprintViewRef = document.getElementById("completed")
+    
+    for (let i = 0; i<completedSprints.length; i++)
+    {
+        value += 
+            `
+            <div class="mdl-cell mdl-cell--4-col">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="notstarted${i}">
+                    <div class="mdl-card__title" style="background: darkgreen">
+                        <h2 class="mdl-card__title-text">Iteration ${completedSprints[i].sprint_id}</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
+                    <span class="mdl-chip start-time">
+                        <span class="mdl-chip__text">Set to start: ${completedSprints[i]._startDate.toDateString()} </span>
+                    </span>
+                        <span class="mdl-chip finish-time">
+                        <span class="mdl-chip__text">Set to finish:${completedSprints[i]._endDate.toDateString()} </span>
+                    </span>
+                        
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
+                        <!-- Accent-colored raised button with ripple -->
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='manage-button${i}' style="float:right">
+                            MANAGE
+                        </button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='setActive-button${i}' onclick = "setActive(${i})" style="float:right">
+                        Set Active
+                    </button>
+                    </div>
+                    
+                </div> 
+            </div>`
+    }
+
+    sprintViewRef.innerHTML = value
+
+
+}
+// -----------------------------------------------------------------------------------------------------
+// implement set active
+function setActive(i)
+{
+    if (sys._activeSprint == null)
+    {
+        // make it active, add it to active
+        let sprint = sys._notStartedSprints[i]
+        sys._activeSprint = sprint
+
+        // remove it from the not_started list
+        sys.notStartedSprints.splice(i,1)
+
+    }
+    showSprint()
+}
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------
+function viewActiveButton()
+{
+    viewDialogRef.show()
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // implement Incomplete or in progress tasks get added back to product backlog
-function restore_Incomplete_Tasks()
+
+function markSprintAsComplete()
 {
-    
+    let sprint = sys._activeSprint
+    sys._activeSprint = null
+    sys._completedSprints.push(sprint)
+
+    confirmDialogRef.close()
+    viewDialogRef.close()
+
+
+    //check any uncompletedSprint, put them back to product backlog
+    let startedTask = sprint._sprintBacklog._started_task
+    let not_startedTask = sprint._sprintBacklog._notStarted_task
+
+    sprint.sprintBacklog._started_task = []
+    sprint.sprintBacklog._notStarted_task = []
+
+    sys._productBacklog._tasks.concat(startedTask)
+    sys._productBacklog._tasks.concat(not_startedTask)
+
+    showSprint()
+
 }
 
 
