@@ -1,4 +1,5 @@
 "use strict"
+// Retrieves data from the system 
 
 let sys = new System();
 console.log(sys)
