@@ -455,11 +455,49 @@
                 <button type="button" class="mdl-button close">NO</button>
             </div>
         </dialog>
+
+        <!-- Dialog for the Burndown chart-->
+        <dialog class="mdl-dialog" style="width: 70vw" id="burndown-chart">
+            <div class="mdl-dialog__title" style="padding-top:0; padding-right:0">
+                <div class="mdl-grid" style="padding:0">
+                    <div class="mdl-cell mdl-cell--10-col" style="margin:0">
+                        <h4 style="font-size:2.5rem">Iteration 2</h4>
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <div style="float:right; font-size: 12pt">
+                            <span class="mdl-chip start-time" style="width: 130px">
+                                <span class="mdl-chip__text" style="padding-left:5px">Started on: 22/09/22</span>
+                            </span>
+                            <span class="mdl-chip finish-time" style="width: 130px">
+                                <span class="mdl-chip__text" style="text-align: center;">Set to finish: 01/10/22</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif;">
+                <div class="burnDivider">
+                    <h4 style="margin: 0; color:black">Tasks</h4>
+                </div>
+            </div>
+            <div>
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+
+
+            <div class="mdl-dialog__actions" style="padding-right:24px">
+
+                <button id='mark-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">MARK AS COMPLETE</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="wrongstuff">BURNDOWN CHART</button>
+                <button type="button" class="mdl-button close">CLOSE</button>
+            </div>
+        </dialog>
     </main>
 </div>
 <script src="js/keys.js" ></script>
 <script src="js/classes.js" ></script>
 <script src="js/main.js" ></script>
 <script src="js/sprints.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>

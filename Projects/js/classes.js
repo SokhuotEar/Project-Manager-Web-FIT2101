@@ -5,7 +5,7 @@ class System {
     constructor() {
         this._productBacklog = new ProductBacklog();
         this._teamMembers = new TeamMembers();
-        this._activeSprint;
+        this._activeSprint=null;
         this._completedSprints = [];
         this._notStartedSprints = [];
     }
@@ -31,7 +31,30 @@ class System {
     get notStartedSprints() {
         return this._notStartedSprints;
     }
+    //
+    createSprint(id,start,end){
+        let sprint = new Sprint(id,start,end)
+        this._notStartedSprints.push(sprint)
+    }
 
+    //setter
+    moveSprint(list,index){
+        let sprint
+        if (list==0){
+            sprint=this._notStartedSprints[index]
+            if(this._activeSprint==null){
+                this._activeSprint=sprint
+                this._notStartedSprints.splice(index,1)
+            }
+
+        } else if (list==1){
+            sprint=this.activeSprint()
+            this._completedSprints.push(sprint)
+            this._activeSprint=null
+        }
+
+
+    }
 
     //No methods done yet
     fromData(data){
@@ -217,9 +240,6 @@ class Task {
         }
     }
 
-
-
-
     //methods
 
     summarise(){
@@ -252,8 +272,8 @@ class Task {
     }
 
     getTotalTime(){
-        array=this._timeSpent
-        total=0
+        let array=this._timeSpent
+        let total=0
         for(let i=0; i<array.length;i++){
             total+=array[i][1]
         }
@@ -265,12 +285,21 @@ class Task {
         
     logTime(timeToAdd, date){
         date.setHours(0,0,0,0)
-        if(this._timeSpent[this._timeSpent.length-1][0]==date){
-            this._timeSpent[this._timeSpent.length-1][0]+=timeToAdd
-        }
-        else{
+        if (this._timeSpent.length==0){
             this._timeSpent.push([date,timeToAdd])
+            return
         }
+        //loop through and see if it hits
+        for(let i=0; i<this._timeSpent.length; i++){
+            if(this._timeSpent[i][0]==date){
+                this._timeSpent[i][0]+=timeToAdd
+                return
+            } else if(this._timeSpent[i][0]>date){
+                this._timeSpent.splice(i,0,[date,timeToAdd])
+                return
+            }
+        }
+        this._timeSpent.push([date,timeToAdd])
     }
 
     // updating local storage
@@ -281,7 +310,7 @@ class Task {
         for(let i=0;i<data._developers.length;i++){
             let next_developer= Developer.fromData(data._developers[i]);
             task.addMember(next_developer);
-            console.log(task)
+            //console.log(task)
         }
 
         return task
@@ -338,28 +367,27 @@ class Sprint {
         this._sprintId = backlog
     }
 
-
 }
 
 class SprintBacklog {
     constructor()
     {
-        this._allTasks = []
+        this._allTask = []
         this._notStarted_task = []
         this._started_task = []
         this._completedTask = []
     }
 
     // get task
-    get notStarted_task()
+    get notStarted()
     {
         return this._notStarted_task
     }
-    get started_task()
+    get started()
     {
         return this._started_task
     }
-    get completedTask()
+    get completed()
     {
         return this._completedTask
     }
@@ -433,10 +461,10 @@ class TeamMembers {
     }
 
     equivalentMember(developer){
-        console.log(developer)
+        //console.log(developer)
         for(let i=0; i<this._teamMembers.length; i++){
             let checkDev=this._teamMembers[i]
-            console.log(checkDev)
+            //console.log(checkDev)
             if(checkDev.name==developer.name && JSON.stringify(checkDev.tasks)==JSON.stringify(developer.tasks) && JSON.stringify(checkDev.hoursWorked)==JSON.stringify(developer.hoursWorked)){
                 return checkDev
             }
