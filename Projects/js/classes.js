@@ -417,12 +417,12 @@ class SprintBacklog {
             // push it to in started task array
             this._started_task.push(taskClass)
         }
-        else if (taskClass._status == "N/S")
+        else if (taskClass._status == "N/S" || taskClass._status == "Not Started")
         {
             // assign it to not started array
             this._started_task.push(taskClass)
         }
-        else if (taskClass._status == "comp")
+        else if (taskClass._status == "comp" || taskClass._status == "Completed")
         {
             // assign it to completed array
             this._completedTask.push(taskClass)
@@ -431,16 +431,37 @@ class SprintBacklog {
 
 
     // move task
-    move_task(indexToMove, destination)
+    move_task(list,index, destination){
+        if(list==0){
+            let task = this._notStarted_task[index]
+            this._notStarted_task.splice(index,1)
+        } else if (list==1){
+            let task = this._started_task[index]
+            this._started_task.splice(index,1)
+        } else if (list==2){
+            let task = this._completedTask[index]
+            this._completedTask.splice(index,1)
+        }
+
+        if(destination==0){
+            this._notStarted_task.push(task)
+        } else if (destination==1){
+            this._started_task.push(task)
+        } else if (destination==2){
+            this._completedTask.push(task)
+        }
+
+
+    }
     /* indexToMove: is the index of the task to move, relative to this._allTask
         dest
     */
-    {
+    
         // find the task and 
         
-    }
-
+    
 }
+
 
 class TeamMembers {
     constructor(){

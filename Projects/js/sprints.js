@@ -32,7 +32,10 @@ addButtonRef.addEventListener('click', function() {
 });
 
 viewButtonRef.addEventListener('click', function() {
+
         viewDialogRef.showModal();
+        listTasks()
+        console.log(33)
     });
 completeButtonRef.addEventListener('click', function() {
     confirmDialogRef.showModal();
@@ -294,12 +297,74 @@ function viewTask(list,index){
     
 }
 
+//
+// Showing actual tasks of a sprint
+function listTasks(){
+    let sprint=sys.activeSprint;
+    let notStartedList=sprint.sprintBacklog.notStarted
+    let startedList=sprint.sprintBacklog.started
+    let completedList=sprint.sprintBacklog.completed
+    let nsHTML=""
+    let ipHTML=""
+    let comHTML=""
+    console.log(sprint)
+    console.log(notStartedList)
+    console.log(startedList)
+    console.log(completedList)
+    for(let i=0; i<notStartedList.length;i++){
+        nsHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+            ${notStartedList[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-ns-${i}">
+                <input type="checkbox" id="list-checkbox-ns-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+    }
+    for(let i=0; i<startedList.length;i++){
+        ipHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+            ${startedList[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-s-${i}">
+                <input type="checkbox" id="list-checkbox-s-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+
+    }
+    for(let i=0; i<completedList.length;i++){
+        comHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+            ${completedList[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-c-${i}">
+                <input type="checkbox" id="list-checkbox-c-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+
+    }
+
+    document.getElementById("ns-list").innerHTML=nsHTML
+    document.getElementById("ip-list").innerHTML=ipHTML
+    document.getElementById("com-list").innerHTML=comHTML
+
+}
+
+
+
 // ----------------------------------------------------------------------------------
 // Add task to sprint backlog
 let addTaskToSprintRef = document.getElementById('add-toSprint-button')
 let addTaskDialogRef = document.getElementById('add-task-dialog')
 addTaskToSprintRef.addEventListener('click', function() {
     addTaskDialogRef.showModal();
+    addTaskWindow()
 });
 
 function addToSprintBacklog(i)
@@ -346,6 +411,44 @@ function showSprint()
     showActiveSprint()
     showCompletedSprint()
 }
+
+
+//add task
+function addTaskWindow(){
+    let taskList=""
+
+    for(let i=0; i<sys.productBacklog.tasks.length; i++){
+        taskList+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
+        <span class="mdl-list__item-primary-content" style="font-size:16pt">
+            ${sys.productBacklog.tasks[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="add-task-${i}">
+                <input type="checkbox" id="add-task-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+    }
+    document.getElementById('add-task-html').innerHTML=taskList
+    
+}
+
+function addTask(){
+    for(let i=sys.productBacklog.tasks.length-1; i>=0; i--){
+        console.log(`add-task-${i}`)
+        if(document.getElementById(`add-task-${i}`).checked){
+            let task = sys.productBacklog.tasks[i]
+            sys.productBacklog.removeTask(i)
+            sys._activeSprint.sprintBacklog.add_task(task)
+        }
+    }
+    listTasks()
+    addTaskDialogRef.close();
+}
+
+
+
+
 
 
 
@@ -500,6 +603,8 @@ function setActive(i)
 function viewActiveButton()
 {
     viewDialogRef.show()
+    listTasks()
+    console.log(33)
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -529,6 +634,50 @@ function markSprintAsComplete()
 
 }
 
+//
+function nsToIp(){
+    let sprint=sys.activeSprint;
+    let notStartedList=sprint.sprintBacklog.notStarted
+    for(let i=notStartedList.length-1; i>=0;i--){
+        console.log(`list-checkbox-ns-${i}`)
+        if(document.getElementById(`list-checkbox-ns-${i}`).checked){
+            sprint.sprintBacklog.move_task(0,i,1)
+        }
+    }
+
+    listTasks()
+}
+
+function ipToNs(){
+    let sprint=sys.activeSprint;
+    let startedList=sprint.sprintBacklog.started
+    for(let i=startedList.length-1; i>=0;i--){
+        if(document.getElementById(`list-checkbox-s-${i}`).checked){
+            sprint.sprintBacklog.move_task(1,i,0)
+        }
+    }
+    listTasks()
+}
+function ipToCom(){
+    let sprint=sys.activeSprint;
+    let startedList=sprint.sprintBacklog.started
+    for(let i=startedList.length-1; i>=0;i--){
+        if(document.getElementById(`list-checkbox-s-${i}`).checked){
+            sprint.sprintBacklog.move_task(1,i,2)
+        }
+    }
+    listTasks()
+}
+function comToIp(){
+    let sprint=sys.activeSprint;
+    let completedList=sprint.sprintBacklog.completed
+    for(let i=completedList.length-1; i>=0;i--){
+        if(document.getElementById(`list-checkbox-c-${i}`).checked){
+            sprint.sprintBacklog.move_task(2,i,1)
+        }
+    }
+    listTasks()
+}
 
 
-
+showSprint()
