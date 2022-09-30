@@ -1,0 +1,40 @@
+The sprint goal of the second iteration to work on implementing sprint page functionlities and to implement some non-functional requirements. 
+Detailed user requirements of the sprint goal is outlined below: 
+
+Sprint 2 requirements:
+
+Epic 1: View Sprint
+As a user, I want the main sprint backlog page to show me a list of all the sprints I have created. 
+    Time Expected:              Time Spent:             logged by: 
+As a user, I want to make sure I only have a maximum of one active sprint so that I can make sure that there is not multiple active sprints running at once. 
+    Time Expected:              Time Spent:             logged by: 
+As a user, I want to have my sprints sorted by active, not completed, then completed so I see the most important sprints first 
+    Time Expected:              Time Spent:             logged by: 
+As a user, I want a button to open a new window that lets me create new sprints so the layout can be cleaner 
+    Time Expected:              Time Spent:             logged by: 
+
+Epic 2: Create/Set Sprint as active/Mark sprint as completed functionalities
+As a user, I want to be able to create new sprints so that I can work on them later on. 
+    Time Expected:              Time Spent:             logged by: 
+As a user, I want my create sprint fields to consist of sprint name, start date and end date so that I can enter the details of the sprint for later use. 
+    Time Expected:              Time Spent:             logged by: 
+As a user, I want my created sprint to be in listed in the not started section of the list, so that I can start on it later on. 
+    Time Expected:              Time Spent:             logged by: 
+As a user, I want to be able to set one of my not started sprint as active when there is no current active sprint, so that I know what sprint I am currently working on. 
+    Time Expected:              Time Spent:             logged by: 
+As a user, I want to be able to set my active sprint as completed so that I can keep track of sprints that is no longer active. 
+    Time Expected:              Time Spent:             logged by: 
+
+Epic 3: View Task Sprint: 
+As a user, I would like tasks to be separated into different categories such as to do, Doing or done, so that I can easily tell what progress state of these task (2)
+
+Non-functional requirements: 
+Epic3: Aesthetic: 
+As a user, I want my lining of the website to be clean and consistent so that it looks professional. 
+    Time Expected:              Time Spent:             logged by: 
+As a user, I want my website to have beautiful colours so that it looks pleasing. 
+    Time Expected:              Time Spent:             logged by: 
+As a user, I want the content of my website to aligned so that it is easy to read. 
+    Time Expected:              Time Spent:             logged by: 
+
+Epic4: Fault Tolerant
