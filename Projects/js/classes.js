@@ -291,7 +291,7 @@ class Task {
         }
         //loop through and see if it hits
         for(let i=0; i<this._timeSpent.length; i++){
-            if(this._timeSpent[i][0]==date){
+            if(str(this._timeSpent[i][0])==str(date)){
                 this._timeSpent[i][0]+=timeToAdd
                 return
             } else if(this._timeSpent[i][0]>date){
@@ -405,7 +405,7 @@ class SprintBacklog {
     // assign task to relevant array
     assign_task(taskClass)
     {
-        if (taskClass._status == "prog" || taskClass._status == "dev" || taskClass._status == "test")
+        if (taskClass._status == "prog" || taskClass._status == "dev" || taskClass._status == "test"|| taskClass._status == "In Progress")
         {
             // push it to in started task array
             this._started_task.push(taskClass)
