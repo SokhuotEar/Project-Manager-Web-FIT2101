@@ -5,40 +5,32 @@ Sprint 2 requirements:
 
 Epic 1: View Sprint
 1.1) As a user, I want the main sprint backlog page to show me a list of all the sprints I have created. 
-    Time Spent:  0.5 hr      logged by: Sok Ear
 1.2) As a user, I want to make sure I only have a maximum of one active sprint so that I can make sure that there is not multiple active sprints running at once. 
-    Time Spent:  0.5 hr     logged by: Sok Ear
 1.3) As a user, I want to have my sprints sorted by active, not completed, then completed so I see the most important sprints first 
-    Time Spent:  0.83 hr     logged by: Sok Ear
 1.4) As a user, I want a button to open a new window that lets me create new sprints so the layout can be cleaner 
-    Time Spent:  0.5 hr     logged by: Sok Ear
 
 Epic 2: Create/Set Sprint as active/Mark sprint as completed functionalities
 2.1) As a user, I want to be able to create new sprints so that I can work on them later on. 
-    Time Spent:   0.75 hr   logged by: Sok Ear
 2.2) As a user, I want my create sprint fields to consist of sprint name, start date and end date so that I can enter the details of the sprint for later use. 
-    Time Spent:     logged by: 
 2.3) As a user, I want my created sprint to be in listed in the not started section of the list, so that I can start on it later on. 
-    Time Spent:    0.5 hr   logged by: Sok Ear
 2.4) As a user, I want to be able to set one of my not started sprint as active when there is no current active sprint, so that I know what sprint I am currently working on. 
-    Time Spent:     0.5 hr   logged by: Sok Ear
 2.5) As a user, I want to be able to set my active sprint as completed so that I can keep track of sprints that is no longer active. 
-    Time Spent:     0.5 hr   logged by: Sok Ear
 
 Epic 3: View Task Sprint: 
 3.1) As a user, I would like tasks to be separated into different categories such as to do, Doing or done, so that I can easily tell what progress state of these task (2)
 
+Epic 4: Burn down chart:
+
+
 Non-functional requirements: 
 Epic 4: Aesthetic: 
 4.1) As a user, I want my lining of the website to be clean and consistent so that it looks professional. 
-    Time Spent:             logged by: 
 4.2) As a user, I want my website to have beautiful colours so that it looks pleasing. 
-    Time Spent:             logged by: 
 4.3) As a user, I want the content of my website to aligned so that it is easy to read. 
-    Time Spent:             logged by: 
 
-Epic 5: Fault Tolerant: 
----TO BE FILLED -----
+Epic 5: Fault Tolerance: 
+5.1) As a developper, I want user's inputs to be validated so that it can prevent potential failures later on
+5.2) As a developper, I want the main functions of the program to have its input validated so that it can prevent potential failures in the application
 
 
 
@@ -55,6 +47,19 @@ Luke Phillips:
 Sok Ear: 4hr35 mins (on requirements above) + 1h25 mins (working data structure) = 5hr 50mins
 
 
+---------------------------------------------------------------------------------------------------------------------------
+
 Time Tracking Tool and Task Tracking tool: 
 Trello link = https://trello.com/w/fit210129
 This will include time logged by each member spent on tasks that are not part of the user requirement 
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Link to testing document: 
+https://docs.google.com/document/d/1D5KgYm4FnnU9yejEh32LZrV3NKuqUgHrc3FOL1qK3Ys/edit
+
+Link to product backlog: 
+https://docs.google.com/document/d/141Veo3zq98RTtFeEvzvHkNnJA8nMpuSaO1vzs2drfUw/edit
+
+link to summary of time spent:
+https://docs.google.com/document/d/1-KUJ8YuuXWYYzFt5YPkzWiB6Y4B6rLUtrVOMUJ4yAug/edit
