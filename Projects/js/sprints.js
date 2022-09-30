@@ -412,7 +412,7 @@ function showActiveSprint()
     {   
         value += 
                 `<div class="mdl-card__title" style="background: lightcoral">
-                            <h2 class="mdl-card__title-text">${activeSprint.sprint_id}</h2>
+                            <h2 class="mdl-card__title-text">Iteration ${activeSprint.sprint_id}</h2>
                         </div>
                         <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                                     <span class="mdl-chip start-time">
@@ -467,9 +467,6 @@ function showCompletedSprint(){
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='manage-button${i}' style="float:right">
                             MANAGE
                         </button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='setActive-button${i}' onclick = "setActive(${i})" style="float:right">
-                        Set Active
-                    </button>
                     </div>
                     
                 </div> 
