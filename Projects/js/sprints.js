@@ -5,7 +5,7 @@
 
     This file contains the JavaScript code necessary to run the functionality of the Sprints page.
 
-    Written by: Luke Phillips (32511760), [add name and ids here]
+    Written by: Luke Phillips (32511760), Dasun Mahamadachchi (32488580), [add name and ids here]
  */
 
 // document ids
@@ -66,8 +66,77 @@ confirmDialogRef.querySelector('.close').addEventListener('click', function() {
 showSprint()
 
 function showChart(){
+    let taskList=sys.activeSprint.sprintBacklog._allTask
+    console.log(taskList)
+    let SPTotal=0
+    for(let i=0;i<taskList.length;i++){
+        SPTotal+=taskList[i].storyPoints
+    }
+    SPTotal*=4
+    let start= sys.activeSprint.startDate
+    let end = sys.activeSprint.endDate
+    let times =[start]
+    let empty=[]
+
+    ///THIS CODE IS TAKEN FROM https://stackoverflow.com/questions/4413590/javascript-get-array-of-dates-between-2-dates
+    Date.prototype.addDays = function(days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+    function getDates(startDate, stopDate) {
+        var dateArray = new Array();
+        var currentDate = startDate;
+        while (currentDate <= stopDate) {
+            dateArray.push(new Date (currentDate));
+            currentDate = currentDate.addDays(1);
+            empty.push(0)
+        }
+        return dateArray;
+    }
+    //////
+
+    
+    let timds = getDates(start,end)
+    console.log(timds)
+    times=timds
 
 
+
+    let len=times.length
+    let increment = SPTotal/(len-1)
+    
+
+    let graph=[[times[0],SPTotal,0]]
+    for(let i=1;i<times.length;i++){
+        let last=graph[graph.length-1]
+        graph.push([times[i],last[1]-increment,0])
+    }
+
+    for(let i=0;i<taskList.length;i++){
+        console.log(taskList[i]._timespent)
+        for(let j=0;j<taskList[i]._timespent;i++){
+           for(let k=0;k<times.length;k++){
+            if(taskList[i]._timespent[j][0].toDateString==times[k].toDateString){
+                empty[k]+=taskList[i]._timespent[j][1]
+            }
+           }
+        }
+    }
+    let logged=[empty[0]]
+    for(let i=1;i<empty.length;i++){
+        logged.push(logged[i-1]+empty[i])
+    }
+    for(let i=0;i<logged.length;i++){
+        let ite=SPTotal-logged[i]
+        if(ite<0){
+            logged[i]=0
+        } else{
+            logged[i]=ite
+        }
+    }
+    console.log(graph)
+    console.log(logged)
 
     let myChart = new Chart(ctx, {
         type: 'line',
@@ -135,8 +204,16 @@ function logTimeForTask(list,index){
     console.log(document.getElementById("log-date").value)
     let date = new Date(document.getElementById("log-date").value)
 
+
+    
     let sprint = sys.activeSprint.sprintBacklog
     let task
+
+    console.log(date)
+    console.log(sys.activeSprint.endDate)
+    if(date>sys.activeSprint.endDate){
+        return
+    }
     if (list==0){
         task=sprint.notStarted[index]
     } else if (list==1){
@@ -144,7 +221,7 @@ function logTimeForTask(list,index){
     } else if (list==2){
         task=sprint.completed[index]
     }
-    task.logTime(hours,date)
+    task.logTime(parseInt(hours),date)
     console.log(task)
     listTasks()
     viewTaskDialogRef.close();
@@ -291,7 +368,7 @@ function viewTask(list,index){
             </div>
             <div class="mdl-dialog__actions">
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="logTimeForTask(${list},${index})">LOG TIME</button>
-                <button type="button" class="mdl-button close">CLOSE</button>
+                <button type="button" class="mdl-button close" onclick="closeView()">CLOSE</button>
                 </div>
     </div>`
 
@@ -300,6 +377,11 @@ function viewTask(list,index){
     
     
 }
+
+function closeView(){
+    viewTaskDialogRef.close();
+}
+
 
 //
 // Showing actual tasks of a sprint
@@ -316,8 +398,8 @@ function listTasks(){
     console.log(startedList)
     console.log(completedList)
     for(let i=0; i<notStartedList.length;i++){
-        nsHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
-        <span class="mdl-list__item-primary-content" style="font-size:10pt" ondblclick="viewTask(${0},${i})">
+        nsHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${0},${i})">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
             ${notStartedList[i].name}
         </span>
         <span class="mdl-list__item-secondary-action" style="margin-left:5px">
@@ -328,8 +410,8 @@ function listTasks(){
     </li>`
     }
     for(let i=0; i<startedList.length;i++){
-        ipHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
-        <span class="mdl-list__item-primary-content" style="font-size:10pt" ondblclick="viewTask(${1},${i})">
+        ipHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${1},${i})">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
             ${startedList[i].name}
         </span>
         <span class="mdl-list__item-secondary-action" style="margin-left:5px">
@@ -341,8 +423,8 @@ function listTasks(){
 
     }
     for(let i=0; i<completedList.length;i++){
-        comHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
-        <span class="mdl-list__item-primary-content" style="font-size:10pt" ondblclick="viewTask(${2},${i})">
+        comHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${2},${i})">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
             ${completedList[i].name}
         </span>
         <span class="mdl-list__item-secondary-action" style="margin-left:5px">

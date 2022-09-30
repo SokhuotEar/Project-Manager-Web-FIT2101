@@ -298,8 +298,8 @@ class Task {
         }
         //loop through and see if it hits
         for(let i=0; i<this._timeSpent.length; i++){
-            if(str(this._timeSpent[i][0])==str(date)){
-                this._timeSpent[i][0]+=timeToAdd
+            if(this._timeSpent[i][0].toString()==date.toString()){
+                this._timeSpent[i][1]+=timeToAdd
                 return
             } else if(this._timeSpent[i][0]>date){
                 this._timeSpent.splice(i,0,[date,timeToAdd])
