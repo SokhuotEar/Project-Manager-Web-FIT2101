@@ -1,11 +1,11 @@
 /* start and finish classes */
 .start-time {
-    background-color: green;
+    background-color: rgb(114, 235, 114);
     color: white;
 }
 
 .finish-time {
-    background-color: firebrick;
+    background-color: rgb(240, 140, 140);
     color: white;
 }
 
