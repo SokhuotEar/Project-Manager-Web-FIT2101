@@ -24,7 +24,6 @@ let testItemRef = document.getElementById('test-item')
 let viewTaskDialogRef = document.getElementById('view-task-dialog')
 
 let burnDownRef = document.getElementById('burndown-chart');
-let burnDownButtonRef = document.getElementById('show-chart');
 let ctx = document.getElementById('myChart').getContext('2d');
 
 // button to open dialog event listeners
@@ -40,17 +39,14 @@ completeButtonRef.addEventListener('click', function() {
 });
 testItemRef.addEventListener('dblclick', function() {
     viewTaskDialogRef.showModal()
+    viewTask(1,0)
 });
-// burndownButtonRef.addEventListener('click', function() {
-//     burndownDialogRef.showModal();
-// });
+burndownButtonRef.addEventListener('click', function() {
+    burndownDialogRef.showModal();
+    showChart()
+});
 
 
-// burnDownButtonRef.addEventListener('click', function() {
-//     burnDownRef.showModal();
-//     viewDialogRef.close();
-//     showChart()
-// });
 
 // close dialog event listeners
 addDialogRef.querySelector('.close').addEventListener('click', function() {
@@ -126,6 +122,37 @@ function showChart(){
 
 
 // viewTask(1,0)
+//logging time
+function logTimeForTask(list,index){
+    let hours = document.getElementById("log-hours").value
+    console.log(document.getElementById("log-date").value)
+    let date = new Date(document.getElementById("log-date").value)
+
+    let sprint = sys.activeSprint.sprintBacklog
+    let task
+    if (list==0){
+        task=sprint.notStarted[index]
+    } else if (list==1){
+        task=sprint.started[index]
+    } else if (list==2){
+        task=sprint.completed[index]
+    }
+    task.logTime(hours,date)
+    console.log(task)
+    viewTaskDialogRef.close();
+
+}
+
+
+
+// STUFF BELOW THIS IS TO 
+///Testing view sprints
+sys.createSprint("ee",new Date("2022-09-20"),new Date("2022-09-28"))
+sys.moveSprint(0,0)
+
+let task=sys.productBacklog._tasks[1]
+task._status="In Progress"
+let sprint = sys.activeSprint.sprintBacklog.add_task(task)
 // list is 0 to 2 -> NS or IP or Comp
 // index is the place of it
 function viewTask(list,index){
@@ -138,6 +165,132 @@ function viewTask(list,index){
     } else if (list==2){
         task=sprint.completed[index]
     }
+    let teamMemberText=''
+    console.log(task.developers)
+    for(let i=0;i<task.developers.length;i++){
+        let tm = task.developers[i]
+        teamMemberText+=`<li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-icon">person</i>
+                    ${tm.name}
+            </span>
+        </li>`
+    }
+
+    let prio=task.priority;
+    let tag=task.tags;
+    let type = task.type;
+    let status = task.status
+    let typeCSS;
+    let prioCSS;
+    let tagCSS;
+    let statusCSS;
+    if(prio=="Low"){
+        prioCSS="low-p"
+    }
+    else if(prio=="Medium"){
+        prioCSS="med-p"
+    }
+    else if(prio=="High"){
+        prioCSS="high-p"
+    }
+    else if(prio=="Critical"){
+        prioCSS="crit-p"
+    }
+
+    if(tag=="UI"){
+        tagCSS= "ui-tag"
+    }
+    else if(tag=="Core"){
+        tagCSS="core-tag"
+    }
+    else if(tag=="Testing"){
+        tagCSS="testing-tag"
+    }
+
+    if (type === "userStory"){
+        typeCSS = 'userstory';
+    } 
+    else if (type == "bug"){
+        typeCSS = 'bug';
+    }
+    if (status=="Not Started"){
+        statusCSS="not-started"
+    } else if (status =="In Progress"){
+        statusCSS="in-progress"
+    } else if (status =="Completed"){
+        statusCSS=="finished"
+    }
+
+    let viewText=`<div class="mdl-grid" style="padding-right: 0">
+                <div class="mdl-cell mdl-cell--10-col" style="margin: 0 0 0 10px;">
+                    <h4 style="font-size:2.5rem; margin: 9px 0 0;">Add Sprint Functionality</h4>
+                </div>
+                <div class="mdl-cell mdl-cell--2-col">
+                    <div style="float:right; font-size: 12pt">
+                        <span class="mdl-chip not-started">
+                            <span class="mdl-chip__text ${statusCSS}">${task.status}</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif; padding:0;">
+                <div class="mdl-grid" style="padding-right: 0; padding-top:0; height: 256px">
+                    <div class="mdl-cell mdl-cell--6-col task-info">
+                        <b>Description:</b>
+                        <p>${task.description}</p>
+                        <b>Story points:</b> ${task.storyPoints}
+                        <div style="padding-top:5px"><b style="position:absolute;margin-top:8px">Tags:</b>
+                            <span class="mdl-chip ${tagCSS}" style="margin-left:40px">
+                                        <span class="mdl-chip__text">${task.tags}</span>
+                                    </span>
+                        </div>
+                        <div><b style="position:absolute;margin-top:8px">Priority:</b>
+                            <span class="mdl-chip ${prioCSS}" style="margin-left:58px">
+                                        <span class="mdl-chip__text">${task.priority}</span>
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <p><b>Team Members:</b></p>
+                        <ul class="demo-list-icon mdl-list" id="team-list">
+                            ${teamMemberText}
+                        </ul>
+                    </div>
+                </div>
+                <div class="task-divider">
+                    <h4 style="margin: -4px 0 0;color:black; font-size:1.3rem;">Sprint Information</h4>
+                </div>
+                <div class="mdl-grid" style="padding-right: 0">
+                    <div class="mdl-cell mdl-cell--3-col task-info" style="text-align: center">
+                        <b>Time logged: </b>${task.getTotalTime()} hours
+                    </div>
+                    <div class="mdl-cell mdl-cell--9-col">
+                        <b>Log a time:</b>
+                        <form action="#">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="log-hours">
+                                <label class="mdl-textfield__label" for="log-hours">Enter hours...</label>
+                            </div>
+                        </form>
+                        <div class="mdl-textfield--floating-label has-placeholder">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="date" id="log-date">
+                                <label class="mdl-textfield__label" for="log-date">Enter log date:</label>
+                                <span id="log_date_err" class="mdl-textfield__error" style='visibility: visible;'></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="logTimeForTask(${list},${index})">LOG TIME</button>
+                <button type="button" class="mdl-button close">CLOSE</button>
+                </div>
+    </div>`
+
+    document.getElementById('view-task-dialog').innerHTML=viewText
+    
     
 }
 
