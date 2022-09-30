@@ -34,6 +34,15 @@ Epic 2: Create/Set Sprint as active/Mark sprint as completed functionalities
 
 Epic 3: View Task Sprint: 
 3.1) As a user, I would like tasks to be separated into different categories such as to do, Doing or done, so that I can easily tell what progress state of these task (2)
+    Time Spent: 1hr logged by: Dasun Mahamadachchi
+3.2) As a user, I would like to be able to see all tasks currently in the sprint backlog (2)
+    Time Spent: 2hr logged by: Dasun Mahamadachchi
+3.3) As a user, I would like to be able to move tasks from the product backlog into the current sprint backlog (3)
+    Time Spent: 1hr logged by: Dasun Mahamadachchi
+3.4) As a user, I would like to be able to move a task from ‘to do’/'doing'/'done to ‘to do’/'doing'/'done so that I could easily track the progress of my work.
+    Time Spent: 2hr logged by: Dasun Mahamadachchi
+
+
 
 Non-functional requirements: 
 Epic 4: Aesthetic: 
@@ -55,7 +64,7 @@ Epic 5: Fault Tolerant:
 ------------------------------------------------------------------------------------------------------------------------
 
 Summary of Total Time spent by each member: 
-Dasun Mahamadachchi: 
+Dasun Mahamadachchi: 7
 Parul Garg: 
 Laetitia Teo: 1.5 hrs
 Luke Phillips: 

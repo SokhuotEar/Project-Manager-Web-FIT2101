@@ -65,6 +65,7 @@ confirmDialogRef.querySelector('.close').addEventListener('click', function() {
 
 showSprint()
 
+//Function for the burndown chart -- not functional
 function showChart(){
     let taskList=sys.activeSprint.sprintBacklog._allTask
     console.log(taskList)
@@ -176,29 +177,7 @@ function showChart(){
 }
 
 
-// ///Testing view sprints
-// console.log(sys)
-// sys.createSprint("ee",new Date("2022-09-20"),new Date("2022-09-28"))
-// sys.moveSprint(0,0)
-
-// let task=sys.productBacklog._tasks[1]
-// task._status="prog"
-// let sprint = sys.activeSprint.sprintBacklog.add_task(task)
-
-
-// console.log(sys)
-// console.log(task)
-// //console.log(task.getTotalTime())
-// console.log(task.getTotalTime())
-// task.logTime(10,new Date("2022-09-25"))
-// console.log(task.getTotalTime())
-// task.logTime(5,new Date("2022-09-24"))
-// console.log(task.getTotalTime())
-// console.log(task)
-
-
-// viewTask(1,0)
-//logging time
+//Function to log time
 function logTimeForTask(list,index){
     let hours = document.getElementById("log-hours").value
     console.log(document.getElementById("log-date").value)
@@ -233,7 +212,7 @@ function logTimeForTask(list,index){
 // STUFF BELOW THIS IS TO 
 ///Testing view sprints
 
-
+//Function for view task dialog
 // list is 0 to 2 -> NS or IP or Comp
 // index is the place of it
 function viewTask(list,index){
@@ -383,8 +362,8 @@ function closeView(){
 }
 
 
-//
-// Showing actual tasks of a sprint
+
+// Function for showing actual tasks of a sprint
 function listTasks(){
     let sprint=sys.activeSprint;
     let notStartedList=sprint.sprintBacklog.notStarted
@@ -725,7 +704,7 @@ function markSprintAsComplete()
 
 }
 
-//
+// function to move from not strated to in progress
 function nsToIp(){
     if(sys.activeSprint.endDate<new Date()){
         console.log("L")
@@ -742,7 +721,7 @@ function nsToIp(){
 
     listTasks()
 }
-
+//function to move from in progress to not started
 function ipToNs(){
     if(sys.activeSprint.endDate<new Date()){
         console.log("L")
@@ -757,6 +736,7 @@ function ipToNs(){
     }
     listTasks()
 }
+//function to move from in progress to complete
 function ipToCom(){
     if(sys.activeSprint.endDate<new Date()){
         console.log("L")
@@ -771,6 +751,7 @@ function ipToCom(){
     }  
     listTasks()
 }
+//function to move from complete to in progress
 function comToIp(){
     if(sys.activeSprint.endDate<new Date()){
         console.log("L")
