@@ -1,4 +1,8 @@
 "use strict"
+/**
+ * Contains all the necessary classes: System, ProductBacklog, Task, Sprint, SprintBacklog, TeamMember, Developer
+ */
+
 
 class System {
     //constructor
@@ -79,6 +83,10 @@ class System {
 
 }
 
+/**
+ * Class for the product backlog
+ */
+
 class ProductBacklog {
     constructor(){
         this._tasks=[];
@@ -157,6 +165,9 @@ class ProductBacklog {
     }
 }
 
+/**
+ * Class for each task
+ */
 
 class Task {
     constructor(name, description, type, storyPoints, tags, priority,status){
@@ -326,7 +337,9 @@ class Task {
 
 }
 
-
+/**
+ * Class for each sprint
+ */
 
 class Sprint {
     // please don't call this directly; call sys.createSprint() instead
@@ -375,6 +388,10 @@ class Sprint {
     }
 
 }
+
+/**
+ * Class for the sprint backlog 
+ */
 
 class SprintBacklog {
     constructor()
@@ -442,6 +459,10 @@ class SprintBacklog {
 
 }
 
+/**
+ * Class for all the team members
+ */
+
 class TeamMembers {
     constructor(){
         this._teamMembers=[];
@@ -491,6 +512,9 @@ class TeamMembers {
 
 }
 
+/**
+ * Class for each developer/ team member
+ */
 
 class Developer {
     constructor(name){

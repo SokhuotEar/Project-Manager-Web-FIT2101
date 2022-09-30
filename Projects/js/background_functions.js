@@ -1,3 +1,9 @@
+/**
+ * 
+ * handling the background functions of the website
+ */
+
+// adding the contents
 function sum(array){
     return array.reduce((x,y)=>x+y)
 }
