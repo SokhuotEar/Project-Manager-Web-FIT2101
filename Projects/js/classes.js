@@ -5,6 +5,7 @@ class System {
     constructor() {
         this._productBacklog = new ProductBacklog();
         this._teamMembers = new TeamMembers();
+        this._allSprint = []
         this._activeSprint=null;
         this._completedSprints = [];
         this._notStartedSprints = [];
@@ -12,6 +13,10 @@ class System {
 
 
     //accessors
+    get allSprint()
+    {
+        return this._allSprint
+    }
     get productBacklog() {
         return this._productBacklog;
     }
@@ -32,8 +37,10 @@ class System {
         return this._notStartedSprints;
     }
     //
-    createSprint(id,start,end){
+    createSprint(start,end){
+        let id = this.allSprint.length + 1
         let sprint = new Sprint(id,start,end)
+        this._allSprint.push(sprint)
         this._notStartedSprints.push(sprint)
     }
 
@@ -334,7 +341,7 @@ class Sprint {
     // getters
     get sprint_id()
     {
-        return this._sprint_id
+        return this._sprintId
     }
     get startDate()
     {
@@ -398,8 +405,8 @@ class SprintBacklog {
         // whenever a task is added, add it to all tasks first
         this._allTask.push(taskClass)
 
-        // assign it to a relevant array: notStarted, started or completed
-        this.assign_task(taskClass)
+        // assign it to not started section
+        this._notStarted_task.push(taskClass)
     }
 
     // assign task to relevant array
