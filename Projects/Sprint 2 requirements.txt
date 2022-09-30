@@ -2,6 +2,13 @@ The sprint goal of the second iteration to work on implementing sprint page func
 Detailed user requirements of the sprint goal is outlined below: 
 
 Sprint 2 requirements:
+UX planning:
+- 'Add Task' Wireframe
+    Time Spent: 25 mins     logged by: Laetitia Teo
+
+Testing Document
+    Time Spent: 1 hr        logged by: Laetitia Teo
+
 
 Epic 1: View Sprint
 1.1) As a user, I want the main sprint backlog page to show me a list of all the sprints I have created. 
