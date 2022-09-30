@@ -1,5 +1,7 @@
 "use strict"
-
+/**
+ * Product backlog functions
+ */
 
 // dialog and button ids
 let viewDialogRef = document.getElementById('view-dialog')
@@ -63,7 +65,7 @@ if(teamMembers.teamMembers.length!=5){
     teamMembers.addMember(new Developer("e"))
 }
 
-
+// display for deleting an element
 
 function deleteQuery(i){
     //
@@ -95,6 +97,8 @@ function deleteQuery(i){
 }
 
 let productBacklog = sys.productBacklog;
+
+// displaying the tasks
 
 function showCards(){
     let words='';
@@ -438,6 +442,7 @@ function verifyInputs(name, desc, storyp, tags, taskType, priority, team, status
     }
 }
 
+// deletes a task
 function deleteTask(i){
     productBacklog.removeTask(i);
     showCards();
@@ -541,6 +546,7 @@ function view_task(i) {
 
 }
 
+// closing view task
 function closeViewTask()
 {
     viewDialogRef.close()
@@ -558,7 +564,7 @@ function editTask(i)
     {
         document.getElementById("edit-button").disabled = true;
 
-        // TODO: error message
+        
         let compErrorRef = document.getElementById('comp_err');
         compErrorRef.innerText = 'Completed tasks are not editable.';
         return 0
@@ -620,7 +626,7 @@ function editTask(i)
 
     
 }
-
+// confirming edit functionality
 function confirmEdit(i)
 {
     //retrive information from edit task input field
