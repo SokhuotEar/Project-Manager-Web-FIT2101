@@ -147,7 +147,7 @@ function logTimeForTask(list,index){
 
 // STUFF BELOW THIS IS TO 
 ///Testing view sprints
-sys.createSprint("ee",new Date("2022-09-20"),new Date("2022-09-28"))
+sys.createSprint(new Date("2022-09-20"),new Date("2022-09-28"))
 sys.moveSprint(0,0)
 
 let task=sys.productBacklog._tasks[1]
