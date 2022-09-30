@@ -78,3 +78,38 @@
     border-top: 2px solid #B85450;
     text-align: center
 }
+
+
+/* priority */
+
+.low-p {
+    background-color: rgb(53, 231, 142);
+}
+
+.med-p {
+    background-color: rgb(240, 221, 75);
+}
+
+.high-p {
+    background-color: rgb(235, 140, 44);
+    color: white
+}
+
+.crit-p {
+    background-color: orangered;
+    color: white;
+}
+
+/* tags */
+
+.ui-tag {
+    background-color:orange
+}
+
+.core-tag {
+    background-color:hotpink
+}
+
+.testing-tag {
+    background-color:lightgreen
+}
