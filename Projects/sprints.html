@@ -55,11 +55,11 @@
                 </h4>
             </div>
             <div class="mdl-cell mdl-cell--2-col">
-                <button style="float: right" id='add-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = "openAddTask()">
+                <button style="float: right" id='add-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                     ADD SPRINT
                 </button>
             </div>
-            <div class="mdl-cell mdl-cell--4-col">
+            <div class="mdl-cell mdl-cell--4-col" id = "active-sprint-view">
                 <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="active-sprint">
                     <div class="mdl-card__title" style="background: lightcoral">
                         <h2 class="mdl-card__title-text">Iteration 2</h2>
@@ -85,7 +85,7 @@
                     Other Sprints
                 </h4>
             </div>
-            <div style="margin-top:0" class="mdl-cell mdl-cell--12-col">
+            <div style="margin-top:0" class="mdl-cell mdl-cell--12-col" id = "other-sprint-view">
                 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                     <div class="mdl-tabs__tab-bar tabs">
                         <a href="#notstarted" class="mdl-tabs__tab is-active">Not Started</a>
@@ -105,6 +105,31 @@
                                     <span class="mdl-chip finish-time">
                                     <span class="mdl-chip__text">Set to finish: 27/10/22</span>
                                 </span>
+                                    
+
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
+                                    <!-- Accent-colored raised button with ripple -->
+                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right">
+                                        MANAGE
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="notstarted1">
+                                <div class="mdl-card__title" style="background: darkgreen">
+                                    <h2 class="mdl-card__title-text">Iteration 3</h2>
+                                </div>
+                                <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
+                                <span class="mdl-chip start-time">
+                                    <span class="mdl-chip__text">Set to start: 15/10/22</span>
+                                </span>
+                                    <span class="mdl-chip finish-time">
+                                    <span class="mdl-chip__text">Set to finish: 27/10/22</span>
+                                </span>
+                                    
+
                                 </div>
                                 <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
                                     <!-- Accent-colored raised button with ripple -->
@@ -155,7 +180,7 @@
                 <div class="mdl-textfield--floating-label has-placeholder">
                     <div class="mdl-textfield mdl-js-textfield">
                         <input class="mdl-textfield__input" type="date" id="start-date">
-                        <label class="mdl-textfield__label" for="start-date">Enter start date:</label>
+                        <label class="mdl-textfield__label" for="start-date" >Enter start date:</label>
                         <span id="start_date_err" class="mdl-textfield__error" style='visibility: visible;'></span>
                     </div>
                 </div>
@@ -168,7 +193,7 @@
                 </div>
             </div>
             <div class="mdl-dialog__actions">
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">ADD</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id = 'addSprint' onclick = "addSprintConfirm()">ADDD</button>
                 <button type="button" class="mdl-button close">CLOSE</button>
             </div>
         </dialog>
@@ -311,9 +336,9 @@
                 </div>
             </div>
             <div class="mdl-dialog__actions" style="padding-right:24px">
-
                 <button id='mark-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">MARK AS COMPLETE</button>
                 <button id='burndown-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">BURNDOWN CHART</button>
+                <button id='add-toSprint-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">ADD TASK</button>
                 <button type="button" class="mdl-button close">CLOSE</button>
             </div>
         </dialog>
@@ -336,14 +361,14 @@
                 <div class="mdl-grid" style="padding-right: 0; padding-top:0; height: 256px">
                     <div class="mdl-cell mdl-cell--6-col task-info">
                         <b>Description:</b>
-                        <p> the functionality of the Sprints page.</p>
+                        <p>Implement the functionality of the Sprints page.</p>
                         <b>Story points:</b> 20
                         <div style="padding-top:5px"><b style="position:absolute;margin-top:8px">Tags:</b>
                             <span class="mdl-chip" style="background-color:orange;margin-left:40px">
                                         <span class="mdl-chip__text">UI</span>
                                     </span>
                         </div>
-                        <div><bImplement style="position:absolute;margin-top:8px">Priority:</b>
+                        <div><b style="position:absolute;margin-top:8px">Priority:</b>
                             <span class="mdl-chip" style="background-color:lightskyblue;margin-left:58px">
                                         <span class="mdl-chip__text">Low</span>
                                     </span>
@@ -451,7 +476,7 @@
                 Are you sure you want to mark 'Iteration 2' as complete?
             </div>
             <div class="mdl-dialog__actions">
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">YES</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = "markSprintAsComplete()">YES</button>
                 <button type="button" class="mdl-button close">NO</button>
             </div>
         </dialog>
@@ -489,6 +514,97 @@
 
                 <button id='mark-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">MARK AS COMPLETE</button>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="wrongstuff">BURNDOWN CHART</button>
+                <button type="button" class="mdl-button close">CLOSE</button>
+            </div>
+        </dialog>
+
+        <!-- Dialog for adding a task -->
+        <dialog class="mdl-dialog" style="width: 50vw" id="add-task-dialog">
+            <div class="mdl-grid" style="padding-right: 0">
+                <div class="mdl-cell mdl-cell--10-col" style="margin: 0 0 0 10px;">
+                    <h4 style="font-size:2.5rem; margin: 9px 0 0;">Add Task To Sprint</h4>
+                </div>
+
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif; padding:0;">
+                <div class="mdl-grid" style="padding-right: 0; padding-top:0; height: 256px">
+                    <div class="mdl-cell mdl-cell--6-col task-info">
+                        <b>Description:</b>
+                        <p>Implement the functionality of the Sprints page.</p>
+                        <b>Story points:</b> 20
+                        <div style="padding-top:5px"><b style="position:absolute;margin-top:8px">Tags:</b>
+                            <span class="mdl-chip" style="background-color:orange;margin-left:40px">
+                                        <span class="mdl-chip__text">UI</span>
+                                    </span>
+                        </div>
+                        <div><b style="position:absolute;margin-top:8px">Priority:</b>
+                            <span class="mdl-chip" style="background-color:lightskyblue;margin-left:58px">
+                                        <span class="mdl-chip__text">Low</span>
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <p><b>Team Members:</b></p>
+                        <ul class="demo-list-icon mdl-list" id="team-list">
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                        John Smith
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                        Brooke Perry
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                        Mr Sandman
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                        Cameron Perry
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">person</i>
+                                        Obi-Wan Kenobi
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="task-divider">
+                    <h4 style="margin: -4px 0 0;color:black; font-size:1.3rem;">Sprint Information</h4>
+                </div>
+                <div class="mdl-grid" style="padding-right: 0">
+                    <div class="mdl-cell mdl-cell--3-col task-info" style="text-align: center">
+                        <b>Time logged: </b>25 hours
+                    </div>
+                    <div class="mdl-cell mdl-cell--9-col">
+                        <b>Log a time:</b>
+                        <form action="#">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="log-hours">
+                                <label class="mdl-textfield__label" for="log-hours">Enter hours...</label>
+                            </div>
+                        </form>
+                        <div class="mdl-textfield--floating-label has-placeholder">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="date" id="log-date">
+                                <label class="mdl-textfield__label" for="log-date">Enter log date:</label>
+                                <span id="log_date_err" class="mdl-textfield__error" style='visibility: visible;'></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">LOG TIME</button>
                 <button type="button" class="mdl-button close">CLOSE</button>
             </div>
         </dialog>
