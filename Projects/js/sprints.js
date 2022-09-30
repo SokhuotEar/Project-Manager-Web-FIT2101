@@ -5,7 +5,7 @@
 
     This file contains the JavaScript code necessary to run the functionality of the Sprints page.
 
-    Written by: Luke Phillips (32511760)
+    Written by: Luke Phillips (32511760), Dasun Mahamadachchi (32488580), [add name and ids here]
  */
 
 // document ids
@@ -17,6 +17,8 @@ let completeButtonRef = document.getElementById('mark-button');
 let confirmDialogRef = document.getElementById('confirm-complete-dialog');
 let burndownDialogRef = document.getElementById('burndown-task-dialog');
 let burndownButtonRef = document.getElementById('burndown-button')
+
+
 
 
 // document id for test item (view item dialog)
@@ -32,13 +34,15 @@ addButtonRef.addEventListener('click', function() {
 });
 
 viewButtonRef.addEventListener('click', function() {
+
         viewDialogRef.showModal();
+        listTasks()
+        console.log(33)
     });
 completeButtonRef.addEventListener('click', function() {
     confirmDialogRef.showModal();
 });
 testItemRef.addEventListener('dblclick', function() {
-    viewTaskDialogRef.showModal()
     viewTask(1,0)
 });
 burndownButtonRef.addEventListener('click', function() {
@@ -61,7 +65,80 @@ confirmDialogRef.querySelector('.close').addEventListener('click', function() {
 
 showSprint()
 
+//Function for the burndown chart -- not functional
 function showChart(){
+    let taskList=sys.activeSprint.sprintBacklog._allTask
+    console.log(taskList)
+    let SPTotal=0
+    for(let i=0;i<taskList.length;i++){
+        SPTotal+=taskList[i].storyPoints
+    }
+    SPTotal*=4
+    let start= sys.activeSprint.startDate
+    let end = sys.activeSprint.endDate
+    let times =[start]
+    let empty=[]
+
+    ///THIS CODE IS TAKEN FROM https://stackoverflow.com/questions/4413590/javascript-get-array-of-dates-between-2-dates
+    Date.prototype.addDays = function(days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+    function getDates(startDate, stopDate) {
+        var dateArray = new Array();
+        var currentDate = startDate;
+        while (currentDate <= stopDate) {
+            dateArray.push(new Date (currentDate));
+            currentDate = currentDate.addDays(1);
+            empty.push(0)
+        }
+        return dateArray;
+    }
+    //////
+
+    
+    let timds = getDates(start,end)
+    console.log(timds)
+    times=timds
+
+
+
+    let len=times.length
+    let increment = SPTotal/(len-1)
+    
+
+    let graph=[[times[0],SPTotal,0]]
+    for(let i=1;i<times.length;i++){
+        let last=graph[graph.length-1]
+        graph.push([times[i],last[1]-increment,0])
+    }
+
+    for(let i=0;i<taskList.length;i++){
+        console.log(taskList[i]._timespent)
+        for(let j=0;j<taskList[i]._timespent;i++){
+           for(let k=0;k<times.length;k++){
+            if(taskList[i]._timespent[j][0].toDateString==times[k].toDateString){
+                empty[k]+=taskList[i]._timespent[j][1]
+            }
+           }
+        }
+    }
+    let logged=[empty[0]]
+    for(let i=1;i<empty.length;i++){
+        logged.push(logged[i-1]+empty[i])
+    }
+    for(let i=0;i<logged.length;i++){
+        let ite=SPTotal-logged[i]
+        if(ite<0){
+            logged[i]=0
+        } else{
+            logged[i]=ite
+        }
+    }
+    console.log(graph)
+    console.log(logged)
+
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -100,36 +177,22 @@ function showChart(){
 }
 
 
-// ///Testing view sprints
-// console.log(sys)
-// sys.createSprint("ee",new Date("2022-09-20"),new Date("2022-09-28"))
-// sys.moveSprint(0,0)
-
-// let task=sys.productBacklog._tasks[1]
-// task._status="prog"
-// let sprint = sys.activeSprint.sprintBacklog.add_task(task)
-
-
-// console.log(sys)
-// console.log(task)
-// //console.log(task.getTotalTime())
-// console.log(task.getTotalTime())
-// task.logTime(10,new Date("2022-09-25"))
-// console.log(task.getTotalTime())
-// task.logTime(5,new Date("2022-09-24"))
-// console.log(task.getTotalTime())
-// console.log(task)
-
-
-// viewTask(1,0)
-//logging time
+//Function to log time
 function logTimeForTask(list,index){
     let hours = document.getElementById("log-hours").value
     console.log(document.getElementById("log-date").value)
     let date = new Date(document.getElementById("log-date").value)
 
+
+    
     let sprint = sys.activeSprint.sprintBacklog
     let task
+
+    console.log(date)
+    console.log(sys.activeSprint.endDate)
+    if(date>sys.activeSprint.endDate){
+        return
+    }
     if (list==0){
         task=sprint.notStarted[index]
     } else if (list==1){
@@ -137,25 +200,24 @@ function logTimeForTask(list,index){
     } else if (list==2){
         task=sprint.completed[index]
     }
-    task.logTime(hours,date)
+    task.logTime(parseInt(hours),date)
     console.log(task)
+    listTasks()
     viewTaskDialogRef.close();
-
+    
 }
 
 
 
 // STUFF BELOW THIS IS TO 
 ///Testing view sprints
-sys.createSprint(new Date("2022-09-20"),new Date("2022-09-28"))
-sys.moveSprint(0,0)
 
-let task=sys.productBacklog._tasks[1]
-task._status="In Progress"
-let sprint = sys.activeSprint.sprintBacklog.add_task(task)
+//Function for view task dialog
 // list is 0 to 2 -> NS or IP or Comp
 // index is the place of it
 function viewTask(list,index){
+    viewTaskDialogRef.showModal()
+    console.log("viewing")
     let sprint = sys.activeSprint.sprintBacklog
     let task
     if (list==0){
@@ -285,14 +347,81 @@ function viewTask(list,index){
             </div>
             <div class="mdl-dialog__actions">
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="logTimeForTask(${list},${index})">LOG TIME</button>
-                <button type="button" class="mdl-button close">CLOSE</button>
+                <button type="button" class="mdl-button close" onclick="closeView()">CLOSE</button>
                 </div>
     </div>`
 
     document.getElementById('view-task-dialog').innerHTML=viewText
+
     
     
 }
+
+function closeView(){
+    viewTaskDialogRef.close();
+}
+
+
+
+// Function for showing actual tasks of a sprint
+function listTasks(){
+    let sprint=sys.activeSprint;
+    let notStartedList=sprint.sprintBacklog.notStarted
+    let startedList=sprint.sprintBacklog.started
+    let completedList=sprint.sprintBacklog.completed
+    let nsHTML=""
+    let ipHTML=""
+    let comHTML=""
+    console.log(sprint)
+    console.log(notStartedList)
+    console.log(startedList)
+    console.log(completedList)
+    for(let i=0; i<notStartedList.length;i++){
+        nsHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${0},${i})">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+            ${notStartedList[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-ns-${i}">
+                <input type="checkbox" id="list-checkbox-ns-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+    }
+    for(let i=0; i<startedList.length;i++){
+        ipHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${1},${i})">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+            ${startedList[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-s-${i}">
+                <input type="checkbox" id="list-checkbox-s-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+
+    }
+    for(let i=0; i<completedList.length;i++){
+        comHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${2},${i})">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+            ${completedList[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-c-${i}">
+                <input type="checkbox" id="list-checkbox-c-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+
+    }
+
+    document.getElementById("ns-list").innerHTML=nsHTML
+    document.getElementById("ip-list").innerHTML=ipHTML
+    document.getElementById("com-list").innerHTML=comHTML
+    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+}
+
+
 
 // ----------------------------------------------------------------------------------
 // Add task to sprint backlog
@@ -300,6 +429,7 @@ let addTaskToSprintRef = document.getElementById('add-toSprint-button')
 let addTaskDialogRef = document.getElementById('add-task-dialog')
 addTaskToSprintRef.addEventListener('click', function() {
     addTaskDialogRef.showModal();
+    addTaskWindow()
 });
 
 function addToSprintBacklog(i)
@@ -347,7 +477,51 @@ function showSprint()
     showCompletedSprint()
 }
 
-// showing the not started sprints
+
+//add task
+function addTaskWindow(){
+    if(sys.activeSprint.endDate<new Date()){
+        console.log("L")
+        return
+    }
+    let taskList=""
+
+    for(let i=0; i<sys.productBacklog.tasks.length; i++){
+        taskList+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
+        <span class="mdl-list__item-primary-content" style="font-size:16pt">
+            ${sys.productBacklog.tasks[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="add-task-${i}">
+                <input type="checkbox" id="add-task-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+    }
+    document.getElementById('add-task-html').innerHTML=taskList
+    
+}
+
+function addTask(){
+    for(let i=sys.productBacklog.tasks.length-1; i>=0; i--){
+        console.log(`add-task-${i}`)
+        if(document.getElementById(`add-task-${i}`).checked){
+            let task = sys.productBacklog.tasks[i]
+            sys._activeSprint.sprintBacklog.add_task(task)
+            sys.productBacklog.removeTask(i)
+            
+        }
+    }
+    console.log(sys)
+    listTasks()
+    addTaskDialogRef.close();
+}
+
+
+
+
+
+
 
 function showNotStartedSprint()
 {
@@ -500,6 +674,7 @@ function setActive(i)
 function viewActiveButton()
 {
     viewDialogRef.show()
+    listTasks()
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -529,6 +704,68 @@ function markSprintAsComplete()
 
 }
 
+// function to move from not strated to in progress
+function nsToIp(){
+    if(sys.activeSprint.endDate<new Date()){
+        console.log("L")
+        return
+    }
+    let sprint=sys.activeSprint;
+    let notStartedList=sprint.sprintBacklog.notStarted
+    for(let i=notStartedList.length-1; i>=0;i--){
+        console.log(`list-checkbox-ns-${i}`)
+        if(document.getElementById(`list-checkbox-ns-${i}`).checked){
+            sprint.sprintBacklog.move_task(0,i,1)
+        }
+    }
+
+    listTasks()
+}
+//function to move from in progress to not started
+function ipToNs(){
+    if(sys.activeSprint.endDate<new Date()){
+        console.log("L")
+        return
+    }
+    let sprint=sys.activeSprint;
+    let startedList=sprint.sprintBacklog.started
+    for(let i=startedList.length-1; i>=0;i--){
+        if(document.getElementById(`list-checkbox-s-${i}`).checked){
+            sprint.sprintBacklog.move_task(1,i,0)
+        }
+    }
+    listTasks()
+}
+//function to move from in progress to complete
+function ipToCom(){
+    if(sys.activeSprint.endDate<new Date()){
+        console.log("L")
+        return
+    }
+    let sprint=sys.activeSprint;
+    let startedList=sprint.sprintBacklog.started
+    for(let i=startedList.length-1; i>=0;i--){
+        if(document.getElementById(`list-checkbox-s-${i}`).checked){
+            sprint.sprintBacklog.move_task(1,i,2)
+        }
+    }  
+    listTasks()
+}
+//function to move from complete to in progress
+function comToIp(){
+    if(sys.activeSprint.endDate<new Date()){
+        console.log("L")
+        return
+    }
+    let sprint=sys.activeSprint;
+    let completedList=sprint.sprintBacklog.completed
+    for(let i=completedList.length-1; i>=0;i--){
+        if(document.getElementById(`list-checkbox-c-${i}`).checked){
+            sprint.sprintBacklog.move_task(2,i,1)
+        }
+    }
+    listTasks()
+}
 
 
-
+showSprint()
