@@ -16,7 +16,7 @@ let viewButtonRef = document.getElementById('open-button');
 let completeButtonRef = document.getElementById('mark-button');
 let confirmDialogRef = document.getElementById('confirm-complete-dialog');
 let burndownDialogRef = document.getElementById('burndown-task-dialog');
-let burndownButtonRef = document.getElementById('burndown-button')
+let burndownButtonRef = document.getElementById('burndown-button');
 
 
 
@@ -430,6 +430,12 @@ let addTaskDialogRef = document.getElementById('add-task-dialog')
 addTaskToSprintRef.addEventListener('click', function() {
     addTaskDialogRef.showModal();
     addTaskWindow()
+});
+addTaskDialogRef.querySelector('.close').addEventListener('click', function() {
+    addTaskDialogRef.close();
+});
+confirmDialogRef.querySelector('.close').addEventListener('click', function() {
+    confirmDialogRef.close();
 });
 
 function addToSprintBacklog(i)
