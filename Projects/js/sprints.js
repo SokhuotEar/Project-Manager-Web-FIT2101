@@ -466,6 +466,7 @@ function addSprintConfirm()
     addSprint()
     addDialogRef.close()
     showSprint()
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 // -------------------------------------------------------------------------------------
@@ -475,6 +476,7 @@ function showSprint()
     showNotStartedSprint()
     showActiveSprint()
     showCompletedSprint()
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
@@ -515,6 +517,7 @@ function addTask(){
     console.log(sys)
     listTasks()
     addTaskDialogRef.close();
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
@@ -568,7 +571,7 @@ function showNotStartedSprint()
 
     sprintViewRef.innerHTML = value
 
-
+    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 function showActiveSprint()
@@ -584,6 +587,7 @@ function showActiveSprint()
     }
     else
     {   
+        console.log(activeSprint)
         value += 
                 `<div class="mdl-card__title" style="background: lightcoral">
                             <h2 class="mdl-card__title-text">Iteration ${activeSprint.sprint_id}</h2>

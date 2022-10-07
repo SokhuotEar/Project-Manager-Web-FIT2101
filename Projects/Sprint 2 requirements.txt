@@ -64,7 +64,7 @@ Epic 5: Fault Tolerant:
 ------------------------------------------------------------------------------------------------------------------------
 
 Summary of Total Time spent by each member: 
-Dasun Mahamadachchi: 
+Dasun Mahamadachchi: 8hrs (inc the 2 hrs spent on burndown chart)
 Parul Garg: 1 hr
 Laetitia Teo: 1.5 hrs
 Luke Phillips: 
