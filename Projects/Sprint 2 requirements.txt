@@ -49,7 +49,7 @@ Epic 4: Aesthetic:
 4.1) As a user, I want my lining of the website to be clean and consistent so that it looks professional. 
     Time Spent:             logged by: 
 4.2) As a user, I want my website to have beautiful colours so that it looks pleasing. 
-    Time Spent:             logged by: 
+    Time Spent: 0.5         logged by: Parul Garg
 4.3) As a user, I want the content of my website to aligned so that it is easy to read. 
     Time Spent:             logged by: 
 
@@ -64,8 +64,8 @@ Epic 5: Fault Tolerant:
 ------------------------------------------------------------------------------------------------------------------------
 
 Summary of Total Time spent by each member: 
-Dasun Mahamadachchi: 8hrs (inc the 2 hrs spent on burndown chart)
-Parul Garg: 1 hr
+Dasun Mahamadachchi: 
+Parul Garg: 1.5 hr
 Laetitia Teo: 1.5 hrs
 Luke Phillips: 
 Sok Ear: 4hr35 mins (on requirements above) + 1h25 mins (working data structure) = 5hr 50mins

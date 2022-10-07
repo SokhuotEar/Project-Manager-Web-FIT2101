@@ -543,8 +543,8 @@ function showNotStartedSprint()
             `
             <div class="mdl-cell mdl-cell--4-col">
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="notstarted${i}">
-                    <div class="mdl-card__title" style="background: darkgreen">
-                        <h2 class="mdl-card__title-text">Iteration ${notStartedSprints[i].sprint_id}</h2>
+                    <div class="mdl-card__title" style="background: orange">
+                        <h2 class="mdl-card__title-text">Sprint ${notStartedSprints[i].sprint_id}</h2>
                     </div>
                     <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                     <span class="mdl-chip start-time">
@@ -590,7 +590,7 @@ function showActiveSprint()
         console.log(activeSprint)
         value += 
                 `<div class="mdl-card__title" style="background: lightcoral">
-                            <h2 class="mdl-card__title-text">Iteration ${activeSprint.sprint_id}</h2>
+                            <h2 class="mdl-card__title-text">Sprint ${activeSprint.sprint_id}</h2>
                         </div>
                         <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                                     <span class="mdl-chip start-time">
@@ -628,8 +628,8 @@ function showCompletedSprint(){
             `
             <div class="mdl-cell mdl-cell--4-col">
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="notstarted${i}">
-                    <div class="mdl-card__title" style="background: darkgreen">
-                        <h2 class="mdl-card__title-text">Iteration ${completedSprints[i].sprint_id}</h2>
+                    <div class="mdl-card__title" style="background: orange">
+                        <h2 class="mdl-card__title-text">Sprint ${completedSprints[i].sprint_id}</h2>
                     </div>
                     <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
                     <span class="mdl-chip start-time">
