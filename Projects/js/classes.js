@@ -75,10 +75,25 @@ class System {
         for(let i=0; i<this._productBacklog.tasks.length; i++){
             this._productBacklog.tasks[i].replaceMember(this._teamMembers.equivalentMember(this._productBacklog.tasks[i].developers[0]))
         }
+        console.log(data._activeSprint)
+        if(data._activeSprint!=null){
+            this._activeSprint=Sprint.fromData(data._activeSprint);
+        }else{
+            this._activeSprint=null
+        }
 
-        this._activeSprint=data._activeSprint;
-        this._completedSprints=data._completedSprints;
-        this._notStartedSprints=data._notStartedSprints;
+        let cs=[]
+        let ns=[]
+        for(let i=0;i<data._completedSprints.length;i++){
+            cs.push(Sprint.fromData(data._completedSprints[i]))
+        }
+        for(let i=0;i<data._notStartedSprints.length;i++){
+            ns.push(Sprint.fromData(data._notStartedSprints[i]))
+        }
+
+
+        this._completedSprints=cs;
+        this._notStartedSprints=ns;
     }
 
 }
@@ -376,17 +391,27 @@ class Sprint {
     }
     set startDate(newDate)
     {
-        this._sprintId = newDate
+        this._startDate = newDate
     }
     set endDate(newDate)
     {
-        this._sprintId = newDate
+        this._endDate = newDate
     }
     set sprintBacklog(backlog)
     {
-        this._sprintId = backlog
+        this._sprintBacklog = backlog
     }
 
+    static fromData(data){
+        let sb = SprintBacklog.fromData(data._sprintBacklog);
+        let start = new Date(data._startDate)
+        let end = new Date(data._endDate)
+        console.log(data)
+        let sprint = new Sprint(data._sprint_id,start,end)
+        sprint._sprintBacklog=sb
+        return sprint
+        
+    }
 }
 
 /**
@@ -474,13 +499,37 @@ class SprintBacklog {
             this._completedTask.push(task)
         }
 
-
     }
     /* indexToMove: is the index of the task to move, relative to this._allTask
         dest
     */
     
         // find the task and 
+    static fromData(data){
+        let sb=new SprintBacklog()
+
+        let at=[]
+        let ns=[]
+        let st=[]
+        let co=[]
+        for(let i=0;i<data._allTask.length;i++){
+            at.push(Task.fromData(data._allTask[i]))
+        }
+        for(let i=0;i<data._notStarted_task.length;i++){
+            ns.push(Task.fromData(data._notStarted_task[i]))
+        }
+        for(let i=0;i<data._started_task.length;i++){
+            st.push(Task.fromData(data._started_task[i]))
+        }
+        for(let i=0;i<data._completedTask.length;i++){
+            co.push(Task.fromData(data._completedTask[i]))
+        }
+        sb._allTask=at
+        sb._notStarted_task=ns
+        sb._started_task=st
+        sb._completedTask=co
+        return sb
+    }
         
     
 }
