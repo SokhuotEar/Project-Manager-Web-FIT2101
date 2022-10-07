@@ -466,7 +466,7 @@ function addSprintConfirm()
     addSprint()
     addDialogRef.close()
     showSprint()
-    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 // -------------------------------------------------------------------------------------
@@ -476,7 +476,7 @@ function showSprint()
     showNotStartedSprint()
     showActiveSprint()
     showCompletedSprint()
-    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
@@ -517,7 +517,7 @@ function addTask(){
     console.log(sys)
     listTasks()
     addTaskDialogRef.close();
-    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
