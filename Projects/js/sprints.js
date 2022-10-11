@@ -457,13 +457,34 @@ function addToSprintBacklog(i)
 
 function addSprint()
 {
+    let id = document.getElementById("sprint-name").value
     let start = document.getElementById("start-date").value
     let end = document.getElementById("end-date").value
 
 
     let start_date = new Date(start)
     let end_Date = new Date(end)
-    sys.createSprint(start_date,end_Date)
+
+    //date verification
+    validateDate(start_date, end_Date)
+
+    //verifications
+    if (id == null)
+    {
+        alert("Sprint name cannot be null!")
+        return;
+    }
+    for (let i=0; i<sys._allSprint.length; i++)
+    {
+        if (id == sys._allSprint[i]._sprintId)
+        {
+            alert("Sprint name already exists")
+            return;
+        }
+    }
+
+    sys.createSprint(id, start_date,end_Date)
+    localStorage.setItem(SYSTEM_KEY, sys)
 
 }
 
@@ -474,6 +495,22 @@ function addSprintConfirm()
     showSprint()
     //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
+
+
+function validateDate(startDate,endDate)
+{
+    if (startDate == null || endDate == null)
+    {
+        alert("Start date or end date cannot be null!");
+        return
+    }
+    if (startDate > endDate)
+    {
+        alert("Start date cannot be after end date!")
+        return
+    }
+}
+
 
 // -------------------------------------------------------------------------------------
 // implement showSprint
@@ -665,10 +702,20 @@ function showCompletedSprint(){
 // implement set active
 function setActive(i)
 {
+
     if (sys._activeSprint == null)
-    {
+    { 
+
         // make it active, add it to active
         let sprint = sys._notStartedSprints[i]
+        // check if sprint is empty
+        if ((sprint.sprintBacklog._allTask.length == 0) && (sprint.sprintBacklog._completedTask.length == 0) && (sprint.sprintBacklog._notStarted_task.length == 0))
+        {
+            // print "sprint is empty to UI"
+            alert("Sprint is empty!")
+            return;
+        }
+
         sys._activeSprint = sprint
 
         // remove it from the not_started list
@@ -692,7 +739,9 @@ function viewActiveButton()
 
 function markSprintAsComplete()
 {
+
     let sprint = sys._activeSprint
+
     sys._activeSprint = null
     sys._completedSprints.push(sprint)
 
