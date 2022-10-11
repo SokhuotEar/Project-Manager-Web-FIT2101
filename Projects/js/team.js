@@ -124,7 +124,7 @@ function showTeamMembers()
                 <b>Average work this time period:</b> "to be done"
         </td>
         <td style="height: 150px">
-            <button id='view-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick = viewTeamMember(${member._email})>
+            <button id='view-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick = "viewTeamMember('${member._email}')">
                 View
             </button>
         </td>
@@ -182,13 +182,12 @@ function viewTeamMember(email)
             </div>
             <div class="mdl-dialog__actions">
                 <button type="button" class="mdl-button close" onclick = "closeViewDialog()">CLOSE</button>
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = "removeMember(${member._email})">REMOVE TEAM MEMBER</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick = "removeMember('${member._email}')">REMOVE TEAM MEMBER</button>
             </div>`
         }
 
     }
     viewDialog.innerHTML = display
-    return "done"
 }
 
 function closeViewDialog()
