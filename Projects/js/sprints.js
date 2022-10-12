@@ -139,7 +139,7 @@ function showChart(){
     }
     console.log(graph)
     console.log(logged)
-
+    
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
