@@ -41,8 +41,7 @@ class System {
         return this._notStartedSprints;
     }
     //
-    createSprint(start,end){
-        let id = parseInt(this._allSprint.length + 1)
+    createSprint(id, start,end){
         let sprint = new Sprint(id,start,end)
         this._allSprint.push(sprint)
         this._notStartedSprints.push(sprint)
@@ -598,12 +597,11 @@ class TeamMembers {
  */
 
 class Developer {
-    constructor(name){
+    constructor(name, email){
         this._name=name;
         this._tasks=[];
         this._hoursWorked=[];
-        
-
+        this._email = email
     }
     get name(){
         return this._name
@@ -617,7 +615,7 @@ class Developer {
     }
 
     static fromData(data){
-        let developer = new Developer(data._name);
+        let developer = new Developer(data._name, data._email);
         this._tasks=data._tasks;
         this._hoursWorked=data._hoursWorked;
         return developer
