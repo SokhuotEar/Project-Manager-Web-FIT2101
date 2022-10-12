@@ -343,16 +343,17 @@ class Task {
         end.setHours(0,0,0,0)
         
         //bad algorithm
-        array=this._timeSpent
+        let array=this._timeSpent
         if(array.length==0){
             return array
         }
-        s_index=[];
-        e_index=[];
+        let s_index=[];
+        let e_index=[];
+        let today;
 // today is always after start
 // today is always before end 
         for(let i=0; i<array.length;i++){
-            today=array[i][0]
+            today=new Date(array[i][0])
             if(today>=start){
                 s_index.push(i)
             }
@@ -670,6 +671,52 @@ class Developer {
 
     get hoursWorked(){
         return this._hoursWorked
+    }
+
+    getTimeDuring(start,end){
+        start.setHours(0,0,0,0)
+        end.setHours(0,0,0,10)
+        
+        //bad algorithm
+        let array=this._hoursWorked
+        if(array.length==0){
+            return array
+        }
+        let s_index=[];
+        let e_index="None";
+        let today
+        for(let i=0; i<array.length;i++){
+            today=new Date(array[i][0])
+            if(today>=start){
+                s_index.push(i)
+            }
+            if(today<=end){
+                e_index=i
+            }
+        }
+        if (e_index=="None" || s_index.length==0){
+            return []
+        }
+        return this._hoursWorked.slice(s_index[0],e_index+1)
+    }
+    
+    getSummedTimeDuring(start,end){
+        let array = this.getTimeDuring(start,end)
+        console.log(array)
+        let total=0
+        for(let i=0; i<array.length;i++){
+            total+=array[i][1]
+        }
+        return total
+    }
+
+    getTotalTime(){
+        let array=this._hoursWorked
+        let total=0
+        for(let i=0; i<array.length;i++){
+            total+=array[i][1]
+        }
+        return total
     }
 
     logTimeD(timeToAdd,date){

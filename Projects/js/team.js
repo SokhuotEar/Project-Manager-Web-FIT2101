@@ -15,9 +15,15 @@ let removeButtonRef = document.getElementById('remove-button');
 let removeDialogRef = document.getElementById('remove-dialog');
 let confirmRemoveButtonRef = document.getElementById('remove-confirm-button');
 
+let changeDateRef = document.getElementById('new-date');
+
 // ids for test team member (Luke)
 let viewButtonRef = document.getElementById('view-button');
 let viewDialogRef = document.getElementById('view-dialog');
+
+let start_display_date=new Date("1 jan 2000")
+let end_display_date=new Date()
+
 
 // button to open dialog event listeners
 dateButtonRef.addEventListener('click', function() {
@@ -30,6 +36,8 @@ removeButtonRef.addEventListener('click', function() {
     removeDialogRef.showModal();
 });
 
+
+
 // close dialog event listeners
 dateDialogRef.querySelector('.close').addEventListener('click', function() {
     dateDialogRef.close();
@@ -40,6 +48,13 @@ addDialogRef.querySelector('.close').addEventListener('click', function() {
 removeDialogRef.querySelector('.close').addEventListener('click', function() {
     removeDialogRef.close();
 });
+
+changeDateRef.addEventListener('click', function() {
+    start_display_date=new Date(document.getElementById('start-date').value)
+    end_display_date=new Date(document.getElementById('end-date').value)
+    dateDialogRef.close()
+});
+
 
 // test team member
 viewButtonRef.addEventListener('click', function() {
@@ -163,6 +178,7 @@ function viewTeamMember(email)
                 totalHr = totalHr + member._hoursWorked[j]
             }
 
+            console.log(member.getTimeDuring(new Date("15 OCT 2022"),new Date("20 OCT 2022")))
             
             display += `
             <div class="mdl-cell mdl-cell--12-col" style="margin: 0 0 0 10px;">
@@ -173,9 +189,9 @@ function viewTeamMember(email)
                 <div class="analytics-divider">
                     <h4 style="margin: -4px 0 0;color:black; font-size:1.3rem;">Analytics</h4>
                 </div>
-                from [selected start date] to [selected end date]<br>
-                <h4 style="font-size:1.3rem; margin:0"><b>Total time logged this sprint:</b> 50 hours<br></h4>
-                <h4 style="font-size:1.3rem; margin:0"><b>Total time logged this time period:</b> ${totalHr}<br></h4>
+                from ${start_display_date.toDateString()} to ${end_display_date.toDateString()}<br>
+                <h4 style="font-size:1.3rem; margin:0"><b>Total time logged this sprint:</b> ${member.getTotalTime()}<br></h4>
+                <h4 style="font-size:1.3rem; margin:0"><b>Total time logged this time period:</b> ${member.getSummedTimeDuring(start_display_date,end_display_date)}<br></h4>
                 [insert bar graph here]
             </div>
             <div class="mdl-dialog__actions">
