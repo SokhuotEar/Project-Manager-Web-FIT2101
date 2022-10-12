@@ -42,7 +42,7 @@ class System {
     }
     //
     createSprint(start,end){
-        let id = this.allSprint.length + 1
+        let id = parseInt(this._allSprint.length + 1)
         let sprint = new Sprint(id,start,end)
         this._allSprint.push(sprint)
         this._notStartedSprints.push(sprint)
@@ -84,16 +84,22 @@ class System {
 
         let cs=[]
         let ns=[]
+        let as=[]
         for(let i=0;i<data._completedSprints.length;i++){
-            cs.push(Sprint.fromData(data._completedSprints[i]))
+            let toPush=Sprint.fromData(data._completedSprints[i])
+            cs.push(toPush)
+            as.push(toPush)
         }
         for(let i=0;i<data._notStartedSprints.length;i++){
-            ns.push(Sprint.fromData(data._notStartedSprints[i]))
+            let toPush=Sprint.fromData(data._notStartedSprints[i])
+            ns.push(toPush)
+            as.push(toPush)
         }
 
 
         this._completedSprints=cs;
         this._notStartedSprints=ns;
+        this._allSprint=as;
     }
 
 }
@@ -407,7 +413,7 @@ class Sprint {
         let start = new Date(data._startDate)
         let end = new Date(data._endDate)
         console.log(data)
-        let sprint = new Sprint(data._sprint_id,start,end)
+        let sprint = new Sprint(data._sprintId,start,end)
         sprint._sprintBacklog=sb
         return sprint
         
