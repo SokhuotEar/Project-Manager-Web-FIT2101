@@ -418,7 +418,7 @@ function listTasks(){
     document.getElementById("ns-list").innerHTML=nsHTML
     document.getElementById("ip-list").innerHTML=ipHTML
     document.getElementById("com-list").innerHTML=comHTML
-    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
@@ -484,8 +484,7 @@ function addSprint()
     }
 
     sys.createSprint(id, start_date,end_Date)
-    localStorage.setItem(SYSTEM_KEY, sys)
-
+    console.log(sys)
 }
 
 function addSprintConfirm()
@@ -493,7 +492,7 @@ function addSprintConfirm()
     addSprint()
     addDialogRef.close()
     showSprint()
-    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
@@ -519,7 +518,7 @@ function showSprint()
     showNotStartedSprint()
     showActiveSprint()
     showCompletedSprint()
-    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
@@ -560,7 +559,7 @@ function addTask(){
     console.log(sys)
     listTasks()
     addTaskDialogRef.close();
-    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
@@ -614,7 +613,7 @@ function showNotStartedSprint()
 
     sprintViewRef.innerHTML = value
 
-    //localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 function showActiveSprint()

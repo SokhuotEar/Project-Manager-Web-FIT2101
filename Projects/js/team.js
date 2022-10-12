@@ -96,8 +96,7 @@ function addTeamMember()
 // show all team member in a list
 function showTeamMembers()
 {
-    let system = localStorage.getItem(SYSTEM_KEY)
-    system = JSON.parse(system)
+    let system = sys
     let table = document.getElementById("table")
     let display = ''
     
@@ -143,8 +142,7 @@ function viewTeamMember(email)
 {
 
     // retrieve from local storage
-    let system = localStorage.getItem(SYSTEM_KEY)
-    system = JSON.parse(system)
+    let system = sys
     let viewDialog = document.getElementById("view-dialog")
     let display = ''
 
