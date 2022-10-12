@@ -323,16 +323,17 @@ class Task {
         
     logTime(timeToAdd, date){
         date.setHours(0,0,0,0)
+        date=date.toString()
         if (this._timeSpent.length==0){
             this._timeSpent.push([date,timeToAdd])
             return
         }
         //loop through and see if it hits
         for(let i=0; i<this._timeSpent.length; i++){
-            if(this._timeSpent[i][0].toString()==date.toString()){
+            if(this._timeSpent[i][0]==date){
                 this._timeSpent[i][1]+=timeToAdd
                 return
-            } else if(this._timeSpent[i][0]>date){
+            } else if(new Date(this._timeSpent[i][0])>new Date(date)){
                 this._timeSpent.splice(i,0,[date,timeToAdd])
                 return
             }
