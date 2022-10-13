@@ -1,7 +1,7 @@
 "use strict"
 /**
  * File Name: main.js
- * File Purpose: The purpose of this file is to create the homepage/splash page for the website, so that the other pages are easily accessible.
+ * File Purpose: This file is designed to create the main functions that are required for the system to function. This mainly includes data maintenance.
  * Authors: Dasun, Sok Ear, Luke, Parul, Laetitia
  * Date modified: 29/09/2022
  */
