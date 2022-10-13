@@ -1,5 +1,9 @@
-"use strict"
-
+/**
+ * File Name: pbacklog.js
+ * File purpose: This file is designed to create neccessary and working functionalities for the produt backlog page.
+ * Authors: Dasun, Sok Ear, Luke, Parul, Laetitia
+ * Date modified: 29/09/2022
+ */
 
 // dialog and button ids
 let viewDialogRef = document.getElementById('view-dialog')
@@ -30,7 +34,7 @@ let statusErrorRef = document.getElementById('status_err');
 //let colours=["darkgray","greenyellow","green","darkolivegreen","lightskyblue","lightseagreen","dodgerblue","tomato","indianred","red","maroon"]
 let colours=["orange","hotpink","lightgreen"]
 
-
+// Predefined error messages
 viewButtonRef.addEventListener('click', function() {
     viewDialogRef.showModal();
 });
@@ -64,9 +68,9 @@ if(teamMembers.teamMembers.length!=5){
 }
 
 
-
+// This function allows the user to confirm that they want to delete the task
 function deleteQuery(i){
-    //
+    // html code for dialog box
     let confirmText =
     `<h4 class="mdl-dialog__title" style="padding-left:30px">Delete Task</h4>
     <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif">
@@ -78,17 +82,20 @@ function deleteQuery(i){
         <button type="button" class="mdl-button close">CANCEL</button>
     </div>
     `
-
+    // associating the html code for the corresponsing tag
     document.getElementById("close-dialog").innerHTML = confirmText;
 
+    // showing confirm message
     let deleteButton = document.getElementById('delete-confirm')
     closeDialogRef.showModal();
     
+    // deleting task after action is confirmed
     deleteButton.addEventListener('click', function() {
         deleteTask(i);
         closeDialogRef.close();
     })
 
+    // closing message if user does not want to delete task
     closeDialogRef.querySelector('.close').addEventListener('click', function() {
         closeDialogRef.close();
     });
@@ -96,8 +103,18 @@ function deleteQuery(i){
 
 let productBacklog = sys.productBacklog;
 
+
+/* 
+    This function updates the product backlog page every time a task is added or deleted so the user is able 
+    to see the dynamic progress of the product backlog.
+    This functions operates every time a task is added, deleted, edited or when the page is refreshed.
+
+*/
 function showCards(){
+    // defining words as empty string so it inputs can be added in
     let words='';
+
+    // creating a for loop for task details
     for(let i=0; i<productBacklog.showTasks().length;i++){
         let task = productBacklog.showTasks()[i]
         let prio=task.priority;
@@ -141,7 +158,7 @@ function showCards(){
         }
 
     
-
+        // adding in input details with html code
         words+=
         `<div class="mdl-cell mdl-cell--4-col">
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="card${i}">
@@ -187,15 +204,18 @@ function showCards(){
     }
     document.getElementById("testing").innerHTML = words;
 
+    // saving it into local storage
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
 
-// operates when "add task" button is clicked
+// This function operates when "add task" button is clicked
 // resets all input fields to empty strings
 function openAddTask()
 {
+    // defining variable as the input contents 
     let nameRef=document.getElementById("task-name");
+    // redefining variable as an empty string so that previous input is not retained
     nameRef.value = "";
 
     let descRef=document.getElementById("task-desc");
