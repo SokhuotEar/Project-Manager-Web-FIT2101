@@ -669,7 +669,7 @@ function showActiveSprint()
 
 
 function showCompletedSprint(){
-    // get all not started prints
+    // get all completed sprints
     let completedSprints = sys.completedSprints
     let value = ""
 
@@ -681,7 +681,7 @@ function showCompletedSprint(){
         value += 
             `
             <div class="mdl-cell mdl-cell--4-col">
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="notstarted${i}">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="completed${i}">
                     <div class="mdl-card__title" style="background: orange">
                         <h2 class="mdl-card__title-text">Sprint ${completedSprints[i].sprint_id}</h2>
                     </div>
@@ -696,8 +696,8 @@ function showCompletedSprint(){
                     </div>
                     <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
                         <!-- Accent-colored raised button with ripple -->
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='manage-button${i}' style="float:right">
-                            MANAGE
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "viewActiveButton()">
+                                VIEW
                         </button>
                     </div>
                     
