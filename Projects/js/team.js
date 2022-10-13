@@ -15,9 +15,18 @@ let removeButtonRef = document.getElementById('remove-button');
 let removeDialogRef = document.getElementById('remove-dialog');
 let confirmRemoveButtonRef = document.getElementById('remove-confirm-button');
 
+let changeDateRef = document.getElementById('new-date');
+
 // ids for test team member (Luke)
 let viewButtonRef = document.getElementById('view-button');
 let viewDialogRef = document.getElementById('view-dialog');
+
+let start_display_date=new Date("1 jan 2022")
+let end_display_date=new Date()
+start_display_date=new Date("13 oct 2022")
+end_display_date=new Date("22 oct 2022")
+
+
 
 // button to open dialog event listeners
 dateButtonRef.addEventListener('click', function() {
@@ -30,6 +39,8 @@ removeButtonRef.addEventListener('click', function() {
     removeDialogRef.showModal();
 });
 
+
+
 // close dialog event listeners
 dateDialogRef.querySelector('.close').addEventListener('click', function() {
     dateDialogRef.close();
@@ -41,6 +52,13 @@ removeDialogRef.querySelector('.close').addEventListener('click', function() {
     removeDialogRef.close();
 });
 
+changeDateRef.addEventListener('click', function() {
+    start_display_date=new Date(document.getElementById('start-date').value)
+    end_display_date=new Date(document.getElementById('end-date').value)
+    dateDialogRef.close()
+});
+
+
 // test team member
 viewButtonRef.addEventListener('click', function() {
     viewDialogRef.showModal();
@@ -51,6 +69,78 @@ viewDialogRef.querySelector('.close').addEventListener('click', function() {
 
 
 // --------------------------------------------------------------------------------
+//SHOW CHART
+function showChart(email){
+    let people = sys.teamMembers._teamMembers;
+    let person;
+    for(let i=0; i<people.length; i++){
+        console.log(people[i]._email)
+        if (people[i]._email==email){
+            person=people[i]
+        }
+    }
+    let array = person.getTimeDuring(start_display_date,end_display_date)
+    let labels =[start_display_date]
+    let last = labels[labels.length]
+    let next
+    while(labels[labels.length-1]<end_display_date){
+        last = labels[labels.length-1]
+        next=new Date(new Date().setDate(last.getDate()+1))
+        labels.push(new Date(next.setHours(0,0,0,0)))
+    }
+    let realLabels=[]
+    let realNums=[]
+    let checking=0
+    console.log(array)
+    for(let i=0; i<labels.length; i++){
+        realLabels.push(labels[i].toDateString().slice(4))
+
+        if (checking<array.length && new Date(array[checking][0]).toDateString()==labels[i].toDateString()){
+            realNums.push(array[checking][1])
+            checking+=1
+        } else {
+            realNums.push(0)
+        }
+    }
+    console.log(realNums)
+    console.log(realLabels)
+
+    let ctx = document.getElementById('myChart').getContext('2d');
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: realLabels,
+            datasets: [{
+                label: 'Hours logged',
+                data: realNums,
+                backgroundColor: [
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Add team member
 function addTeamMember()
 {
@@ -140,7 +230,7 @@ showTeamMembers()
 // view a summary of each team member
 function viewTeamMember(email)
 {
-
+    
     // retrieve from local storage
     let system = sys
     let viewDialog = document.getElementById("view-dialog")
@@ -163,6 +253,7 @@ function viewTeamMember(email)
                 totalHr = totalHr + member._hoursWorked[j]
             }
 
+            console.log(member.getTimeDuring(new Date("15 OCT 2022"),new Date("20 OCT 2022")))
             
             display += `
             <div class="mdl-cell mdl-cell--12-col" style="margin: 0 0 0 10px;">
@@ -173,10 +264,10 @@ function viewTeamMember(email)
                 <div class="analytics-divider">
                     <h4 style="margin: -4px 0 0;color:black; font-size:1.3rem;">Analytics</h4>
                 </div>
-                from [selected start date] to [selected end date]<br>
-                <h4 style="font-size:1.3rem; margin:0"><b>Total time logged this sprint:</b> 50 hours<br></h4>
-                <h4 style="font-size:1.3rem; margin:0"><b>Total time logged this time period:</b> ${totalHr}<br></h4>
-                [insert bar graph here]
+                from ${start_display_date.toDateString()} to ${end_display_date.toDateString()}<br>
+                <h4 style="font-size:1.3rem; margin:0"><b>Total time logged this sprint:</b> ${member.getTotalTime()}<br></h4>
+                <h4 style="font-size:1.3rem; margin:0"><b>Total time logged this time period:</b> ${member.getSummedTimeDuring(start_display_date,end_display_date)}<br></h4>
+                <canvas id="myChart" width="400" height="400"></canvas>
             </div>
             <div class="mdl-dialog__actions">
                 <button type="button" class="mdl-button close" onclick = "closeViewDialog()">CLOSE</button>
@@ -186,6 +277,7 @@ function viewTeamMember(email)
 
     }
     viewDialog.innerHTML = display
+    showChart(email)
 }
 
 function closeViewDialog()

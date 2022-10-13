@@ -55,8 +55,8 @@ closeButtonRef.addEventListener('click', function() {
 });
 
 let teamMembers=sys.teamMembers
-
-if(teamMembers.teamMembers.length!=5){
+/*
+if(teamMembers.teamMembers.length==0){
     teamMembers.removeAll()
     teamMembers.addMember(new Developer("a"))
     teamMembers.addMember(new Developer("b"))
@@ -64,7 +64,7 @@ if(teamMembers.teamMembers.length!=5){
     teamMembers.addMember(new Developer("d"))
     teamMembers.addMember(new Developer("e"))
 }
-
+*/
 // display for deleting an element
 
 function deleteQuery(i){

@@ -207,15 +207,15 @@ date: 1/10/22-->
             <div class="mdl-dialog__title" style="padding-top:0; padding-right:0">
                 <div class="mdl-grid" style="padding:0">
                     <div class="mdl-cell mdl-cell--10-col" style="margin:0">
-                        <h4 style="font-size:2.5rem">Sprint 2</h4>
+                        <h4 style="font-size:2.5rem" id="view-name">Sprint 2</h4>
                     </div>
                     <div class="mdl-cell mdl-cell--2-col">
                         <div style="float:right; font-size: 12pt">
                             <span class="mdl-chip start-time" style="width: 130px">
-                                <span class="mdl-chip__text" style="padding-left:5px">Started on: 22/09/22</span>
+                                <span class="mdl-chip__text" id="view-start-date" style="padding-left:5px">Started on: 22/09/22</span>
                             </span>
                             <span class="mdl-chip finish-time" style="width: 130px">
-                                <span class="mdl-chip__text" style="text-align: center;">Set to finish: 01/10/22</span>
+                                <span class="mdl-chip__text" id="view-end-date" style="text-align: center;">Set to finish: 01/10/22</span>
                             </span>
                         </div>
                     </div>
@@ -342,7 +342,7 @@ date: 1/10/22-->
             <div class="mdl-dialog__actions" style="padding-right:24px">
                 <button id='mark-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">MARK AS COMPLETE</button>
                 <button id='burndown-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">BURNDOWN CHART</button>
-                <button id='add-toSprint-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">ADD TASK</button>
+                <button id='add-toSprint-button' onclick="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">ADD TASK</button>
                 <button type="button" class="mdl-button close">CLOSE</button>
             </div>
         </dialog>
@@ -454,10 +454,10 @@ date: 1/10/22-->
                 <div class="mdl-cell mdl-cell--2-col">
                     <div style="float:right; font-size: 12pt">
                             <span class="mdl-chip start-time" style="width: 130px">
-                                <span class="mdl-chip__text" style="padding-left:5px">Started on: 22/09/22</span>
+                                <span class="mdl-chip__text"  style="padding-left:5px">Started on: 22/09/22</span>
                             </span>
                         <span class="mdl-chip finish-time" style="width: 130px">
-                                <span class="mdl-chip__text" style="text-align: center;">Set to finish: 01/10/22</span>
+                                <span class="mdl-chip__text"  style="text-align: center;">Set to finish: 01/10/22</span>
                             </span>
                     </div>
                 </div>
@@ -614,10 +614,10 @@ date: 1/10/22-->
         </dialog>
     </main>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/keys.js" ></script>
 <script src="js/classes.js" ></script>
 <script src="js/main.js" ></script>
 <script src="js/sprints.js" ></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
