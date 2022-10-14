@@ -213,7 +213,7 @@ function showTeamMembers()
                 <br>
                 E-mail: ${member._email}
                 <br>
-                <b>Average work this time period:</b> "${avgTime}"
+                <b>Average work this time period:</b> "${avgTime.toFixed(2)}"
         </td>
         <td style="height: 150px">
             <button id='view-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick = "viewTeamMember('${member._email}')">
