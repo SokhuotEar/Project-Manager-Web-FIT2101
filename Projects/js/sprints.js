@@ -700,23 +700,26 @@ function showActiveSprint()
     {   
         console.log(activeSprint)
         value += 
-                `<div class="mdl-card__title" style="background: lightcoral">
+               `<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title" style="background: lightcoral">
                             <h2 class="mdl-card__title-text">Sprint ${activeSprint.sprint_id}</h2>
-                        </div>
-                        <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
-                                    <span class="mdl-chip start-time">
-                                        <span class="mdl-chip__text">Started on: ${activeSprint._startDate.toDateString()}</span>
-                                    </span>
-                            <span class="mdl-chip finish-time">
-                                        <span class="mdl-chip__text">Set to finish: ${activeSprint._endDate.toDateString()}</span>
-                                    </span>
-                        </div>
+                    </div>
+                    <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
+                        <span class="mdl-chip start-time">
+                            <span class="mdl-chip__text">Started on: ${activeSprint._startDate.toDateString()}</span>
+                        </span>
+                        <span class="mdl-chip finish-time">
+                            <span class="mdl-chip__text">Set to finish: ${activeSprint._endDate.toDateString()}</span>
+                        </span>
+                    </div>
                         <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
                             <!-- Accent-colored raised button with ripple -->
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "manageActive()">
                                 VIEW
                             </button>
-                        </div>`
+                        </div>
+                    </div>
+               </div>`
     }
 
     sprintViewRef.innerHTML = value
