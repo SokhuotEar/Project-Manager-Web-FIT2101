@@ -741,7 +741,7 @@ function setActive(i)
 //-------------------------------------------------------------------------------------------------------------------------------------------
 function viewActiveButton()
 {
-    viewDialogRef.show()
+    viewDialogRef.showModal()
     listTasks()
 }
 
@@ -774,7 +774,7 @@ function markSprintAsComplete()
 
 }
 
-// function to move from not strated to in progress
+// function to move from not started to in progress
 function nsToIp(sprintID=SiD){
     if(sys._allSprint[sprintID].endDate<new Date()){
         console.log("L")
