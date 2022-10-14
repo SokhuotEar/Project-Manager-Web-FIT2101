@@ -722,7 +722,7 @@ function setActive(i)
         // check if sprint is empty
         if ((sprint.sprintBacklog._allTask.length == 0) && (sprint.sprintBacklog._completedTask.length == 0) && (sprint.sprintBacklog._notStarted_task.length == 0))
         {
-            // print "sprint is empty to UI"
+            // print "sprint is empty" to UI
             alert("Sprint is empty!")
             return;
         }

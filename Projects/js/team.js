@@ -210,7 +210,7 @@ function showTeamMembers()
                 <br>
                 E-mail: ${member._email}
                 <br>
-                <b>Average work this time period:</b> "to be done"
+                <b>Average work this time period:</b> ${(member.getSummedTimeDuring(start_display_date,end_display_date)/((end_display_date-start_display_date)/86400000)).toFixed(2)}
         </td>
         <td style="height: 150px">
             <button id='view-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick = "viewTeamMember('${member._email}')">
