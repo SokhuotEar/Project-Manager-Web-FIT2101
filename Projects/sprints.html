@@ -92,80 +92,15 @@ date: 1/10/22-->
             <div style="margin-top:0" class="mdl-cell mdl-cell--12-col" id = "other-sprint-view">
                 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                     <div class="mdl-tabs__tab-bar tabs">
-                        <a href="#notstarted" class="mdl-tabs__tab is-active">Not Started</a>
-                        <a href="#completed" class="mdl-tabs__tab">Completed</a>
+                        <a href="#notstarted-tab" class="mdl-tabs__tab is-active">Not Started</a>
+                        <a href="#completed-tab" class="mdl-tabs__tab">Completed</a>
                     </div>
 
-                    <div class="mdl-tabs__panel is-active" id="notstarted">
-                        <div class="mdl-cell mdl-cell--4-col">
-                            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="notstarted1">
-                                <div class="mdl-card__title" style="background: darkgreen">
-                                    <h2 class="mdl-card__title-text">Iteration 3</h2>
-                                </div>
-                                <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
-                                <span class="mdl-chip start-time">
-                                    <span class="mdl-chip__text">Set to start: 15/10/22</span>
-                                </span>
-                                    <span class="mdl-chip finish-time">
-                                    <span class="mdl-chip__text">Set to finish: 27/10/22</span>
-                                </span>
-                                    
-
-                                </div>
-                                <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
-                                    <!-- Accent-colored raised button with ripple -->
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right">
-                                        MANAGE
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mdl-cell mdl-cell--4-col">
-                            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="notstarted1">
-                                <div class="mdl-card__title" style="background: darkgreen">
-                                    <h2 class="mdl-card__title-text">Iteration 3</h2>
-                                </div>
-                                <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
-                                <span class="mdl-chip start-time">
-                                    <span class="mdl-chip__text">Set to start: 15/10/22</span>
-                                </span>
-                                    <span class="mdl-chip finish-time">
-                                    <span class="mdl-chip__text">Set to finish: 27/10/22</span>
-                                </span>
-                                    
-
-                                </div>
-                                <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
-                                    <!-- Accent-colored raised button with ripple -->
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right">
-                                        MANAGE
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mdl-tabs__panel is-active" id="notstarted-tab">
+                        <div id='notstarted' class="mdl-grid"></div>
                     </div>
-                    <div class="mdl-tabs__panel" id="completed">
-                        <div class="mdl-cell mdl-cell--4-col">
-                            <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="completed1">
-                                <div class="mdl-card__title" style="background: darkblue">
-                                    <h2 class="mdl-card__title-text">Iteration 1</h2>
-                                </div>
-                                <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
-                                <span class="mdl-chip start-time">
-                                    <span class="mdl-chip__text">Started: 29/08/22</span>
-                                </span>
-                                    <span class="mdl-chip finish-time">
-                                    <span class="mdl-chip__text">Finished: 09/09/22</span>
-                                </span>
-                                </div>
-                                <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
-                                    <!-- Accent-colored raised button with ripple -->
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right">
-                                        VIEW
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mdl-tabs__panel" id="completed-tab">
+                        <div id="completed" class='mdl-grid'></div>
                     </div>
                 </div>
             </div>
