@@ -200,7 +200,9 @@ function showTeamMembers()
         {
             totalHr = totalHr + member._hoursWorked[j]
         }
-
+        let sumTime = member.getSummedTimeDuring(start_display_date, end_display_date)
+        let dayNum = Math.ceil(end_display_date.getTime() - start_display_date.getTime()) / 1000 /60/ 60/24
+        let avgTime = sumTime / dayNum
 
         display += `
         <tr style="height: 150px; width: 500px">
@@ -210,7 +212,7 @@ function showTeamMembers()
                 <br>
                 E-mail: ${member._email}
                 <br>
-                <b>Average work this time period:</b> "to be done"
+                <b>Average work this time period:</b> "${avgTime}"
         </td>
         <td style="height: 150px">
             <button id='view-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick = "viewTeamMember('${member._email}')">
