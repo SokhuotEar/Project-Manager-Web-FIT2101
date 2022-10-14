@@ -57,8 +57,8 @@ closeButtonRef.addEventListener('click', function() {
 });
 
 let teamMembers=sys.teamMembers
-
-if(teamMembers.teamMembers.length!=5){
+/*
+if(teamMembers.teamMembers.length==0){
     teamMembers.removeAll()
     teamMembers.addMember(new Developer("a"))
     teamMembers.addMember(new Developer("b"))
@@ -458,6 +458,7 @@ function verifyInputs(name, desc, storyp, tags, taskType, priority, team, status
     }
 }
 
+// deletes a task
 function deleteTask(i){
     productBacklog.removeTask(i);
     showCards();
@@ -561,6 +562,7 @@ function view_task(i) {
 
 }
 
+// closing view task
 function closeViewTask()
 {
     viewDialogRef.close()
@@ -578,7 +580,7 @@ function editTask(i)
     {
         document.getElementById("edit-button").disabled = true;
 
-        // TODO: error message
+        
         let compErrorRef = document.getElementById('comp_err');
         compErrorRef.innerText = 'Completed tasks are not editable.';
         return 0
@@ -640,7 +642,7 @@ function editTask(i)
 
     
 }
-
+// confirming edit functionality
 function confirmEdit(i)
 {
     //retrive information from edit task input field

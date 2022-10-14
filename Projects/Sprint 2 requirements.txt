@@ -2,6 +2,13 @@ The sprint goal of the second iteration to work on implementing sprint page func
 Detailed user requirements of the sprint goal is outlined below: 
 
 Sprint 2 requirements:
+UX planning:
+- 'Add Task' Wireframe
+    Time Spent: 25 mins     logged by: Laetitia Teo
+
+Testing Document
+    Time Spent: 1 hr        logged by: Laetitia Teo
+
 
 Epic 1: View Sprint
 1.1) As a user, I want the main sprint backlog page to show me a list of all the sprints I have created. 
@@ -27,13 +34,22 @@ Epic 2: Create/Set Sprint as active/Mark sprint as completed functionalities
 
 Epic 3: View Task Sprint: 
 3.1) As a user, I would like tasks to be separated into different categories such as to do, Doing or done, so that I can easily tell what progress state of these task (2)
+    Time Spent: 1hr logged by: Dasun Mahamadachchi
+3.2) As a user, I would like to be able to see all tasks currently in the sprint backlog (2)
+    Time Spent: 2hr logged by: Dasun Mahamadachchi
+3.3) As a user, I would like to be able to move tasks from the product backlog into the current sprint backlog (3)
+    Time Spent: 1hr logged by: Dasun Mahamadachchi
+3.4) As a user, I would like to be able to move a task from ‘to do’/'doing'/'done to ‘to do’/'doing'/'done so that I could easily track the progress of my work.
+    Time Spent: 2hr logged by: Dasun Mahamadachchi
+
+
 
 Non-functional requirements: 
 Epic 4: Aesthetic: 
 4.1) As a user, I want my lining of the website to be clean and consistent so that it looks professional. 
     Time Spent:             logged by: 
 4.2) As a user, I want my website to have beautiful colours so that it looks pleasing. 
-    Time Spent:             logged by: 
+    Time Spent: 0.5         logged by: Parul Garg
 4.3) As a user, I want the content of my website to aligned so that it is easy to read. 
     Time Spent:             logged by: 
 
@@ -49,8 +65,8 @@ Epic 5: Fault Tolerant:
 
 Summary of Total Time spent by each member: 
 Dasun Mahamadachchi: 
-Parul Garg: 
-Laetitia Teo: 
+Parul Garg: 1.5 hr
+Laetitia Teo: 1.5 hrs
 Luke Phillips: 
 Sok Ear: 4hr35 mins (on requirements above) + 1h25 mins (working data structure) = 5hr 50mins
 

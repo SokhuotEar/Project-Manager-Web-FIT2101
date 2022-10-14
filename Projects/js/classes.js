@@ -44,12 +44,16 @@ class System {
         return this._notStartedSprints;
     }
     //
-    createSprint(start,end){
-        let id = this.allSprint.length + 1
+    createSprint(id, start,end){
         let sprint = new Sprint(id,start,end)
         this._allSprint.push(sprint)
         this._notStartedSprints.push(sprint)
     }
+
+    find_sprint_index(sprint){
+        return this._allSprint.indexOf(sprint)
+    }
+
 
     //setter
     moveSprint(list,index){
@@ -72,16 +76,97 @@ class System {
 
     //No methods done yet
     fromData(data){
+        let cs=[]
+        let ns=[]
+        let as=[]
+
         this._productBacklog.fromData(data._productBacklog)
         this._teamMembers.fromData(data._teamMembers);
 
         for(let i=0; i<this._productBacklog.tasks.length; i++){
             this._productBacklog.tasks[i].replaceMember(this._teamMembers.equivalentMember(this._productBacklog.tasks[i].developers[0]))
         }
+        
+        let developerINFO=this._teamMembers;
 
-        this._activeSprint=data._activeSprint;
-        this._completedSprints=data._completedSprints;
-        this._notStartedSprints=data._notStartedSprints;
+        console.log(data._activeSprint)
+
+
+
+        if(data._activeSprint!=null){
+        
+            let toPush=Sprint.fromData(data._activeSprint,developerINFO);
+            for(let i=0; i<toPush._sprintBacklog._allTask.length; i++){
+                toPush._sprintBacklog._allTask[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._allTask[i].developers[0]))
+            }
+            for(let i=0; i<toPush._sprintBacklog._notStarted_task.length; i++){
+                toPush._sprintBacklog._notStarted_task[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._notStarted_task[i].developers[0]))
+            }
+            for(let i=0; i<toPush._sprintBacklog._started_task.length; i++){
+                toPush._sprintBacklog._started_task[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._started_task[i].developers[0]))
+            }
+            for(let i=0; i<toPush._sprintBacklog._completedTask.length; i++){
+                toPush._sprintBacklog._completedTask[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._completedTask[i].developers[0]))
+            }
+            this._activeSprint=toPush
+            as.push(toPush)
+
+
+        }else{
+            this._activeSprint=null
+        }
+
+        
+        for(let i=0;i<data._completedSprints.length;i++){
+            let toPush=Sprint.fromData(data._completedSprints[i],developerINFO)
+                    /*
+        this._allTask = []
+        this._notStarted_task = []
+        this._started_task = []
+        this._completedTask = []
+        */
+            for(let i=0; i<toPush._sprintBacklog._allTask.length; i++){
+                toPush._sprintBacklog._allTask[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._allTask[i].developers[0]))
+            }
+            for(let i=0; i<toPush._sprintBacklog._notStarted_task.length; i++){
+                toPush._sprintBacklog._notStarted_task[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._notStarted_task[i].developers[0]))
+            }
+            for(let i=0; i<toPush._sprintBacklog._started_task.length; i++){
+                toPush._sprintBacklog._started_task[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._started_task[i].developers[0]))
+            }
+            for(let i=0; i<toPush._sprintBacklog._completedTask.length; i++){
+                toPush._sprintBacklog._completedTask[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._completedTask[i].developers[0]))
+            }
+
+            cs.push(toPush)
+            as.push(toPush)
+
+        }
+        for(let i=0;i<data._notStartedSprints.length;i++){
+            let toPush=Sprint.fromData(data._notStartedSprints[i],developerINFO)
+            for(let i=0; i<toPush._sprintBacklog._allTask.length; i++){
+                toPush._sprintBacklog._allTask[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._allTask[i].developers[0]))
+            }
+            for(let i=0; i<toPush._sprintBacklog._notStarted_task.length; i++){
+                toPush._sprintBacklog._notStarted_task[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._notStarted_task[i].developers[0]))
+            }
+            for(let i=0; i<toPush._sprintBacklog._started_task.length; i++){
+                toPush._sprintBacklog._started_task[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._started_task[i].developers[0]))
+            }
+            for(let i=0; i<toPush._sprintBacklog._completedTask.length; i++){
+                toPush._sprintBacklog._completedTask[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._completedTask[i].developers[0]))
+            }
+
+            ns.push(toPush)
+            as.push(toPush)
+        }
+
+
+        this._completedSprints=cs;
+        this._notStartedSprints=ns;
+        this._allSprint=as;
+        console.log(cs)
+        console.log(as)
     }
 
 }
@@ -305,17 +390,17 @@ class Task {
         end.setHours(0,0,0,0)
         
         //bad algorithm
-        array=this._timeSpent
+        let array=this._timeSpent
         if(array.length==0){
             return array
         }
-        s_index=[];
-        e_index=[];
-
-        // today is always after start
-        // today is always before end 
+        let s_index=[];
+        let e_index=[];
+        let today;
+// today is always after start
+// today is always before end 
         for(let i=0; i<array.length;i++){
-            today=array[i][0]
+            today=new Date(array[i][0])
             if(today>=start){
                 s_index.push(i)
             }
@@ -354,17 +439,20 @@ class Task {
      * @returns 
      */
     logTime(timeToAdd, date){
+        this._developers[0].logTimeD(timeToAdd, date)
+
         date.setHours(0,0,0,0)
+        date=date.toString()
         if (this._timeSpent.length==0){
             this._timeSpent.push([date,timeToAdd])
             return
         }
         //loop through and see if it hits
         for(let i=0; i<this._timeSpent.length; i++){
-            if(str(this._timeSpent[i][0])==str(date)){
-                this._timeSpent[i][0]+=timeToAdd
+            if(this._timeSpent[i][0]==date){
+                this._timeSpent[i][1]+=timeToAdd
                 return
-            } else if(this._timeSpent[i][0]>date){
+            } else if(new Date(this._timeSpent[i][0])>new Date(date)){
                 this._timeSpent.splice(i,0,[date,timeToAdd])
                 return
             }
@@ -373,14 +461,19 @@ class Task {
     }
 
     // updating local storage
-    static fromData(data)
+    static fromData(data,developerINFO=false)
     {
         let task = new Task(data._name,data._description,data._type,data._storyPoints,data._tags,data._priority,data._status)
         task._developers=[]
-        for(let i=0;i<data._developers.length;i++){
-            let next_developer= Developer.fromData(data._developers[i]);
-            task.addMember(next_developer);
-            //console.log(task)
+
+        let next_developer= Developer.fromData(data._developers[0]);
+        task.addMember(next_developer);
+
+        
+
+        for(let i=0;i<data._timeSpent.length;i++){
+            let current = data._timeSpent[i]
+            task._timeSpent.push([current[0],parseFloat(current[1])])
         }
 
         return task
@@ -426,18 +519,32 @@ class Sprint {
     }
     set startDate(newDate)
     {
-        this._sprintId = newDate
+        this._startDate = newDate
     }
     set endDate(newDate)
     {
-        this._sprintId = newDate
+        this._endDate = newDate
     }
     set sprintBacklog(backlog)
     {
-        this._sprintId = backlog
+        this._sprintBacklog = backlog
     }
 
+    static fromData(data,developerINFO){
+        let sb = SprintBacklog.fromData(data._sprintBacklog,developerINFO);
+        let start = new Date(data._startDate)
+        let end = new Date(data._endDate)
+        console.log(data)
+        let sprint = new Sprint(data._sprintId,start,end)
+        sprint._sprintBacklog=sb
+        return sprint
+        
+    }
 }
+
+/**
+ * Class for the sprint backlog 
+ */
 
 class SprintBacklog {
     constructor()
@@ -462,6 +569,7 @@ class SprintBacklog {
         return this._completedTask
     }
 
+
     // add a task
     add_task(taskClass){
         
@@ -469,7 +577,7 @@ class SprintBacklog {
         this._allTask.push(taskClass)
 
         // assign it to not started section
-        this._notStarted_task.push(taskClass)
+        this.assign_task(taskClass)
     }
 
     // assign task to relevant array
@@ -480,12 +588,12 @@ class SprintBacklog {
             // push it to in started task array
             this._started_task.push(taskClass)
         }
-        else if (taskClass._status == "N/S")
+        else if (taskClass._status == "N/S" || taskClass._status == "Not Started")
         {
             // assign it to not started array
-            this._started_task.push(taskClass)
+            this._notStarted_task.push(taskClass)
         }
-        else if (taskClass._status == "comp")
+        else if (taskClass._status == "comp" || taskClass._status == "Completed")
         {
             // assign it to completed array
             this._completedTask.push(taskClass)
@@ -494,15 +602,65 @@ class SprintBacklog {
 
 
     // move task
-    move_task(indexToMove, destination)
+    move_task(list,index, destination){
+        console.log(list)
+        console.log(this._notStarted_task)
+        let task
+        if(list==0){
+            task = this._notStarted_task[index]
+            this._notStarted_task.splice(index,1)
+        } else if (list==1){
+            task = this._started_task[index]
+            this._started_task.splice(index,1)
+        } else if (list==2){
+            task = this._completedTask[index]
+            this._completedTask.splice(index,1)
+        }
+
+        if(destination==0){
+            task.status = "Not Started"
+            this._notStarted_task.push(task)
+        } else if (destination==1){
+            task.status = "In Progress"
+            this._started_task.push(task)
+        } else if (destination==2){
+            task.status = "Completed"
+            this._completedTask.push(task)
+        }
+
+    }
     /* indexToMove: is the index of the task to move, relative to this._allTask
         dest
     */
-    {
+    
         // find the task and 
-        
-    }
+    static fromData(data,developerINFO){
+        let sb=new SprintBacklog()
 
+        let at=[]
+        let ns=[]
+        let st=[]
+        let co=[]
+        for(let i=0;i<data._allTask.length;i++){
+            at.push(Task.fromData(data._allTask[i],developerINFO))
+        }
+        for(let i=0;i<data._notStarted_task.length;i++){
+            ns.push(Task.fromData(data._notStarted_task[i],developerINFO))
+        }
+        for(let i=0;i<data._started_task.length;i++){
+            st.push(Task.fromData(data._started_task[i],developerINFO))
+        }
+        for(let i=0;i<data._completedTask.length;i++){
+            co.push(Task.fromData(data._completedTask[i],developerINFO))
+        }
+        sb._allTask=at
+        sb._notStarted_task=ns
+        sb._started_task=st
+        sb._completedTask=co
+        return sb
+    }
+        
+    
 }
 
 // Class creation to instantiate team member objects
@@ -570,32 +728,99 @@ class TeamMembers {
 
 }
 
-// class creation for developer objects
-class Developer {
-    // constructor
-    constructor(name){
-        this._name=name;
-        this._tasks=[];
-        this._hoursWorked=[];
-        
+/**
+ * Class for each developer/ team member
+ */
 
+class Developer {
+    constructor(name, email){
+        this._name=name;
+        this._hoursWorked=[];
+        this._email = email
     }
     //getters
     get name(){
         return this._name
     }
-    get tasks(){
-        return this._tasks
-    }
 
     get hoursWorked(){
         return this._hoursWorked
     }
-    // data maintenance
+
+    getTimeDuring(start,end){
+        start.setHours(0,0,0,0)
+        end.setHours(0,0,0,10)
+        
+        //bad algorithm
+        let array=this._hoursWorked
+        if(array.length==0){
+            return array
+        }
+        let s_index=[];
+        let e_index="None";
+        let today
+        for(let i=0; i<array.length;i++){
+            today=new Date(array[i][0])
+            if(today>=start){
+                s_index.push(i)
+            }
+            if(today<=end){
+                e_index=i
+            }
+        }
+        if (e_index=="None" || s_index.length==0){
+            return []
+        }
+        return this._hoursWorked.slice(s_index[0],e_index+1)
+    }
+    
+    getSummedTimeDuring(start,end){
+        let array = this.getTimeDuring(start,end)
+        console.log(array)
+        let total=0
+        for(let i=0; i<array.length;i++){
+            total+=array[i][1]
+        }
+        return total
+    }
+
+    getTotalTime(){
+        let array=this._hoursWorked
+        let total=0
+        for(let i=0; i<array.length;i++){
+            total+=array[i][1]
+        }
+        return total
+    }
+
+    logTimeD(timeToAdd,date){
+        date.setHours(0,0,0,0)
+        date=date.toString()
+        if (this._hoursWorked.length==0){
+            this._hoursWorked.push([date,timeToAdd])
+            return
+        }
+        //loop through and see if it hits
+        for(let i=0; i<this._hoursWorked.length; i++){
+            if(this._hoursWorked[i][0]==date){
+                this._hoursWorked[i][1]+=timeToAdd
+                return
+            } else if(new Date(this._hoursWorked[i][0])>new Date(date)){
+                this._hoursWorked.splice(i,0,[date,timeToAdd])
+                return
+            }
+        }
+        this._hoursWorked.push([date,timeToAdd])
+    }
+
+
     static fromData(data){
-        let developer = new Developer(data._name);
-        this._tasks=data._tasks;
-        this._hoursWorked=data._hoursWorked;
+        let developer = new Developer(data._name, data._email);
+        console.log(data)
+        for(let i=0;i<data._hoursWorked.length;i++){
+            let current = data._hoursWorked[i];
+            developer._hoursWorked.push([current[0],parseFloat(current[1])])
+        }
         return developer
     }
 }

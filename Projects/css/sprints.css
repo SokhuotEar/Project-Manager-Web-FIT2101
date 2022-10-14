@@ -1,12 +1,12 @@
 /* start and finish classes */
 .start-time {
-    background-color: green;
-    color: white;
+    background-color: rgb(114, 235, 114);
+    color: rgb(4, 4, 4);
 }
 
 .finish-time {
-    background-color: firebrick;
-    color: white;
+    background-color: rgb(240, 140, 218);
+    color: rgb(13, 12, 12);
 }
 
 /* status colours */
@@ -14,11 +14,11 @@
     /* for not started use chip default colors */
 }
 .in-progress {
-    background-color: green;
+    background-color: rgb(140, 242, 140);
     color: white;
 }
 .finished {
-    background-color: firebrick;
+    background-color: rgb(245, 153, 153);
     color: white;
 }
 
