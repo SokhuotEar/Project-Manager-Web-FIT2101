@@ -1,9 +1,9 @@
 /**
- * 
- * handling the background functions of the website
+ * File Name: background_functions.js
+ * File Purpose: This file is designed to contain the background functions needed for the system to operate, primarly local storage functions for data maintenance.
+ * Authors: Dasun, Sok Ear, Luke, Parul, Laetitia
+ * Date modified: 29/09/2022
  */
-
-// adding the contents
 function sum(array){
     return array.reduce((x,y)=>x+y)
 }
@@ -12,6 +12,10 @@ function sum(array){
  //credit: ENG1003 :^)
 
  //checks
+ /*
+    This function checks whether the local storage contains elements.
+    It will only return the local storage if there is something in it.
+ */
  function checkLSData(key)
  {
      return localStorage.getItem(key) != null

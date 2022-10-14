@@ -1,5 +1,10 @@
 "use strict"
-// Retrieves data from the system 
+/**
+ * File Name: main.js
+ * File Purpose: This file is designed to create the main functions that are required for the system to function. This mainly includes data maintenance.
+ * Authors: Dasun, Sok Ear, Luke, Parul, Laetitia
+ * Date modified: 29/09/2022
+ */
 
 let sys = new System();
 console.log(sys)

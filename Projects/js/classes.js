@@ -1,8 +1,11 @@
 "use strict"
 /**
- * Contains all the necessary classes: System, ProductBacklog, Task, Sprint, SprintBacklog, TeamMember, Developer
+ * File name: classes.js 
+ * File Purpose: The file is designed to create the structure for the object orientation required for the system to operate.
+ *               Main classes include: System, Task, ProuctBacklog, Sprint, SprintBacklog, TeamMember, Developer
+ * Authors: Dasun, Sok Ear, Luke, Parul, Laetitia
+ * Date modified: 29/09/2022
  */
-
 
 class System {
     //constructor
@@ -168,10 +171,8 @@ class System {
 
 }
 
-/**
- * Class for the product backlog
- */
-
+// Product backlog class to create product backlog object with functionalities
+// Functions acted on tasks include: add task, remove task, update task, show tasks, sort tasks, filter tasks
 class ProductBacklog {
     constructor(){
         this._tasks=[];
@@ -184,27 +185,51 @@ class ProductBacklog {
 
     // methods 
 
+    /**
+     * This function allows users to add a task in the product backlog by pushing it into the tasks list
+     * @param {object} task 
+     */
     addTask(task){
         this._tasks.push(task);
     }
 
+    /**
+     * This function allows users to remove a task in the product backlog by splicing it from the task list using its index
+     * @param {integer} i 
+     */
     removeTask(i){
         if(i>-1){
             this._tasks.splice(i,1)
         }
     }
 
+    /**
+     * This function allows task edits by updating tasks when information is changed/deleted/added
+     * @param {*} oldTask 
+     * @param {*} newTask 
+     */
     updateTask(oldTask,newTask){
+        // defining a variable as the old tasks's index
         let index = this._tasks.indexOf(oldTask);
+        // finding old task and recreating it as the new task652
         if(index>-1){
             this._tasks[index]=newTask;
         }
     }
 
+    /**
+     * This function's purpose is to show all the tasks created in the product backlog page
+     * @returns 
+     */
     showTasks(){
+        // getting and returning all the tasks
         return this._tasks;
     }
 
+    /**
+     * This function sorts tasks in the product backlog depending on the category chosen
+     * @param {*} sortBy 
+     */
     sortTasks(sortBy){
         array=this._tasks
         // name, priority, tag, that stuff i guess
@@ -226,6 +251,11 @@ class ProductBacklog {
         
     }
 
+    /**
+     * This function allows the user to choose the category the tasks should be filtered by 
+     * @param {*} condition 
+     * @returns 
+     */
     filterTasks(condition){
         // returns the index instead
         let array=this._tasks
@@ -239,6 +269,10 @@ class ProductBacklog {
         return result
     }
 
+    /**
+     * This function allows the data to be maintained even when the page is refreshed
+     * @param {*} data 
+     */
     fromData(data){
         this._tasks=[]
         for(let i=0;i<data._tasks.length;i++){
@@ -250,10 +284,7 @@ class ProductBacklog {
     }
 }
 
-/**
- * Class for each task
- */
-
+// class to create task object
 class Task {
     constructor(name, description, type, storyPoints, tags, priority,status){
         this._name=name;
@@ -292,6 +323,7 @@ class Task {
     get status(){
         return this._status;
     }
+
     //mutators
     // not editable part is the responsibility of the function not the class
     set name(newName){
@@ -345,6 +377,10 @@ class Task {
 
     //methods
 
+    /**
+     * This function's purpose is to extract the key information associated with a task so it can be displayed on the card
+     * @returns 
+     */
     summarise(){
         return [this.name(),this.tags(),this.priority(),this.storyPoints()]
     }
@@ -375,6 +411,10 @@ class Task {
         return this._timeSpent.slice(s_index[0],e_index+1)
     }
 
+    /**
+     * This function records the time spent on the associate dtask
+     * @returns 
+     */
     getTotalTime(){
         let array=this._timeSpent
         let total=0
@@ -383,10 +423,21 @@ class Task {
         }
         return total
     }
+
+    /**
+     * This function changes the status of a task when it is edited by a user
+     * @param {*} newStatus 
+     */
     changeStatus(newStatus){
         this._status=newStatus;
     }
-        
+     
+    /**
+     * This function allows the user to log time for a task
+     * @param {*} timeToAdd 
+     * @param {*} date 
+     * @returns 
+     */
     logTime(timeToAdd, date){
         this._developers[0].logTimeD(timeToAdd, date)
 
@@ -431,10 +482,8 @@ class Task {
 
 }
 
-/**
- * Class for each sprint
- */
 
+// class to create sprint object
 class Sprint {
     // please don't call this directly; call sys.createSprint() instead
     constructor(sprint_id, start_date, end_date)
@@ -614,23 +663,31 @@ class SprintBacklog {
     
 }
 
-/**
- * Class for all the team members
- */
-
+// Class creation to instantiate team member objects
 class TeamMembers {
+    // constructors
     constructor(){
         this._teamMembers=[];
     }
 
+    // getters
     get teamMembers(){
         return this._teamMembers;
     }
 
+    // methods
+    /**
+     * This function adds a member to the developer team
+     * @param {*} developer 
+     */
     addMember(developer){
         this._teamMembers.push(developer)
     }
 
+    /**
+     * This function removes a member from the developer team if needed
+     * @param {} developer 
+     */
     removeMember(developer){
         let index = this._tasks.indexOf(developer);
 
@@ -639,6 +696,9 @@ class TeamMembers {
         }
     }
 
+    /**
+     * This function removes all members from the developer team for when the propject is completed
+     */
     removeAll(){
         this._teamMembers=[];
     }
@@ -655,6 +715,7 @@ class TeamMembers {
         return false
     }
 
+    // data maintenance
     fromData(data){
         this._teamMembers=[]
 
@@ -677,6 +738,7 @@ class Developer {
         this._hoursWorked=[];
         this._email = email
     }
+    //getters
     get name(){
         return this._name
     }
