@@ -85,7 +85,7 @@ function showChart(email){
     let next
     while(labels[labels.length-1]<end_display_date){
         last = labels[labels.length-1]
-        next=new Date(new Date().setDate(last.getDate()+1))
+        next=new Date(last.setDate(last.getDate()+1))
         labels.push(new Date(next.setHours(0,0,0,0)))
     }
     let realLabels=[]
