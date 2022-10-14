@@ -279,21 +279,28 @@ function viewTask(list,index,sprintID){
     else if (type == "bug"){
         typeCSS = 'bug';
     }
+
     if (status=="Not Started"){
         statusCSS="not-started"
+        console.log("bad)")
     } else if (status =="In Progress"){
         statusCSS="in-progress"
     } else if (status =="Completed"){
-        statusCSS=="finished"
+        statusCSS="finished"
+        console.log("good)")
     }
+    console.log(status=='Completed')
+    console.log(status)
 
+
+    
     let viewText=`<div class="mdl-grid" style="padding-right: 0">
                 <div class="mdl-cell mdl-cell--10-col" style="margin: 0 0 0 10px;">
                     <h4 style="font-size:2.5rem; margin: 9px 0 0;">Add Sprint Functionality</h4>
                 </div>
                 <div class="mdl-cell mdl-cell--2-col">
                     <div style="float:right; font-size: 12pt">
-                        <span class="mdl-chip not-started">
+                        <span class="mdl-chip ${statusCSS}">
                             <span class="mdl-chip__text ${statusCSS}">${task.status}</span>
                         </span>
                     </div>
