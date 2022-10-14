@@ -347,6 +347,152 @@ date: 1/10/22-->
             </div>
         </dialog>
 
+        <!--------------------------- -->
+        <dialog class="mdl-dialog" style="width: 70vw" id="view-sprint-completed">
+            <div class="mdl-dialog__title" style="padding-top:0; padding-right:0">
+                <div class="mdl-grid" style="padding:0">
+                    <div class="mdl-cell mdl-cell--10-col" style="margin:0">
+                        <h4 style="font-size:2.5rem" id="view-name-completed">Sprint 2</h4>
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <div style="float:right; font-size: 12pt">
+                            <span class="mdl-chip start-time" style="width: 130px">
+                                <span class="mdl-chip__text" id="view-start-date-completed" style="padding-left:5px">Started on: 22/09/22</span>
+                            </span>
+                            <span class="mdl-chip finish-time" style="width: 130px">
+                                <span class="mdl-chip__text" id="view-end-date-completed" style="text-align: center;">Set to finish: 01/10/22</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif;">
+                <div class="divider">
+                    <h4 style="margin: 0; color:black">Tasks</h4>
+                </div>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--3-col" style="margin-bottom:0">
+                        <h4 style='margin-top:0; text-align: center'>Not Started</h4>
+                        <ul class="demo-list-control mdl-list" style="border: 1px solid #e0e0e0" id="ns-list-completed">
+                            <li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    Add Sprint Functionality
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">
+                                        <input type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item list-item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    View Sprint Functionality
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-2">
+                                        <input type="checkbox" id="list-checkbox-2" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item list-item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    Burndown Charts
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-3">
+                                        <input type="checkbox" id="list-checkbox-3" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mdl-cell mdl-cell--1-col" style="margin-bottom:0; text-align: center">
+                        <div style="padding-top: 85px">
+                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect" >
+                                <i class="material-icons">arrow_forward_ios</i>
+                            </button>
+                            <button style="margin-top:7px" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
+                                <i class="material-icons" style="color:rgb(66,66,66)">arrow_back_ios_new</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col" style="margin-bottom:0">
+                        <h4 style='margin-top:0; text-align: center'>In Progress</h4>
+                        <ul class="demo-list-control mdl-list" style="border: 1px solid #e0e0e0" id="ip-list-completed">
+                            <li class="mdl-list__item list-item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    Create HTML Mockup
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-4">
+                                        <input type="checkbox" id="list-checkbox-4" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item list-item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    Design CSS
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-5">
+                                        <input type="checkbox" id="list-checkbox-5" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                            <!-- Create empty list items so that borders align-->
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt"></span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mdl-cell mdl-cell--1-col" style="margin-bottom:0; text-align: center">
+                        <div style="padding-top: 85px">
+                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect">
+                                <i class="material-icons">arrow_forward_ios</i>
+                            </button>
+                            <button style="margin-top:7px" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect" >
+                                <i class="material-icons" style="color:rgb(66,66,66)">arrow_back_ios_new</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col" style="margin-bottom:0">
+                        <h4 style='margin-top:0; text-align: center'>Completed</h4>
+                        <ul class="demo-list-control mdl-list" style="border: 1px solid #e0e0e0" id="com-list-completed">
+                            <li class="mdl-list__item list-item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt">
+                                    Create Wireframe for Sprint
+                                </span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-6">
+                                        <input type="checkbox" id="list-checkbox-6" class="mdl-checkbox__input" />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt"></span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px"></span>
+                            </li>
+                            <li class="mdl-list__item" style="padding-top:8px;padding-bottom:8px">
+                                <span class="mdl-list__item-primary-content" style="font-size:10pt"></span>
+                                <span class="mdl-list__item-secondary-action" style="margin-left:5px"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mdl-cell mdl-cell--12-col" style="margin-top:0">
+                        <b>Double click on a task to view.</b>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions" style="padding-right:24px">
+                <button id='mark-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">MARK AS COMPLETE</button>
+                <button id='burndown-button' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">BURNDOWN CHART</button>
+                <button type="button" class="mdl-button close" onclick="closeCompleted()">CLOSE</button>
+            </div>
+        </dialog>
+        
+
+
         <!-- Dialog for viewing a task -->
         <dialog class="mdl-dialog" style="width: 50vw" id="view-task-dialog">
             <div class="mdl-grid" style="padding-right: 0">
