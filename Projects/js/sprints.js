@@ -278,21 +278,28 @@ function viewTask(list,index,sprintID){
     else if (type == "bug"){
         typeCSS = 'bug';
     }
+
     if (status=="Not Started"){
         statusCSS="not-started"
+        console.log("bad)")
     } else if (status =="In Progress"){
         statusCSS="in-progress"
     } else if (status =="Completed"){
-        statusCSS=="finished"
+        statusCSS="finished"
+        console.log("good)")
     }
+    console.log(status=='Completed')
+    console.log(status)
 
+
+    
     let viewText=`<div class="mdl-grid" style="padding-right: 0">
                 <div class="mdl-cell mdl-cell--10-col" style="margin: 0 0 0 10px;">
                     <h4 style="font-size:2.5rem; margin: 9px 0 0;">Add Sprint Functionality</h4>
                 </div>
                 <div class="mdl-cell mdl-cell--2-col">
                     <div style="float:right; font-size: 12pt">
-                        <span class="mdl-chip not-started">
+                        <span class="mdl-chip ${statusCSS}">
                             <span class="mdl-chip__text ${statusCSS}">${task.status}</span>
                         </span>
                     </div>
@@ -667,7 +674,7 @@ function showNotStartedSprint()
                     </div>
                     <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
                         <!-- Accent-colored raised button with ripple -->
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='manage-button${i}' onclick='manage(${i})' style="float:right">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='manage-button${i}' onclick='manage(${i})' style="float:right;margin-left:5px">
                             MANAGE
                         </button>
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='setActive-button${i}' onclick = "setActive(${i})" style="float:right">
@@ -699,23 +706,26 @@ function showActiveSprint()
     {   
         console.log(activeSprint)
         value += 
-                `<div class="mdl-card__title" style="background: lightcoral">
+               `<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title" style="background: lightcoral">
                             <h2 class="mdl-card__title-text">Sprint ${activeSprint.sprint_id}</h2>
-                        </div>
-                        <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
-                                    <span class="mdl-chip start-time">
-                                        <span class="mdl-chip__text">Started on: ${activeSprint._startDate.toDateString()}</span>
-                                    </span>
-                            <span class="mdl-chip finish-time">
-                                        <span class="mdl-chip__text">Set to finish: ${activeSprint._endDate.toDateString()}</span>
-                                    </span>
-                        </div>
+                    </div>
+                    <div class="mdl-card__supporting-text" style="font-family:Roboto, sans-serif">
+                        <span class="mdl-chip start-time">
+                            <span class="mdl-chip__text">Started on: ${activeSprint._startDate.toDateString()}</span>
+                        </span>
+                        <span class="mdl-chip finish-time">
+                            <span class="mdl-chip__text">Set to finish: ${activeSprint._endDate.toDateString()}</span>
+                        </span>
+                    </div>
                         <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
                             <!-- Accent-colored raised button with ripple -->
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "manageActive()">
                                 VIEW
                             </button>
-                        </div>`
+                        </div>
+                    </div>
+               </div>`
     }
 
     sprintViewRef.innerHTML = value
@@ -798,7 +808,7 @@ function setActive(i)
 //-------------------------------------------------------------------------------------------------------------------------------------------
 function viewActiveButton()
 {
-    viewDialogRef.show()
+    viewDialogRef.showModal()
     listTasks()
 }
 
@@ -839,7 +849,7 @@ function markSprintAsComplete()
     console.log(sys)
 }
 
-// function to move from not strated to in progress
+// function to move from not started to in progress
 function nsToIp(sprintID=SiD){
     if(sys._allSprint[sprintID].endDate<new Date()){
         console.log("L")
