@@ -56,6 +56,7 @@ changeDateRef.addEventListener('click', function() {
     start_display_date=new Date(document.getElementById('start-date').value)
     end_display_date=new Date(document.getElementById('end-date').value)
     dateDialogRef.close()
+    showTeamMembers()
 });
 
 
@@ -201,7 +202,7 @@ function showTeamMembers()
             totalHr = totalHr + member._hoursWorked[j]
         }
         let sumTime = member.getSummedTimeDuring(start_display_date, end_display_date)
-        let dayNum = Math.ceil(end_display_date.getTime() - start_display_date.getTime()) / 1000 /60/ 60/24
+        let dayNum = Math.ceil(end_display_date - start_display_date) / 1000 /60/ 60/24
         let avgTime = sumTime / dayNum
 
         display += `

@@ -478,7 +478,7 @@ function addSprint()
     validateDate(start_date, end_Date)
 
     //verifications
-    if (id == null)
+    if (id == '')
     {
         alert("Sprint name cannot be null!")
         return;
@@ -507,12 +507,12 @@ function addSprintConfirm()
 
 function validateDate(startDate,endDate)
 {
-    if (startDate == null || endDate == null)
+    if (startDate == '' || endDate == '')
     {
         alert("Start date or end date cannot be null!");
         return
     }
-    if (startDate > endDate)
+    else if (startDate > endDate)
     {
         alert("Start date cannot be after end date!")
         return
