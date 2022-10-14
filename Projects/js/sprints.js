@@ -533,15 +533,21 @@ function addSprint()
     let start = document.getElementById("start-date").value
     let end = document.getElementById("end-date").value
 
+    if (start == '' || end == '')
+    {
+        alert ("Sprint date cannot be null")
+        return
+    }
 
     let start_date = new Date(start)
     let end_Date = new Date(end)
+
 
     //date verification
     validateDate(start_date, end_Date)
 
     //verifications
-    if (id == null)
+    if (id == '')
     {
         alert("Sprint name cannot be null!")
         return;
@@ -554,9 +560,12 @@ function addSprint()
             return;
         }
     }
-    console.log(end_Date)
+
     sys.createSprint(id, start_date,end_Date)
-    console.log(sys)
+
+    document.getElementById("sprint-name").value = ''
+    document.getElementById("start-date").value = ''
+    document.getElementById("end-date").value = ''
 }
 
 function addSprintConfirm()
@@ -570,12 +579,17 @@ function addSprintConfirm()
 
 function validateDate(startDate,endDate)
 {
-    if (startDate == null || endDate == null)
+    if (startDate == '' || endDate == '')
     {
         alert("Start date or end date cannot be null!");
         return
     }
-    if (startDate > endDate)
+    else if (endDate < new Date())
+    {
+        alert("The sprint must not have end date in the past")
+        return
+    }
+    else if (startDate > endDate)
     {
         alert("Start date cannot be after end date!")
         return
