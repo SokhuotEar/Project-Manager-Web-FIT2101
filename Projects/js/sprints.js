@@ -12,6 +12,7 @@
 let addButtonRef = document.getElementById('add-button');
 let addDialogRef = document.getElementById('add-sprint');
 let viewDialogRef = document.getElementById('view-sprint');
+let viewCompleteRef = document.getElementById('view-sprint-completed');
 let viewButtonRef = document.getElementById('open-button');
 let completeButtonRef = document.getElementById('mark-button');
 let confirmDialogRef = document.getElementById('confirm-complete-dialog');
@@ -367,6 +368,7 @@ function closeView(){
 
 // Function for showing actual tasks of a sprint
 function listTasks(sprintID){
+
     let sprint=sys._allSprint[sprintID];
     console.log(sprint)
     let notStartedList=sprint._sprintBacklog.notStarted
@@ -424,6 +426,61 @@ function listTasks(sprintID){
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
+//completed list
+function listCompletedSprintTasks(sprintID){
+
+    let sprint=sys._allSprint[sprintID];
+    console.log(sprint)
+    let notStartedList=sprint._sprintBacklog.notStarted
+    let startedList=sprint.sprintBacklog.started
+    let completedList=sprint.sprintBacklog.completed
+    let nsHTML=""
+    let ipHTML=""
+    let comHTML=""
+    for(let i=0; i<notStartedList.length;i++){
+        nsHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${0},${i},${sprintID})">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+            ${notStartedList[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-ns-${i}">
+                <input type="checkbox" id="list-checkbox-ns-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+    }
+    for(let i=0; i<startedList.length;i++){
+        ipHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${1},${i},${sprintID})">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+            ${startedList[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-s-${i}">
+                <input type="checkbox" id="list-checkbox-s-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+
+    }
+    for(let i=0; i<completedList.length;i++){
+        comHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${2},${i},${sprintID})">
+        <span class="mdl-list__item-primary-content" style="font-size:10pt">
+            ${completedList[i].name}
+        </span>
+        <span class="mdl-list__item-secondary-action" style="margin-left:5px">
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-c-${i}">
+                <input type="checkbox" id="list-checkbox-c-${i}" class="mdl-checkbox__input" />
+            </label>
+        </span>
+    </li>`
+
+    }
+
+    document.getElementById("ns-list-completed").innerHTML=nsHTML
+    document.getElementById("ip-list-completed").innerHTML=ipHTML
+    document.getElementById("com-list-completed").innerHTML=comHTML
+    localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
+}
 
 
 // ----------------------------------------------------------------------------------
@@ -656,7 +713,7 @@ function showActiveSprint()
                         </div>
                         <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
                             <!-- Accent-colored raised button with ripple -->
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "viewActiveButton()">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "manageActive()">
                                 VIEW
                             </button>
                         </div>`
@@ -696,7 +753,7 @@ function showCompletedSprint(){
                     </div>
                     <div class="mdl-card__actions mdl-card--border" style="padding-right:15px">
                         <!-- Accent-colored raised button with ripple -->
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "viewActiveButton()">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id='open-button' style="float:right" onclick = "manageCompleted(${i})">
                                 VIEW
                         </button>
                     </div>
@@ -719,10 +776,11 @@ function setActive(i)
 
         // make it active, add it to active
         let sprint = sys._notStartedSprints[i]
+        console.log(sprint)
         // check if sprint is empty
         if ((sprint.sprintBacklog._allTask.length == 0) && (sprint.sprintBacklog._completedTask.length == 0) && (sprint.sprintBacklog._notStarted_task.length == 0))
         {
-            // print "sprint is empty to UI"
+            // print "sprint is empty" to UI
             alert("Sprint is empty!")
             return;
         }
@@ -763,15 +821,23 @@ function markSprintAsComplete()
     //check any uncompletedSprint, put them back to product backlog
     let startedTask = sprint._sprintBacklog._started_task
     let not_startedTask = sprint._sprintBacklog._notStarted_task
+    for(let i=0;i<startedTask.length; i++){
+        sys._productBacklog._tasks.push(startedTask[i])
+    }
+    for(let i=0;i<not_startedTask.length; i++){
+        sys._productBacklog._tasks.push(not_startedTask[i])
+    }
+
+    console.log(startedTask)
+    console.log(not_startedTask)
 
     sprint.sprintBacklog._started_task = []
     sprint.sprintBacklog._notStarted_task = []
 
-    sys._productBacklog._tasks.concat(startedTask)
-    sys._productBacklog._tasks.concat(not_startedTask)
+    
 
     showSprint()
-
+    console.log(sys)
 }
 
 // function to move from not strated to in progress
@@ -839,12 +905,39 @@ function comToIp(sprintID=SiD){
 
 let SiD;
 function manage(sprintID){
+
     viewDialogRef.showModal();
-    document.getElementById('view-start-date').innerText="Started on: "+sys._allSprint[sprintID]._startDate.toDateString()
-    document.getElementById('view-end-date').innerText= "Set to finish: "+sys._allSprint[sprintID]._startDate.toDateString()
-    document.getElementById('view-name').innerText= "Sprint "+sys._allSprint[sprintID].sprint_id;
-    SiD = sprintID
-    listTasks(sprintID)
+    document.getElementById('view-start-date').innerText="Started on: "+sys._notStartedSprints[sprintID]._startDate.toDateString()
+    document.getElementById('view-end-date').innerText= "Set to finish: "+sys._notStartedSprints[sprintID]._endDate.toDateString()
+    document.getElementById('view-name').innerText= "Sprint "+sys._notStartedSprints[sprintID].sprint_id;
+    SiD = sys.find_sprint_index(sys._notStartedSprints[sprintID])
+    listTasks(SiD)
+}
+
+function manageActive(){
+
+    viewDialogRef.showModal();
+    document.getElementById('view-start-date').innerText="Started on: "+sys._activeSprint._startDate.toDateString()
+    document.getElementById('view-end-date').innerText= "Set to finish: "+sys._activeSprint._endDate.toDateString()
+    document.getElementById('view-name').innerText= "Sprint "+sys._activeSprint.sprint_id;
+    SiD = sys.find_sprint_index(sys._activeSprint)
+    console.log(sys._activeSprint)
+    listTasks(SiD)
+}
+
+
+function manageCompleted(sprintID){
+
+    viewCompleteRef.showModal();
+    document.getElementById('view-start-date-completed').innerText="Started on: "+sys._completedSprints[sprintID]._startDate.toDateString()
+    document.getElementById('view-end-date-completed').innerText= "Finished on: "+sys._completedSprints[sprintID]._endDate.toDateString()
+    document.getElementById('view-name-completed').innerText= "Sprint "+sys._completedSprints[sprintID].sprint_id;
+    SiD = sys.find_sprint_index(sys._completedSprints[sprintID])
+    listCompletedSprintTasks(SiD)
+}
+
+function closeCompleted(){
+    viewCompleteRef.close();
 }
 
 

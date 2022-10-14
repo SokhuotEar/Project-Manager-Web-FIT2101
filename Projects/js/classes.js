@@ -47,6 +47,11 @@ class System {
         this._notStartedSprints.push(sprint)
     }
 
+    find_sprint_index(sprint){
+        return this._allSprint.indexOf(sprint)
+    }
+
+
     //setter
     moveSprint(list,index){
         let sprint
@@ -68,6 +73,10 @@ class System {
 
     //No methods done yet
     fromData(data){
+        let cs=[]
+        let ns=[]
+        let as=[]
+
         this._productBacklog.fromData(data._productBacklog)
         this._teamMembers.fromData(data._teamMembers);
 
@@ -97,14 +106,14 @@ class System {
                 toPush._sprintBacklog._completedTask[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._completedTask[i].developers[0]))
             }
             this._activeSprint=toPush
+            as.push(toPush)
+
 
         }else{
             this._activeSprint=null
         }
 
-        let cs=[]
-        let ns=[]
-        let as=[]
+        
         for(let i=0;i<data._completedSprints.length;i++){
             let toPush=Sprint.fromData(data._completedSprints[i],developerINFO)
                     /*
@@ -153,6 +162,8 @@ class System {
         this._completedSprints=cs;
         this._notStartedSprints=ns;
         this._allSprint=as;
+        console.log(cs)
+        console.log(as)
     }
 
 }
@@ -508,6 +519,7 @@ class SprintBacklog {
     {
         return this._completedTask
     }
+
 
     // add a task
     add_task(taskClass){
