@@ -200,9 +200,8 @@ function logTimeForTask(list,index,sprintID){
         task=sprint.notStarted[index]
     } else if (list==1){
         task=sprint.started[index]
-    } else if (list==2){
-        task=sprint.completed[index]
-    }
+    } 
+    
     task.logTime(parseInt(hours),date)
     console.log(task)
     listTasks(sprintID)
