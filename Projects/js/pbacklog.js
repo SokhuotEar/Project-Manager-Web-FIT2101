@@ -29,7 +29,7 @@ let statusErrorRef = document.getElementById('status_err');
 //core-tag hotpink
 
 //testing-tag lightgreen
-
+let productBacklog = sys._productBacklog
 //old colours based on the story points
 //let colours=["darkgray","greenyellow","green","darkolivegreen","lightskyblue","lightseagreen","dodgerblue","tomato","indianred","red","maroon"]
 let colours=["orange","hotpink","lightgreen"]
