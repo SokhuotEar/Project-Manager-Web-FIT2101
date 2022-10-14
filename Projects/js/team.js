@@ -80,7 +80,7 @@ function showChart(email){
         }
     }
     let array = person.getTimeDuring(start_display_date,end_display_date)
-    let labels =[start_display_date]
+    let labels =[new Date(start_display_date)]
     let last = labels[labels.length]
     let next
     while(labels[labels.length-1]<end_display_date){
