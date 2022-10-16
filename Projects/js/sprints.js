@@ -338,16 +338,19 @@ function viewTask(list,index,sprintID){
                     </div>
                     <div class="mdl-cell mdl-cell--9-col">
                         <b>Log a time:</b>
+
                         <form action="#">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="log-hours">
-                                <label class="mdl-textfield__label" for="log-hours">Enter hours...</label>
+                                
+                                <input class="mdl-textfield__input" type="text" id="log-hours" placeholder = "Enter hours...">
+                                <label class="mdl-textfield__label" for="log-hours"></label>
                             </div>
                         </form>
-                        <div class="mdl-textfield--floating-label has-placeholder">
+                        
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <div class="mdl-textfield mdl-js-textfield">
                                 <input class="mdl-textfield__input" type="date" id="log-date">
-                                <label class="mdl-textfield__label" for="log-date">Enter log date:</label>
+                                <label class="mdl-textfield__label" for="log-date"></label>
                                 <span id="log_date_err" class="mdl-textfield__error" style='visibility: visible;'></span>
                             </div>
                         </div>
