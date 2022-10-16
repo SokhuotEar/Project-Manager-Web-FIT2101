@@ -796,7 +796,7 @@ function showCompletedSprint(){
 // implement set active
 function setActive(i)
 {
-
+    // ensures there are no sprints active
     if (sys._activeSprint == null)
     { 
 
@@ -816,6 +816,12 @@ function setActive(i)
         // remove it from the not_started list
         sys.notStartedSprints.splice(i,1)
 
+    }
+
+    // if user tries to set another sprint active
+    else {
+        alert("Only one sprint can be active at a time.");
+        return
     }
     showSprint()
 }
