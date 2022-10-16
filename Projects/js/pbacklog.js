@@ -28,8 +28,7 @@ let statusErrorRef = document.getElementById('status_err');
 
 //core-tag hotpink
 
-//testing-tag lightgreen
-let productBacklog = sys._productBacklog
+
 //old colours based on the story points
 //let colours=["darkgray","greenyellow","green","darkolivegreen","lightskyblue","lightseagreen","dodgerblue","tomato","indianred","red","maroon"]
 let colours=["orange","hotpink","lightgreen"]
@@ -66,7 +65,7 @@ if(teamMembers.teamMembers.length==0){
     teamMembers.addMember(new Developer("d"))
     teamMembers.addMember(new Developer("e"))
 }
-
+*/
 
 // This function allows the user to confirm that they want to delete the task
 function deleteQuery(i){
