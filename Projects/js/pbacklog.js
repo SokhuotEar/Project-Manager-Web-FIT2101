@@ -766,8 +766,6 @@ function editTaskDialog(taskClass,i)
                                 <div style="padding-top:20px"><b style="padding-right:5px">Status:   </b>
                                     <select name="cars" id="edit-cars" style="font-family:Roboto, sans-serif;padding-right:10px" value = "${taskClass.status}">
                                         <option value="Not Started">Not Started</option>
-                                        <option value="In Progress">In Progress</option>
-                                        <option value="Completed">Completed</option>
                                     </select>
                                     <span id="status_err_edit" class="mdl-textfield__error" style='font-family: "Roboto",sans-serif; visibility: visible; display:inline; padding-left:5px; margin-top:0;'></span>
                                 </div>
