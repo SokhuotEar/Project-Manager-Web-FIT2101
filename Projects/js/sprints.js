@@ -185,8 +185,13 @@ function logTimeForTask(list,index,sprintID){
     console.log(document.getElementById("log-date").value)
     let date = new Date(document.getElementById("log-date").value)
 
-
+    if (hours == '')
+    {
+        alert('Hours cannot be empty')
+        return
+    }
     
+
     let sprint = sys._allSprint[sprintID]._sprintBacklog
     let task
 
@@ -334,7 +339,7 @@ function viewTask(list,index,sprintID){
                 </div>
                 <div class="mdl-grid" style="padding-right: 0">
                     <div class="mdl-cell mdl-cell--3-col task-info" style="text-align: center">
-                        <b>Time logged: </b>${task.getTotalTime()} hours
+                        <b>Time logged: </b> ${task.getTotalTime()} hours
                     </div>
                     <div class="mdl-cell mdl-cell--9-col">
                         <b>Log a time:</b>
