@@ -5,7 +5,9 @@
 
     This file contains the JavaScript code necessary to run the functionality of the Sprints page.
 
-    Written by: Luke Phillips (32511760), Dasun Mahamadachchi (32488580), [add name and ids here]
+    Written by: Luke Phillips (32511760), Dasun Mahamadachchi (32488580), Laetitia Teo (32516940), [add name and ids here]
+
+    Last modified: 17/10/2022
  */
 
 // document ids
@@ -64,6 +66,7 @@ viewDialogRef.querySelector('.close').addEventListener('click', function() {
 confirmDialogRef.querySelector('.close').addEventListener('click', function() {
     confirmDialogRef.close();
 });
+
 
 showSprint()
 
@@ -178,6 +181,9 @@ function showChart(){
     });
 }
 
+function closeBurndown(){
+    burndownDialogRef.close();
+}
 
 //Function to log time
 function logTimeForTask(list,index,sprintID){
