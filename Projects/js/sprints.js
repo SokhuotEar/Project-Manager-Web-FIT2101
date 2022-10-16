@@ -5,7 +5,9 @@
 
     This file contains the JavaScript code necessary to run the functionality of the Sprints page.
 
-    Written by: Luke Phillips (32511760), Dasun Mahamadachchi (32488580), [add name and ids here]
+    Written by: Luke Phillips (32511760), Dasun Mahamadachchi (32488580), Laetitia Teo (32516940), [add name and ids here]
+
+    Last modified: 17/10/2022
  */
 
 // document ids
@@ -64,6 +66,7 @@ viewDialogRef.querySelector('.close').addEventListener('click', function() {
 confirmDialogRef.querySelector('.close').addEventListener('click', function() {
     confirmDialogRef.close();
 });
+
 
 showSprint()
 
@@ -178,6 +181,9 @@ function showChart(){
     });
 }
 
+function closeBurndown(){
+    burndownDialogRef.close();
+}
 
 //Function to log time
 function logTimeForTask(list,index,sprintID){
@@ -358,16 +364,19 @@ function viewTask(list,index,sprintID){
                     </div>
                     <div class="mdl-cell mdl-cell--9-col">
                         <b>Log a time:</b>
+
                         <form action="#">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="log-hours">
-                                <label class="mdl-textfield__label" for="log-hours">Enter hours...</label>
+                                
+                                <input class="mdl-textfield__input" type="text" id="log-hours" placeholder = "Enter hours...">
+                                <label class="mdl-textfield__label" for="log-hours"></label>
                             </div>
                         </form>
-                        <div class="mdl-textfield--floating-label has-placeholder">
+                        
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <div class="mdl-textfield mdl-js-textfield">
                                 <input class="mdl-textfield__input" type="date" id="log-date">
-                                <label class="mdl-textfield__label" for="log-date">Enter log date:</label>
+                                <label class="mdl-textfield__label" for="log-date"></label>
                                 <span id="log_date_err" class="mdl-textfield__error" style='visibility: visible;'></span>
                             </div>
                         </div>
@@ -710,7 +719,7 @@ function showNotStartedSprint()
                         <span class="mdl-chip__text">Set to start: ${notStartedSprints[i]._startDate.toDateString()} </span>
                     </span>
                         <span class="mdl-chip finish-time">
-                        <span class="mdl-chip__text">Set to finish:${notStartedSprints[i]._endDate.toDateString()} </span>
+                        <span class="mdl-chip__text">Set to finish: ${notStartedSprints[i]._endDate.toDateString()} </span>
                     </span>
                         
                     </div>
@@ -821,7 +830,7 @@ function showCompletedSprint(){
 // implement set active
 function setActive(i)
 {
-
+    // ensures there are no sprints active
     if (sys._activeSprint == null)
     { 
 
@@ -841,6 +850,12 @@ function setActive(i)
         // remove it from the not_started list
         sys.notStartedSprints.splice(i,1)
 
+    }
+
+    // if user tries to set another sprint active
+    else {
+        alert("Only one sprint can be active at a time.");
+        return
     }
     showSprint()
 }

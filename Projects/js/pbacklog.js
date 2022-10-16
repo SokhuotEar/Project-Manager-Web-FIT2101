@@ -66,7 +66,7 @@ if(teamMembers.teamMembers.length==0){
     teamMembers.addMember(new Developer("d"))
     teamMembers.addMember(new Developer("e"))
 }
-
+*/
 
 // This function allows the user to confirm that they want to delete the task
 function deleteQuery(i){
@@ -101,7 +101,7 @@ function deleteQuery(i){
     });
 }
 
-let productBacklog = sys.productBacklog;
+
 
 
 /* 
