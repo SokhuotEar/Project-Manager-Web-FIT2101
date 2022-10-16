@@ -195,6 +195,11 @@ function logTimeForTask(list,index,sprintID){
         alert("Time logged must be an integer")
         return
     }
+    if (isNaN(date))
+    {
+        alert("Date entered is invalid")
+        return
+    }
     
 
     let sprint = sys._allSprint[sprintID]._sprintBacklog
