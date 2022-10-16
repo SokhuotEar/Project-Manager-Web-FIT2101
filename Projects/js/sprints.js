@@ -184,29 +184,34 @@ function logTimeForTask(list,index,sprintID){
     let hours = document.getElementById("log-hours").value
     console.log(document.getElementById("log-date").value)
     let date = new Date(document.getElementById("log-date").value)
+    let sprint = sys._allSprint[sprintID]._sprintBacklog
 
     if (hours == '')
     {
         alert('Hours cannot be empty')
         return
     }
-    if (isNaN(parseInt(hours)))
+    else if (isNaN(parseInt(hours)))
     {
         alert("Time logged must be an integer")
         return
     }
-    if (isNaN(date))
+    else if (isNaN(date))
     {
         alert("Date entered is invalid")
         return
     }
-    
+    else if (date < sys._allSprint[sprintID].startDate || date > sys._allSprint[sprintID].endDate)
+    {
 
-    let sprint = sys._allSprint[sprintID]._sprintBacklog
+        alert("Date entered is not within the sprint period")
+        return
+    }
+    
+    console.log(sprint)
+
     let task
 
-    console.log(date)
-    console.log(sprint.endDate)
     if(date>sprint.endDate){
         return
     }
