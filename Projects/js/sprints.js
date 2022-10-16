@@ -544,7 +544,13 @@ function addSprint()
 
 
     //date verification
-    validateDate(start_date, end_Date)
+    try { 
+        validateDate(start_date, end_Date)
+    }
+    catch (e)
+    {
+        return
+    }
 
     //verifications
     if (id == '')
@@ -582,17 +588,19 @@ function validateDate(startDate,endDate)
     if (startDate == '' || endDate == '')
     {
         alert("Start date or end date cannot be null!");
-        return
+        throw 'Start date or end date cannot be null!'
     }
     else if (endDate < new Date())
     {
         alert("The sprint must not have end date in the past")
-        return
+        throw 'The sprint must not have end date in the past'
+
     }
     else if (startDate > endDate)
     {
         alert("Start date cannot be after end date!")
-        return
+        throw 'The sprint must not have end date in the past'
+ 
     }
 }
 
