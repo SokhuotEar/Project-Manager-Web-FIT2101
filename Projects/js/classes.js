@@ -617,8 +617,7 @@ class SprintBacklog {
             this._completedTask.splice(index,1)
         }
 
-        if(destination==0){
-            task.status = "Not Started"
+        if(destination==0){            task.status = "Not Started"
             this._notStarted_task.push(task)
         } else if (destination==1){
             task.status = "In Progress"

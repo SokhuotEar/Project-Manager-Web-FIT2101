@@ -614,19 +614,23 @@ function addSprintConfirm()
 
 function validateDate(startDate,endDate)
 {
+    // validate date
     if (startDate == '' || endDate == '')
     {
+        // if date inputs are none, then raise error
         alert("Start date or end date cannot be null!");
         throw 'Start date or end date cannot be null!'
     }
     else if (endDate < new Date())
     {
+        // if date inputs are in the past, then raise error
         alert("The sprint must not have end date in the past")
         throw 'The sprint must not have end date in the past'
 
     }
     else if (startDate > endDate)
     {
+        // if start date is after end date, then raise error
         alert("Start date cannot be after end date!")
         throw 'The sprint must not have end date in the past'
  
