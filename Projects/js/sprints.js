@@ -21,9 +21,6 @@ let confirmDialogRef = document.getElementById('confirm-complete-dialog');
 let burndownDialogRef = document.getElementById('burndown-task-dialog');
 let burndownButtonRef = document.getElementById('burndown-button');
 
-
-
-
 // document id for test item (view item dialog)
 let testItemRef = document.getElementById('test-item')
 let viewTaskDialogRef = document.getElementById('view-task-dialog')
@@ -692,8 +689,6 @@ function addTask(){
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
-
-
 function showNotStartedSprint()
 {
 
@@ -784,7 +779,6 @@ function showActiveSprint()
 
 }
 
-
 function showCompletedSprint(){
     // get all completed sprints
     let completedSprints = sys.completedSprints
@@ -859,7 +853,6 @@ function setActive(i)
     }
     showSprint()
 }
-
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
