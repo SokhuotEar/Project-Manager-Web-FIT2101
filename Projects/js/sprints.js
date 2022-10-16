@@ -682,7 +682,7 @@ function showNotStartedSprint()
                         <span class="mdl-chip__text">Set to start: ${notStartedSprints[i]._startDate.toDateString()} </span>
                     </span>
                         <span class="mdl-chip finish-time">
-                        <span class="mdl-chip__text">Set to finish:${notStartedSprints[i]._endDate.toDateString()} </span>
+                        <span class="mdl-chip__text">Set to finish: ${notStartedSprints[i]._endDate.toDateString()} </span>
                     </span>
                         
                     </div>
