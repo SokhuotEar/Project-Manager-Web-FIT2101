@@ -306,7 +306,6 @@ function removeMember(email)
 
     }
 
-    pBacklog = sys.productBacklog._tasks()
 
 
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys))
