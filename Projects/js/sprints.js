@@ -21,9 +21,6 @@ let confirmDialogRef = document.getElementById('confirm-complete-dialog');
 let burndownDialogRef = document.getElementById('burndown-task-dialog');
 let burndownButtonRef = document.getElementById('burndown-button');
 
-
-
-
 // document id for test item (view item dialog)
 let testItemRef = document.getElementById('test-item')
 let viewTaskDialogRef = document.getElementById('view-task-dialog')
@@ -190,14 +187,34 @@ function logTimeForTask(list,index,sprintID){
     let hours = document.getElementById("log-hours").value
     console.log(document.getElementById("log-date").value)
     let date = new Date(document.getElementById("log-date").value)
-
-
-    
     let sprint = sys._allSprint[sprintID]._sprintBacklog
+
+    if (hours == '')
+    {
+        alert('Hours cannot be empty')
+        return
+    }
+    else if (isNaN(parseInt(hours)))
+    {
+        alert("Time logged must be an integer")
+        return
+    }
+    else if (isNaN(date))
+    {
+        alert("Date entered is invalid")
+        return
+    }
+    else if (date < sys._allSprint[sprintID].startDate || date > sys._allSprint[sprintID].endDate)
+    {
+
+        alert("Date entered is not within the sprint period")
+        return
+    }
+    
+    console.log(sprint)
+
     let task
 
-    console.log(date)
-    console.log(sprint.endDate)
     if(date>sprint.endDate){
         return
     }
@@ -340,7 +357,7 @@ function viewTask(list,index,sprintID){
                 </div>
                 <div class="mdl-grid" style="padding-right: 0">
                     <div class="mdl-cell mdl-cell--3-col task-info" style="text-align: center">
-                        <b>Time logged: </b>${task.getTotalTime()} hours
+                        <b>Time logged: </b> ${task.getTotalTime()} hours
                     </div>
                     <div class="mdl-cell mdl-cell--9-col">
                         <b>Log a time:</b>
@@ -553,7 +570,13 @@ function addSprint()
 
 
     //date verification
-    validateDate(start_date, end_Date)
+    try { 
+        validateDate(start_date, end_Date)
+    }
+    catch (e)
+    {
+        return
+    }
 
     //verifications
     if (id == '')
@@ -588,20 +611,26 @@ function addSprintConfirm()
 
 function validateDate(startDate,endDate)
 {
+    // validate date
     if (startDate == '' || endDate == '')
     {
+        // if date inputs are none, then raise error
         alert("Start date or end date cannot be null!");
-        return
+        throw 'Start date or end date cannot be null!'
     }
     else if (endDate < new Date())
     {
+        // if date inputs are in the past, then raise error
         alert("The sprint must not have end date in the past")
-        return
+        throw 'The sprint must not have end date in the past'
+
     }
     else if (startDate > endDate)
     {
+        // if start date is after end date, then raise error
         alert("Start date cannot be after end date!")
-        return
+        throw 'The sprint must not have end date in the past'
+ 
     }
 }
 
@@ -659,12 +688,6 @@ function addTask(){
     addTaskDialogRef.close();
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
-
-
-
-
-
-
 
 function showNotStartedSprint()
 {
@@ -756,7 +779,6 @@ function showActiveSprint()
 
 }
 
-
 function showCompletedSprint(){
     // get all completed sprints
     let completedSprints = sys.completedSprints
@@ -831,7 +853,6 @@ function setActive(i)
     }
     showSprint()
 }
-
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
