@@ -190,6 +190,11 @@ function logTimeForTask(list,index,sprintID){
         alert('Hours cannot be empty')
         return
     }
+    if (isNaN(parseInt(hours)))
+    {
+        alert("Time logged must be an integer")
+        return
+    }
     
 
     let sprint = sys._allSprint[sprintID]._sprintBacklog
