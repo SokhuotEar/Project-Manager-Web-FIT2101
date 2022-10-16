@@ -317,3 +317,9 @@ function removeMember(email)
 }
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------
+function showDateRange()
+{
+    document.getElementById("current-date-range").innerHTML = 
+    `Current Date Range : ${start_display_date.toDateString()} to ${end_display_date.toDateString()} `
+}
+showDateRange()
