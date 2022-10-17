@@ -702,6 +702,11 @@ function addTaskWindow(){
  * For each checked task, removes it from the sprint backlog and moves it to the sprint
  */
 function addTask(){
+    if(sys._allSprint[SiD]==sys._activeSprint){
+        alert("Cannot add Tasks to an active sprint")
+        return
+    }
+
     for(let i=sys.productBacklog.tasks.length-1; i>=0; i--){
         console.log(`add-task-${i}`)
         if(document.getElementById(`add-task-${i}`).checked){
