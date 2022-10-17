@@ -5,7 +5,7 @@
 
     This file contains the JavaScript code necessary to run the functionality of the Sprints page.
 
-    Written by: Luke Phillips (32511760), Dasun Mahamadachchi (32488580), Laetitia Teo (32516940), [add name and ids here]
+    Written by: Luke Phillips (32511760), Dasun Mahamadachchi (32488580), Laetitia Teo (32516940), Sok Ear (32442688) [add name and ids here]
 
     Last modified: 17/10/2022
  */
