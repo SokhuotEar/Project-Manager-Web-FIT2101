@@ -8,9 +8,12 @@
 
 let sys = new System();
 console.log(sys)
+// intialise the variable, will be null if it doesn't exist
 let data = localStorage.getItem(SYSTEM_KEY);
+
 try
 {
+    //if parses as not null, retrieve the system info
     data = JSON.parse(data);
     if(data!=null){
         sys.fromData(data)
