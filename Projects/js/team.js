@@ -337,4 +337,6 @@ function showDateRange()
     document.getElementById("current-date-range").innerHTML = 
     `Current Date Range : ${start_display_date.toDateString()} to ${end_display_date.toDateString()} `
 }
+
+/* This is to ensure that the date range is alwasy updated when the page is refreshed */
 showDateRange()

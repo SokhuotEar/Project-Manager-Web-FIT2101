@@ -1105,5 +1105,5 @@ function closeCompleted(){
     viewCompleteRef.close();
 }
 
-
+/* this is to ensure that sprint is always updated when the page is refreshed */
 showSprint()
