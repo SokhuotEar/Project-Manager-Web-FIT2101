@@ -25,4 +25,9 @@ Test document for sprint 2: https://docs.google.com/document/d/1D5KgYm4FnnU9yejE
 
 Trello Board for sprint 3: https://trello.com/b/CIsglMsm/sprint-3
 Test Document for sprint 3: https://docs.google.com/document/d/19fjf66wMfeGKVxIh1aznROXtfiSiF1gGM3BrPPEDanw/edit
+Sprint 3 Detail: https://docs.google.com/document/d/1a2oM9fs4aO_58pl6BMCvPhGuYTiLBYUySUHeuH6t5Dg/edit
+    includes: sprint goal, scrum master information, user requirements and summary of time spent
+Product backlog spreadsheet: 
+https://docs.google.com/spreadsheets/d/1nD-I_1GTJ-e_6egqHZinP7cVBESvCgx0K0icXH7EauY/edit#gid=0
+    includes: product backlog epics and tasks
 
