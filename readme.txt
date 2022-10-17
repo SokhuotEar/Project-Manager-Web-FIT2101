@@ -1,5 +1,7 @@
 FIT2101 readme file for Group 27
 
+Scrum master: Laetitia Teo
+
 Sprint Goal for Sprint 1:
 - Complete all the user stories related to the Product Backlog page according to our Definition of Done.
 
