@@ -968,10 +968,13 @@ function markSprintAsComplete()
  * @param {*} sprintID the sprint being managed currently
  */
 function nsToIp(sprintID=SiD){
+
+    // checks if sprint is within date range
     if(sys._allSprint[sprintID].endDate<new Date()){
         console.log("L")
         return
     }
+
     let sprint=sys._allSprint[sprintID];
     let notStartedList=sprint.sprintBacklog.notStarted
     for(let i=notStartedList.length-1; i>=0;i--){
@@ -983,6 +986,7 @@ function nsToIp(sprintID=SiD){
 
     listTasks(sprintID)
 }
+
 /**
  * Moves checked tasks in the not started column over to not started
  * @param {*} sprintID the sprint being managed currently
@@ -1001,6 +1005,7 @@ function ipToNs(sprintID=SiD){
     }
     listTasks(sprintID)
 }
+
 /**
  * Moves checked tasks in the in progress column over to completed
  * @param {*} sprintID the sprint being managed currently
@@ -1019,6 +1024,7 @@ function ipToCom(sprintID=SiD){
     }  
     listTasks(sprintID)
 }
+
 /**
  * Moves checked tasks in the completed over to in progress
  * @param {*} sprintID the sprint being managed currently
