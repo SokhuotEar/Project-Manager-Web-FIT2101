@@ -52,6 +52,7 @@ removeDialogRef.querySelector('.close').addEventListener('click', function() {
     removeDialogRef.close();
 });
 
+//updates the date range 
 changeDateRef.addEventListener('click', function() {
     start_display_date=new Date(document.getElementById('start-date').value)
     end_display_date=new Date(document.getElementById('end-date').value)
@@ -70,7 +71,10 @@ viewDialogRef.querySelector('.close').addEventListener('click', function() {
 
 
 // --------------------------------------------------------------------------------
-//SHOW CHART
+/**
+ * Creates a time logged chart for a given team member and shows it on the view team member dialog box
+ * @param {string} email unique email of the team member to display the chart for
+ */
 function showChart(email){
     let people = sys.teamMembers._teamMembers;
     let person;
@@ -130,19 +134,10 @@ function showChart(email){
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-//Add team member
+/**
+ * Associated with the OK button on the add team member dialog box
+ * validates the inputs and creates a new developer using the input information
+ */
 function addTeamMember()
 {
     let new_name = document.getElementById("new-member-name").value
@@ -184,7 +179,9 @@ function addTeamMember()
 
 
 //--------------------------------------------------------------------------------
-// show all team member in a list
+/**
+ * Updates the HTML to show a table which has details regarding every team member
+ */
 function showTeamMembers()
 {
     let system = sys
@@ -230,7 +227,11 @@ function showTeamMembers()
 showTeamMembers()
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// view a summary of each team member
+/**
+ * Associated with the VIEW button for a team member
+ * Opens a diaglog box with the sumamary of the team member for a given date range
+ * @param {string} unique email of a team member, passed using the HTML
+ */
 function viewTeamMember(email)
 {
     
@@ -282,7 +283,10 @@ function viewTeamMember(email)
     viewDialog.innerHTML = display
     showChart(email)
 }
-
+/**
+ * Assocaited with the CLOSE button on the team member summary dialog box
+ * closes the dialog box
+ */
 function closeViewDialog()
 {
     document.getElementById("view-dialog").close()
@@ -290,6 +294,11 @@ function closeViewDialog()
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // remove team member
+/**
+ * Associated with the REMOVE TEAM MEMBER button
+ * removes a team member from the system after confirmation
+ * @param {string} unique email of a team member, passed using the HTML
+ */
 function removeMember(email)
 {
     if (!confirm("Are you sure you want to delete this member?"))
@@ -318,6 +327,9 @@ function removeMember(email)
 }
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------
+/**
+ * Function updates HTML to show the chosen date range
+ */
 function showDateRange()
 {
     document.getElementById("current-date-range").innerHTML = 
