@@ -64,6 +64,7 @@ let teamMembers=sys.teamMembers
  */
 
 function deleteQuery(i){
+    /* This function is an auxiliary function aiding with the delete task function */
     // html code for dialog box
     let confirmText =
     `<h4 class="mdl-dialog__title" style="padding-left:30px">Delete Task</h4>
@@ -105,6 +106,7 @@ function deleteQuery(i){
 
 */
 function showCards(){
+    // This function shows all the tasks and its summary on the HTML page
     // defining words as empty string so it inputs can be added in
     let words='';
 
