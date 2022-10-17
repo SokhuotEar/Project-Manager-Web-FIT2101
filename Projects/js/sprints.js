@@ -412,6 +412,7 @@ function closeView(){
  */
 function listTasks(sprintID){
 
+    // variable assignment
     let sprint=sys._allSprint[sprintID];
     console.log(sprint)
     let notStartedList=sprint._sprintBacklog.notStarted
@@ -424,6 +425,8 @@ function listTasks(sprintID){
     console.log(notStartedList)
     console.log(startedList)
     console.log(completedList)
+
+    // showing tasks
     for(let i=0; i<notStartedList.length;i++){
         nsHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${0},${i},${sprintID})">
         <span class="mdl-list__item-primary-content" style="font-size:10pt">
@@ -475,7 +478,8 @@ function listTasks(sprintID){
  * @param {} sprintID the sprintID of the sprint being displayed by the dialog box
  */
 function listCompletedSprintTasks(sprintID){
-
+    
+    // variable assignment
     let sprint=sys._allSprint[sprintID];
     console.log(sprint)
     let notStartedList=sprint._sprintBacklog.notStarted
@@ -484,6 +488,8 @@ function listCompletedSprintTasks(sprintID){
     let nsHTML=""
     let ipHTML=""
     let comHTML=""
+
+    // HTML output to display not started sprint tasks
     for(let i=0; i<notStartedList.length;i++){
         nsHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${0},${i},${sprintID})">
         <span class="mdl-list__item-primary-content" style="font-size:10pt">
@@ -496,6 +502,8 @@ function listCompletedSprintTasks(sprintID){
         </span>
     </li>`
     }
+
+    // HTML output to display started sprint tasks
     for(let i=0; i<startedList.length;i++){
         ipHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${1},${i},${sprintID})">
         <span class="mdl-list__item-primary-content" style="font-size:10pt">
@@ -509,6 +517,8 @@ function listCompletedSprintTasks(sprintID){
     </li>`
 
     }
+
+    // HTML output to display completed sprint tasks
     for(let i=0; i<completedList.length;i++){
         comHTML+=`<li class="mdl-list__item list-item" id='test-item' style="padding-top:8px;padding-bottom:8px"  ondblclick="viewTask(${2},${i},${sprintID})">
         <span class="mdl-list__item-primary-content" style="font-size:10pt">
@@ -523,6 +533,7 @@ function listCompletedSprintTasks(sprintID){
 
     }
 
+    // data maintenance
     document.getElementById("ns-list-completed").innerHTML=nsHTML
     document.getElementById("ip-list-completed").innerHTML=ipHTML
     document.getElementById("com-list-completed").innerHTML=comHTML
@@ -962,10 +973,13 @@ function markSprintAsComplete()
  * @param {*} sprintID the sprint being managed currently
  */
 function nsToIp(sprintID=SiD){
+
+    // checks if sprint is within date range
     if(sys._allSprint[sprintID].endDate<new Date()){
         console.log("L")
         return
     }
+
     let sprint=sys._allSprint[sprintID];
     let notStartedList=sprint.sprintBacklog.notStarted
     for(let i=notStartedList.length-1; i>=0;i--){
@@ -977,6 +991,7 @@ function nsToIp(sprintID=SiD){
 
     listTasks(sprintID)
 }
+
 /**
  * Moves checked tasks in the not started column over to not started
  * @param {*} sprintID the sprint being managed currently
@@ -995,6 +1010,7 @@ function ipToNs(sprintID=SiD){
     }
     listTasks(sprintID)
 }
+
 /**
  * Moves checked tasks in the in progress column over to completed
  * @param {*} sprintID the sprint being managed currently
@@ -1013,6 +1029,7 @@ function ipToCom(sprintID=SiD){
     }  
     listTasks(sprintID)
 }
+
 /**
  * Moves checked tasks in the completed over to in progress
  * @param {*} sprintID the sprint being managed currently

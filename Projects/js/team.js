@@ -141,6 +141,7 @@ function showChart(email){
  */
 function addTeamMember()
 {
+    // variable assignment
     let new_name = document.getElementById("new-member-name").value
 
     let new_email = document.getElementById("new-email").value
