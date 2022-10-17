@@ -24,14 +24,12 @@ let prioErrorRef = document.getElementById('prio_err');
 let teamErrorRef = document.getElementById('team_err');
 let statusErrorRef = document.getElementById('status_err');
 
-//ui-tag orange
-
-//core-tag hotpink
-
-//testing-tag lightgreen
 let productBacklog = sys._productBacklog
+
+
 //old colours based on the story points
 //let colours=["darkgray","greenyellow","green","darkolivegreen","lightskyblue","lightseagreen","dodgerblue","tomato","indianred","red","maroon"]
+
 let colours=["orange","hotpink","lightgreen"]
 
 // Predefined error messages
@@ -51,24 +49,20 @@ addDialogRef.querySelector('.close').addEventListener('click', function() {
     addDialogRef.close();
 });
 
+
 ///delete functionality
 closeButtonRef.addEventListener('click', function() {
     closeDialogRef.showModal();
 });
 
+//set global variable
 let teamMembers=sys.teamMembers
-/*
-if(teamMembers.teamMembers.length==0){
-    teamMembers.removeAll()
-    teamMembers.addMember(new Developer("a"))
-    teamMembers.addMember(new Developer("b"))
-    teamMembers.addMember(new Developer("c"))
-    teamMembers.addMember(new Developer("d"))
-    teamMembers.addMember(new Developer("e"))
-}
-*/
 
-// This function allows the user to confirm that they want to delete the task
+/**
+ * This function allows the user to confirm that they want to delete the task
+ * @param i index of task to remove from productbacklog array
+ */
+
 function deleteQuery(i){
     // html code for dialog box
     let confirmText =
@@ -107,7 +101,7 @@ function deleteQuery(i){
 /* 
     This function updates the product backlog page every time a task is added or deleted so the user is able 
     to see the dynamic progress of the product backlog.
-    This functions operates every time a task is added, deleted, edited or when the page is refreshed.
+    This functions is called every time a task is added, deleted, edited or when the page is refreshed.
 
 */
 function showCards(){
@@ -209,13 +203,15 @@ function showCards(){
 }
 
 
-// This function operates when "add task" button is clicked
-// resets all input fields to empty strings
+/* This function operates when "add task" button is clicked
+    resets all input fields to empty strings
+*/
 function openAddTask()
 {
     // defining variable as the input contents 
+    // redefining variables as an empty string so that previous input is not retained
     let nameRef=document.getElementById("task-name");
-    // redefining variable as an empty string so that previous input is not retained
+    
     nameRef.value = "";
 
     let descRef=document.getElementById("task-desc");
@@ -240,8 +236,6 @@ function openAddTask()
     let teamList =""
     for(let i=0; i<teamMembers.teamMembers.length; i++){
         let developer=teamMembers.teamMembers[i];
-        console.log(developer)
-
         teamList+=
         `<li class="mdl-list__item">
     <span class="mdl-list__item-primary-content">
@@ -256,11 +250,7 @@ function openAddTask()
     </li>`;
     }
 
-    
-    
     document.getElementById("team-list").innerHTML=teamList
-
-    
 }
 
 // operates when "add" button in add dialog is clicked
@@ -475,18 +465,14 @@ function retrieve_from_local_storage() {
     
 }
 
-
+/**
+    Associated with the view button on a task
+    opens up the dialog box to see that task
+    @param i index of the productbacklog array that the dialog box opens
+*/
 function view_task(i) {
-    // first retrieve information from local storage
-    //let storage = retrieve_from_local_storage("ProductBacklog");
-    //let backlog = JSON.parse(storage)._productBacklog;
-    //let task = backlog._tasks[i];
     let task = productBacklog.tasks[i]
 
-    
-    
-    //show modal()
-    // edit the html content in the modal first
     let viewHTMLContent = `
     <h4 class="mdl-dialog__title" style="padding-left:30px">${task._name}</h4>
     <div class="mdl-dialog__content" style="font-family:Roboto, sans-serif">
@@ -562,7 +548,9 @@ function view_task(i) {
 
 }
 
-// closing view task
+/** 
+ * closing view task dialog
+ */
 function closeViewTask()
 {
     viewDialogRef.close()
@@ -570,7 +558,11 @@ function closeViewTask()
 
 // ------------------------------------------------------------------------------
 // edit task functionality
-
+/**
+ * Associated with the EDIT button in the view task dialog box
+ * Opens up the dialog box to edit a task for
+ * @param {*} i index of the product backlog array to open the edit task dialog box for
+ */
 function editTask(i)
 {
     // retrieve from local storage
@@ -642,7 +634,12 @@ function editTask(i)
 
     
 }
-// confirming edit functionality
+
+/**
+ * Associated with the CONFIRM button on the edit task dialog box
+ * Verifies the input parameters then changes the task accordingly before closing all dialog boxes
+ * @param i the index of of the task being edited
+ */
 function confirmEdit(i)
 {
     //retrive information from edit task input field
@@ -691,13 +688,22 @@ function confirmEdit(i)
  
 }
 
+/**
+ * Associated with the CLOSE button on the edit task dialog box
+ * Closes the dialog boxes
+ */
 function closeEdit()
 {
     editDialogRef.close()
 
 }
 
-// edit tasks functionality
+/**
+ * Middle man function to clean up the editTask function
+ * outputs the HTML for a given task and its index in the product backlog
+ * @param {*} taskClass an instance of the task class
+ * @param {*} i index in the product backlog array
+ */
 function editTaskDialog(taskClass,i)
 {
     let a = `
@@ -791,7 +797,12 @@ document.getElementById("UI-filter").addEventListener('click', function(){filter
 document.getElementById("core-filter").addEventListener('click', function(){filterTask("Core")})
 document.getElementById("test-filter").addEventListener('click', function(){filterTask("Testing")})
 document.getElementById("clear-filter").addEventListener('click', function(){showCards()})
-
+/**
+ * Associated with the tags in the filter drop down
+ * When clicked only tasks which match the filter conditions will be displayed
+ * the actual product backlog array is not affected
+ * @param {*} condition the condition to filter for, as a string
+ */
 function filterTask(condition)
 {
 
@@ -894,7 +905,6 @@ function filterTask(condition)
 
     // display the html
     document.getElementById("testing").innerHTML = display;
-
 
 }
 
