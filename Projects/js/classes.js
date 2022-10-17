@@ -89,7 +89,6 @@ class System {
         
         let developerINFO=this._teamMembers;
 
-        console.log(data._activeSprint)
 
 
 
@@ -119,12 +118,7 @@ class System {
         
         for(let i=0;i<data._completedSprints.length;i++){
             let toPush=Sprint.fromData(data._completedSprints[i],developerINFO)
-                    /*
-        this._allTask = []
-        this._notStarted_task = []
-        this._started_task = []
-        this._completedTask = []
-        */
+                    
             for(let i=0; i<toPush._sprintBacklog._allTask.length; i++){
                 toPush._sprintBacklog._allTask[i].replaceMember(this._teamMembers.equivalentMember(toPush._sprintBacklog._allTask[i].developers[0]))
             }
@@ -165,8 +159,6 @@ class System {
         this._completedSprints=cs;
         this._notStartedSprints=ns;
         this._allSprint=as;
-        console.log(cs)
-        console.log(as)
     }
 
 }
@@ -534,7 +526,6 @@ class Sprint {
         let sb = SprintBacklog.fromData(data._sprintBacklog,developerINFO);
         let start = new Date(data._startDate)
         let end = new Date(data._endDate)
-        console.log(data)
         let sprint = new Sprint(data._sprintId,start,end)
         sprint._sprintBacklog=sb
         return sprint
@@ -603,8 +594,6 @@ class SprintBacklog {
 
     // move task
     move_task(list,index, destination){
-        console.log(list)
-        console.log(this._notStarted_task)
         let task
         if(list==0){
             task = this._notStarted_task[index]
@@ -703,10 +692,8 @@ class TeamMembers {
     }
 
     equivalentMember(developer){
-        //console.log(developer)
         for(let i=0; i<this._teamMembers.length; i++){
             let checkDev=this._teamMembers[i]
-            //console.log(checkDev)
             if(checkDev.name==developer.name && JSON.stringify(checkDev.tasks)==JSON.stringify(developer.tasks) && JSON.stringify(checkDev.hoursWorked)==JSON.stringify(developer.hoursWorked)){
                 return checkDev
             }
@@ -775,7 +762,6 @@ class Developer {
     
     getSummedTimeDuring(start,end){
         let array = this.getTimeDuring(start,end)
-        console.log(array)
         let total=0
         for(let i=0; i<array.length;i++){
             total+=array[i][1]
@@ -815,7 +801,6 @@ class Developer {
 
     static fromData(data){
         let developer = new Developer(data._name, data._email);
-        console.log(data)
         for(let i=0;i<data._hoursWorked.length;i++){
             let current = data._hoursWorked[i];
             developer._hoursWorked.push([current[0],parseFloat(current[1])])
