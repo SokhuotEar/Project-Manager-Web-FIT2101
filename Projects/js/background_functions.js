@@ -1,7 +1,7 @@
 /**
  * File Name: background_functions.js
  * File Purpose: This file is designed to contain the background functions needed for the system to operate, primarly local storage functions for data maintenance.
- * Authors: Dasun, Sok Ear, Luke, Parul, Laetitia
+ * Authors: Dasun, Sok Ear, Luke, Laetitia
  * Date modified: 29/09/2022
  */
 function sum(array){
