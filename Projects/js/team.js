@@ -58,6 +58,7 @@ changeDateRef.addEventListener('click', function() {
     end_display_date=new Date(document.getElementById('end-date').value)
     dateDialogRef.close()
     showTeamMembers()
+    showDateRange()
 });
 
 
