@@ -32,14 +32,6 @@ let ctx = document.getElementById('myChart').getContext('2d');
 addButtonRef.addEventListener('click', function() {
     addDialogRef.showModal();
 });
-/*
-viewButtonRef.addEventListener('click', function() {
-
-        viewDialogRef.showModal();
-        listTasks()
-        console.log(33)
-});
-    */
 completeButtonRef.addEventListener('click', function() {
     confirmDialogRef.showModal();
 });
@@ -67,7 +59,12 @@ confirmDialogRef.querySelector('.close').addEventListener('click', function() {
 
 showSprint()
 
-//Function for the burndown chart -- not functional
+/**
+ * Function for the burndown chart
+ * Should show the burndown chart when clicked
+ * Code does not work
+ * */
+
 function showChart(){
     let taskList=sys.activeSprint.sprintBacklog._allTask
     console.log(taskList)
@@ -177,12 +174,21 @@ function showChart(){
           },
     });
 }
-
+/**
+ * Associated with the 'back to sprint button'
+ * closes the burndown chat dialog box when clicked
+ */
 function closeBurndown(){
     burndownDialogRef.close();
 }
 
-//Function to log time
+/**
+ * Logs the time for a task (task will log the time for the developer automatically)
+ * Validates the input paramters then logs the time using task.logTime(time, date))
+ * @param {0,1,2} list The sublist the task is in
+ * @param {integer} index the index of the task in the sublist
+ * @param {integer} sprintID The sprintID of the sprint being viewed
+ */
 function logTimeForTask(list,index,sprintID){
     let hours = document.getElementById("log-hours").value
     console.log(document.getElementById("log-date").value)
@@ -214,7 +220,6 @@ function logTimeForTask(list,index,sprintID){
     console.log(sprint)
 
     let task
-
     if(date>sprint.endDate){
         return
     }
@@ -234,12 +239,12 @@ function logTimeForTask(list,index,sprintID){
 
 
 
-// STUFF BELOW THIS IS TO 
-///Testing view sprints
-
-//Function for view task dialog
-// list is 0 to 2 -> NS or IP or Comp
-// index is the place of it
+/**
+ * Opens the dialog box to view the task in detail. Runs when a task is double clicked
+ * @param {0,1,2} list The sublist the task is in
+ * @param {integer} index the index of the task in the sublist
+ * @param {integer} sprintID The sprintID of the sprint being viewed
+ */
 function viewTask(list,index,sprintID){
     viewTaskDialogRef.showModal()
     console.log("viewing")
@@ -391,14 +396,20 @@ function viewTask(list,index,sprintID){
     
     
 }
-
+/**
+ * Closes the detailed task dialog box when the cancel button is clicked
+ */
 function closeView(){
     viewTaskDialogRef.close();
 }
 
 
 
-// Function for showing actual tasks of a sprint
+/**
+ * Function to display the tasks of each status in the view sprint dialog box.
+ * Shows the tasks as Not started, in process, completed
+ * @param {} sprintID the sprintID of the sprint being displayed by the dialog box
+ */
 function listTasks(sprintID){
 
     let sprint=sys._allSprint[sprintID];
@@ -458,7 +469,11 @@ function listTasks(sprintID){
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
-//completed list
+/**
+ * Function to display the tasks of each status in the view sprint dialog box.
+ * Different from listTasks() as this function changes the HTML in the completed view dialog box, which is seperate from the active/ not started
+ * @param {} sprintID the sprintID of the sprint being displayed by the dialog box
+ */
 function listCompletedSprintTasks(sprintID){
 
     let sprint=sys._allSprint[sprintID];
@@ -517,17 +532,12 @@ function listCompletedSprintTasks(sprintID){
 
 // ----------------------------------------------------------------------------------
 // Add task to sprint backlog
-
 let addTaskDialogRef = document.getElementById('add-task-dialog')
-
 let addTaskToSprintRef = document.getElementById('add-toSprint-button')
 addTaskToSprintRef.addEventListener('click', function() {
     addTaskDialogRef.showModal();
     addTaskWindow()
 });
-
-
-
 
 addTaskDialogRef.querySelector('.close').addEventListener('click', function() {
     addTaskDialogRef.close();
@@ -536,6 +546,12 @@ confirmDialogRef.querySelector('.close').addEventListener('click', function() {
     confirmDialogRef.close();
 });
 
+/**
+ * Removes a task from the sprint backlog and moves it to a sprint
+ * Unused function (addTask() is being used instead)
+ * @param {*} i index of the task in the product backlog
+ * @param {*} sprintID the sptringID of the sprint to add a task to
+ */
 function addToSprintBacklog(i,sprintID)
 {
     let task = productBacklog[i]
@@ -552,7 +568,10 @@ function addToSprintBacklog(i,sprintID)
 
 //-------------------------------------------------------------------------------------------------------
 // Add sprint
-
+/**
+ * Function to verify sprint details and create a new sprint. Associated with the Add button on the add sprint dialog box
+ * Function is run when addSprint() is
+ */
 function addSprint()
 {
     let id = document.getElementById("sprint-name").value
@@ -599,7 +618,10 @@ function addSprint()
     document.getElementById("start-date").value = ''
     document.getElementById("end-date").value = ''
 }
-
+/**
+ * Associated with the ADD button on the add sprint dialog box. Adds a sprint then updates the view and saves to local storage
+ * Function is essentially a middleman to addSprint()
+ */
 function addSprintConfirm()
 {
     addSprint()
@@ -608,7 +630,11 @@ function addSprintConfirm()
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
-
+/**
+ * Function will throw an error if the input parameters are not valid as start and end dates
+ * @param {Date} startDate start date for a sprint
+ * @param {Date} endDate end date for a sprint
+ */
 function validateDate(startDate,endDate)
 {
     // validate date
@@ -636,7 +662,10 @@ function validateDate(startDate,endDate)
 
 
 // -------------------------------------------------------------------------------------
-// implement showSprint
+/**
+ * Calls the functions to show the sprints under each category
+ * Doubles as a local storage update
+ */
 function showSprint()
 {
     showNotStartedSprint()
@@ -646,15 +675,11 @@ function showSprint()
 }
 
 
-//add task
-function addTaskWindow(sprintID){
-    /*
-    console.log(sprintID)
-    console.log(sys._allSprint)
-    if(sys._allSprint[sprintID]._endDate<new Date()){
-        console.log("L")
-        return
-    }*/
+/**
+ * Associated with the ADD TASK button on the sprint view dialog box
+ * Displays the tasks from the product backlog as checkboxes so they can be added into the given sprint
+ */
+function addTaskWindow(){
     let taskList=""
 
     for(let i=0; i<sys.productBacklog.tasks.length; i++){
@@ -672,7 +697,10 @@ function addTaskWindow(sprintID){
     document.getElementById('add-task-html').innerHTML=taskList
     
 }
-
+/**
+ * Associated with the add to sprint button
+ * For each checked task, removes it from the sprint backlog and moves it to the sprint
+ */
 function addTask(){
     for(let i=sys.productBacklog.tasks.length-1; i>=0; i--){
         console.log(`add-task-${i}`)
@@ -689,6 +717,10 @@ function addTask(){
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
+/**
+ * Updates to show the sprints in the NOT STARTED tab.
+ * This is toggled by the tab itself, so showSprint can be called instead of this and the correct sprints are still shown
+ */
 function showNotStartedSprint()
 {
 
@@ -737,6 +769,9 @@ function showNotStartedSprint()
     localStorage.setItem(SYSTEM_KEY, JSON.stringify(sys));
 }
 
+/**
+ * Updates to show the active sprint
+ */
 function showActiveSprint()
 {
     // get the active sprint
@@ -779,6 +814,10 @@ function showActiveSprint()
 
 }
 
+/**
+ * Updates to show the sprints in the COMPLETED tab.
+ * This is toggled by the tab itself, so showSprint can be called instead of this and the correct sprints are still shown
+ */
 function showCompletedSprint(){
     // get all completed sprints
     let completedSprints = sys.completedSprints
@@ -822,6 +861,13 @@ function showCompletedSprint(){
 }
 // -----------------------------------------------------------------------------------------------------
 // implement set active
+
+/**
+ * Associated with the SET ACTIVE button.
+ * Will verify there is no active sprint currently and that this sprint is not empty
+ * Will move a sprint from not started over to active
+ * @param {*} i index of the not started sprint to be made active
+ */
 function setActive(i)
 {
     // ensures there are no sprints active
@@ -856,6 +902,10 @@ function setActive(i)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
+/**
+ * Old function which would open up the active sprint and list the tasks.
+ * This implementation is no longer being used
+ */
 function viewActiveButton()
 {
     viewDialogRef.showModal()
@@ -864,7 +914,10 @@ function viewActiveButton()
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // implement Incomplete or in progress tasks get added back to product backlog
-
+/**
+ * Associated with the MARK AS COMPLETE button.
+ * Will move a sprint from active over to completed then move any uncompleted tasks over to the productBacklog
+ */
 function markSprintAsComplete()
 {
 
@@ -899,7 +952,10 @@ function markSprintAsComplete()
     console.log(sys)
 }
 
-// function to move from not started to in progress
+/**
+ * Moves checked tasks in the not started column over to in progress
+ * @param {*} sprintID the sprint being managed currently
+ */
 function nsToIp(sprintID=SiD){
     if(sys._allSprint[sprintID].endDate<new Date()){
         console.log("L")
@@ -916,7 +972,10 @@ function nsToIp(sprintID=SiD){
 
     listTasks(sprintID)
 }
-//function to move from in progress to not started
+/**
+ * Moves checked tasks in the not started column over to not started
+ * @param {*} sprintID the sprint being managed currently
+ */
 function ipToNs(sprintID=SiD){
     if(sys._allSprint[sprintID].endDate<new Date()){
         console.log("L")
@@ -931,7 +990,10 @@ function ipToNs(sprintID=SiD){
     }
     listTasks(sprintID)
 }
-//function to move from in progress to complete
+/**
+ * Moves checked tasks in the in progress column over to completed
+ * @param {*} sprintID the sprint being managed currently
+ */
 function ipToCom(sprintID=SiD){
     if(sys._allSprint[sprintID].endDate<new Date()){
         console.log("L")
@@ -946,7 +1008,10 @@ function ipToCom(sprintID=SiD){
     }  
     listTasks(sprintID)
 }
-//function to move from complete to in progress
+/**
+ * Moves checked tasks in the completed over to in progress
+ * @param {*} sprintID the sprint being managed currently
+ */
 function comToIp(sprintID=SiD){
     if(sys._allSprint[sprintID].endDate<new Date()){
         console.log("L")
@@ -963,6 +1028,12 @@ function comToIp(sprintID=SiD){
 }
 
 let SiD;
+/**
+ * Associated with the MANAGE button for sprints in NOT STARTED
+ * opens the view dialog box for the sprint and shows the relevant information
+ * ***The dialog box is unique depending on the sprint status, implementation requires seperate functions for each sprint status
+ * @param {*} sprintID sprintID of the sprint to view
+ */
 function manage(sprintID){
 
     viewDialogRef.showModal();
@@ -972,7 +1043,12 @@ function manage(sprintID){
     SiD = sys.find_sprint_index(sys._notStartedSprints[sprintID])
     listTasks(SiD)
 }
-
+/**
+ * Associated with the MANAGE button for active sprint
+ * opens the view dialog box for the sprint and shows the relevant information
+ * ***The dialog box is unique depending on the sprint status, implementation requires seperate functions for each sprint status
+ * @param {*} sprintID sprintID of the sprint to view
+ */
 function manageActive(){
 
     viewDialogRef.showModal();
@@ -984,7 +1060,12 @@ function manageActive(){
     listTasks(SiD)
 }
 
-
+/**
+ * Associated with the MANAGE button for sprints in COMPLETED
+ * opens the view dialog box for the sprint and shows the relevant information
+ * ***The dialog box is unique depending on the sprint status, implementation requires seperate functions for each sprint status
+ * @param {*} sprintID sprintID of the sprint to view
+ */
 function manageCompleted(sprintID){
 
     viewCompleteRef.showModal();
@@ -995,6 +1076,9 @@ function manageCompleted(sprintID){
     listCompletedSprintTasks(SiD)
 }
 
+/**
+ * Closes the dialog box for the completed sprint
+ */
 function closeCompleted(){
     viewCompleteRef.close();
 }
